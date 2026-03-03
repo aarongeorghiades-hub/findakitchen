@@ -9,6 +9,9 @@
   body {
     @apply bg-white text-slate-800 antialiased;
   }
+  a {
+    transition: color 0.15s ease;
+  }
 }
 
 @layer components {

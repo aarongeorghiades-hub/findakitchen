@@ -24,6 +24,19 @@ export default async function ProvidersPage() {
 
   return (
     <>
+      <div className="bg-primary-800 py-10">
+        <div className="container-page">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+            Temporary Kitchen Hire Providers
+          </h1>
+          <p className="mt-3 text-lg text-primary-100 max-w-3xl">
+            Browse our directory of temporary kitchen providers. Whether you need a
+            compact pod for a home renovation or a full commercial kitchen for a
+            school refurbishment, we&apos;ll help you find the right provider.
+          </p>
+        </div>
+      </div>
+
       <div className="container-page py-8">
         <Breadcrumbs
           items={[
@@ -31,17 +44,6 @@ export default async function ProvidersPage() {
             { label: "Providers" },
           ]}
         />
-
-        <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">
-            Temporary Kitchen Hire Providers
-          </h1>
-          <p className="mt-3 text-lg text-slate-500 max-w-3xl">
-            Browse our directory of temporary kitchen providers. Whether you need a
-            compact pod for a home renovation or a full commercial kitchen for a
-            school refurbishment, we&apos;ll help you find the right provider.
-          </p>
-        </div>
 
         <ProviderDirectoryClient
           initialProviders={providers}

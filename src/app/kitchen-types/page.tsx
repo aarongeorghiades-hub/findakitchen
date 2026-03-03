@@ -21,6 +21,20 @@ export default async function KitchenTypesPage() {
 
   return (
     <>
+      <div className="bg-primary-800 py-10">
+        <div className="container-page">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+            Types of Temporary Kitchen
+          </h1>
+          <p className="mt-3 text-lg text-primary-100 max-w-3xl">
+            There are more options than most people realise. From compact indoor
+            units perfect for a home renovation to full commercial kitchens that
+            can serve hundreds of meals a day — here&apos;s every type of
+            temporary kitchen available in the UK.
+          </p>
+        </div>
+      </div>
+
       <div className="container-page py-8">
         <Breadcrumbs
           items={[
@@ -28,18 +42,6 @@ export default async function KitchenTypesPage() {
             { label: "Kitchen Types" },
           ]}
         />
-
-        <div className="mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">
-            Types of Temporary Kitchen
-          </h1>
-          <p className="mt-3 text-lg text-slate-500 max-w-3xl">
-            There are more options than most people realise. From compact indoor
-            units perfect for a home renovation to full commercial kitchens that
-            can serve hundreds of meals a day — here&apos;s every type of
-            temporary kitchen available in the UK.
-          </p>
-        </div>
 
         {commercial.length > 0 && (
           <div className="mb-12">

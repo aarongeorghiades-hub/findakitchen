@@ -20,7 +20,7 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/providers"
-            className="inline-flex items-center justify-center rounded-lg border-2 border-white/30 px-8 py-4 text-lg font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-lg border-2 border-white px-8 py-4 text-lg font-semibold text-white transition-colors hover:bg-white/10"
           >
             See All Providers
           </Link>

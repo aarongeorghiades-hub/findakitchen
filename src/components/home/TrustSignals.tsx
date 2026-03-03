@@ -43,9 +43,9 @@ const signals = [
 
 export default function TrustSignals({ providerCount }: TrustSignalsProps) {
   return (
-    <section className="py-12 sm:py-16 border-b border-slate-100">
+    <section className="py-10 sm:py-12 border-b border-slate-100">
       <div className="container-page">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {signals.map((signal, i) => (
             <div key={i} className="flex flex-col items-center text-center">
               <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-primary-50">

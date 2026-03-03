@@ -37,6 +37,14 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <div className="bg-primary-800 py-10">
+        <div className="container-page">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+            {page.title}
+          </h1>
+        </div>
+      </div>
+
       <div className="container-page py-8">
         <Breadcrumbs
           items={[
@@ -47,10 +55,6 @@ export default async function BlogPostPage({ params }: Props) {
         />
 
         <article className="max-w-3xl">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-6">
-            {page.title}
-          </h1>
-
           <div
             className="prose prose-slate prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: htmlContent }}

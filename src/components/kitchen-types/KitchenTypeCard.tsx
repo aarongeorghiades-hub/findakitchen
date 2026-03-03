@@ -5,7 +5,7 @@ export default function KitchenTypeCard({ kitchenType }: { kitchenType: KitchenT
   return (
     <Link
       href={`/kitchen-types/${kitchenType.slug}`}
-      className="group rounded-xl border border-slate-200 bg-white p-6 transition-all hover:border-primary-500 hover:shadow-lg"
+      className="group rounded-xl border border-slate-200 border-l-4 border-l-primary-600 bg-white p-6 shadow-sm transition-all hover:border-primary-500 hover:shadow-lg"
     >
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-lg font-semibold text-slate-800 group-hover:text-primary-700 transition-colors">
