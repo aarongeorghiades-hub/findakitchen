@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { marked } from "marked";
 import { getSEOPageBySlug, getAllSEOPageSlugs } from "@/lib/seo-pages";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import CTABanner from "@/components/shared/CTABanner";
@@ -32,6 +33,8 @@ export default async function ComparePage({ params }: Props) {
   const page = await getSEOPageBySlug(params.slug, "comparison");
   if (!page) notFound();
 
+  const htmlContent = await marked(page.content);
+
   return (
     <>
       <div className="container-page py-8">
@@ -45,12 +48,12 @@ export default async function ComparePage({ params }: Props) {
 
         <article className="max-w-3xl">
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-6">
-            {page.h1}
+            {page.title}
           </h1>
 
           <div
             className="prose prose-slate prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: page.content }}
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
         </article>
       </div>
