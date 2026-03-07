@@ -307,16 +307,22 @@ export default async function HomePage() {
               emoji: "\u{1F4D0}",
               title: "Driveway Fit Checker",
               body: "Enter your driveway dimensions and we'll tell you which pods and units will fit.",
+              href: "/tools/driveway-fit-checker",
+              live: true,
             },
             {
               emoji: "\u{1F4B7}",
               title: "Quote Estimator",
               body: "Get a ballpark price range before you contact providers. Based on real market data.",
+              href: null,
+              live: false,
             },
             {
               emoji: "\u{1F9EE}",
               title: "Insurance Calculator",
               body: "Find out if your insurance covers temporary kitchen hire and estimate your claim value.",
+              href: null,
+              live: false,
             },
           ].map((tool, i) => (
             <ScrollReveal key={tool.title} delay={i * 80}>
@@ -337,9 +343,18 @@ export default async function HomePage() {
                 <p className="text-sm text-white/50 leading-relaxed mb-4 relative z-10">
                   {tool.body}
                 </p>
-                <span className="inline-block text-xs text-white/30 border border-white/10 px-3 py-1 rounded-full relative z-10">
-                  Coming soon
-                </span>
+                {tool.live && tool.href ? (
+                  <a
+                    href={tool.href}
+                    className="inline-block text-xs text-white border border-white/20 px-4 py-2 rounded-full relative z-10 hover:bg-white/10 transition-all duration-200"
+                  >
+                    Try it free &rarr;
+                  </a>
+                ) : (
+                  <span className="inline-block text-xs text-white/30 border border-white/10 px-3 py-1 rounded-full relative z-10">
+                    Coming soon
+                  </span>
+                )}
               </div>
             </ScrollReveal>
           ))}

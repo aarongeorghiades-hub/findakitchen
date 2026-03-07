@@ -44,6 +44,12 @@ export function Nav() {
           Blog
         </Link>
         <Link
+          href="/tools/driveway-fit-checker"
+          className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
+        >
+          Tools
+        </Link>
+        <Link
           href="/about"
           className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
         >
@@ -78,6 +84,7 @@ export function Nav() {
               { href: "/providers", label: "Providers" },
               { href: "/kitchen-types", label: "Kitchen Types" },
               { href: "/blog", label: "Blog" },
+              { href: "/tools/driveway-fit-checker", label: "Tools" },
               { href: "/about", label: "About" },
             ].map((link) => (
               <Link
