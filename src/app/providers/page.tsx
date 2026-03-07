@@ -1,61 +1,52 @@
 import { Metadata } from "next";
-import { getProviders } from "@/lib/providers";
-import { getRegions } from "@/lib/regions";
-import { getKitchenTypes } from "@/lib/kitchen-types";
-import Breadcrumbs from "@/components/shared/Breadcrumbs";
-import CTABanner from "@/components/shared/CTABanner";
-import ProviderDirectoryClient from "./ProviderDirectoryClient";
+import Link from "next/link";
+import { supabase } from "@/lib/supabase";
+import { ProvidersDirectoryClient } from "./ProvidersDirectoryClient";
 
 export const metadata: Metadata = {
-  title: "Temporary Kitchen Hire Providers",
+  title: "UK Temporary Kitchen Providers",
   description:
-    "Browse verified temporary kitchen hire providers across the UK. Filter by location, kitchen type, and market segment to find the right provider for your needs.",
+    "Browse 26 vetted temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.",
   alternates: { canonical: "https://findakitchen.co.uk/providers" },
 };
 
 export const revalidate = 3600;
 
 export default async function ProvidersPage() {
-  const [providers, regions, kitchenTypes] = await Promise.all([
-    getProviders(),
-    getRegions(),
-    getKitchenTypes(),
-  ]);
+  const { data: providers } = await supabase
+    .from("providers")
+    .select(
+      "id, slug, name, market, region_base, coverage, kitchen_types, power_source, insurance_friendly, pricing_model, pricing, trustpilot_reviews, trustpilot_rating, notable_differentiators"
+    )
+    .eq("active", true)
+    .order("id");
+
+  const allProviders = providers || [];
 
   return (
     <>
-      <div className="bg-primary-800 py-10">
-        <div className="container-page">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white">
-            Temporary Kitchen Hire Providers
-          </h1>
-          <p className="mt-3 text-lg text-primary-100 max-w-3xl">
-            Browse our directory of temporary kitchen providers. Whether you need a
-            compact pod for a home renovation or a full commercial kitchen for a
-            school refurbishment, we&apos;ll help you find the right provider.
-          </p>
-        </div>
-      </div>
+      {/* Hero strip */}
+      <section className="bg-[var(--charcoal)] pt-12 pb-16 px-6 lg:px-12">
+        <nav className="text-xs text-white/40 mb-6">
+          <Link href="/" className="hover:text-white/60 transition-colors">
+            Home
+          </Link>{" "}
+          <span className="mx-1.5">/</span>
+          <span className="text-white/60">Providers</span>
+        </nav>
+        <h1 className="font-serif text-4xl md:text-5xl text-white mb-3">
+          Temporary Kitchen Providers
+        </h1>
+        <p className="text-lg text-white/50 font-light">
+          {allProviders.length} vetted UK suppliers — domestic pods and
+          commercial hire
+        </p>
+      </section>
 
-      <div className="container-page py-8">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Providers" },
-          ]}
-        />
-
-        <ProviderDirectoryClient
-          initialProviders={providers}
-          regions={regions}
-          kitchenTypes={kitchenTypes}
-        />
-      </div>
-
-      <CTABanner
-        headline="Can't find what you need?"
-        subline="Tell us your requirements and we'll match you with the right providers — even if they're not listed here yet."
-      />
+      {/* Provider grid with filters */}
+      <section className="py-12 px-6 lg:px-12">
+        <ProvidersDirectoryClient providers={allProviders} />
+      </section>
     </>
   );
 }

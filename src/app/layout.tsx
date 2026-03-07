@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Serif, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: "FindAKitchen.co.uk — Temporary & Mobile Kitchen Hire UK",
-    template: "%s | FindAKitchen.co.uk",
+    default: "FindAKitchen — Temporary & Mobile Kitchen Hire UK",
+    template: "%s | FindAKitchen",
   },
   description:
-    "Find the right temporary kitchen for your situation. Whether it's a renovation, flood damage, insurance claim, or commercial project — we'll guide you to the perfect solution and connect you with trusted providers.",
+    "Compare every temporary kitchen provider in the UK — domestic pods for renovations, commercial hire for businesses. One place, zero hassle.",
   metadataBase: new URL("https://findakitchen.co.uk"),
   openGraph: {
-    siteName: "FindAKitchen.co.uk",
+    siteName: "FindAKitchen",
     type: "website",
     locale: "en_GB",
   },
@@ -27,10 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <main className="min-h-screen">{children}</main>
+    <html lang="en" className={`${instrumentSerif.variable} ${dmSans.variable}`}>
+      <body>
+        <Nav />
+        <main className="pt-[72px]">{children}</main>
         <Footer />
       </body>
     </html>
