@@ -76,6 +76,8 @@ export interface SEOPage {
   meta_description: string;
   content: string;
   h1: string;
+  market_segment: string | null;
+  target_keyword: string | null;
   published: boolean;
   created_at: string;
   updated_at: string;
