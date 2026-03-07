@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { PostcodeSearch } from "@/components/home/PostcodeSearch";
 import { AnimatedCounter } from "@/components/home/AnimatedCounter";
@@ -96,56 +97,24 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Right column — dark visual */}
+          {/* Right column — hero photo */}
           <div className="relative hidden md:block overflow-hidden">
+            <Image
+              src="/images/hero-pod.png"
+              alt="Temporary kitchen pod on a residential driveway at dusk"
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="50vw"
+            />
+            {/* Subtle dark gradient overlay on left edge to blend into left column */}
             <div
-              className="absolute inset-0"
+              className="absolute inset-y-0 left-0 w-24 pointer-events-none"
               style={{
-                background: "linear-gradient(160deg, #2A231E, #3D3028, #1C1814)",
-                animation: "slowZoom 12s ease-in-out alternate infinite",
+                background: "linear-gradient(to right, var(--cream), transparent)",
               }}
             />
-            <div
-              className="absolute top-0 right-0 w-96 h-96 rounded-full"
-              style={{
-                background: "radial-gradient(circle, rgba(194,89,58,0.25) 0%, transparent 70%)",
-                animation: "ambientPulse 4s ease-in-out infinite",
-              }}
-            />
-
-            {/* Pod illustration */}
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <div className="w-64 space-y-3">
-                <div className="bg-[#2A2520] rounded-xl p-4 border border-white/5">
-                  <div className="flex gap-2 mb-3">
-                    <div className="flex-1 h-3 rounded bg-[var(--amber)] opacity-20" />
-                    <div className="flex-1 h-3 rounded bg-[var(--amber)] opacity-15" />
-                    <div className="flex-1 h-3 rounded bg-[var(--amber)] opacity-10" />
-                  </div>
-                  <div className="flex justify-center gap-4 mb-4">
-                    {["\u{1F525}", "\u{1F4A7}", "\u{2744}\u{FE0F}", "\u{1F50C}"].map((emoji, i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-lg"
-                        style={{
-                          boxShadow: "0 0 12px rgba(194,89,58,0.15)",
-                        }}
-                      >
-                        {emoji}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="h-16 rounded-lg bg-[#1C1814] border border-white/5" />
-                </div>
-                <div className="flex justify-center">
-                  <span className="bg-[var(--clay)] text-white text-xs px-4 py-1.5 rounded-full">
-                    Temporary Kitchen Pod
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating featured card */}
+            {/* Floating featured provider card */}
             <div
               className="absolute bottom-8 left-[-20px] z-20 bg-white rounded-2xl shadow-2xl p-5 w-64"
               style={{ animation: "gentleFloat 4s ease-in-out infinite" }}
