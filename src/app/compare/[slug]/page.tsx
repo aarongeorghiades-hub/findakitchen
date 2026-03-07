@@ -37,7 +37,7 @@ export default async function ComparePage({ params }: Props) {
 
   return (
     <>
-      <div className="bg-primary-800 py-10">
+      <div className="bg-[var(--charcoal)] py-10">
         <div className="container-page">
           <h1 className="text-3xl sm:text-4xl font-bold text-white">
             {page.title}
