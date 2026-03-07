@@ -5,6 +5,7 @@ import { PostcodeSearch } from "@/components/home/PostcodeSearch";
 import { AnimatedCounter } from "@/components/home/AnimatedCounter";
 import { ScrollReveal } from "@/components/home/ScrollReveal";
 import { HomeProviderPreview } from "@/components/home/HomeProviderPreview";
+import { RotatingProviderCard } from "@/components/home/RotatingProviderCard";
 
 export const revalidate = 3600;
 
@@ -17,11 +18,11 @@ async function getHomeData() {
   const { data: previewProviders } = await supabase
     .from("providers")
     .select(
-      "slug, name, market, region_base, coverage, notable_differentiators, insurance_friendly, power_source"
+      "slug, name, market, region_base, coverage, notable_differentiators, insurance_friendly, power_source, trustpilot_rating, trustpilot_reviews"
     )
     .eq("active", true)
     .order("id")
-    .limit(6);
+    .limit(8);
 
   return {
     providerCount: count || 0,
@@ -114,25 +115,8 @@ export default async function HomePage() {
                 background: "linear-gradient(to right, var(--cream), transparent)",
               }}
             />
-            {/* Floating featured provider card */}
-            <div
-              className="absolute bottom-8 left-[-20px] z-20 bg-white rounded-2xl shadow-2xl p-5 w-64"
-              style={{ animation: "gentleFloat 4s ease-in-out infinite" }}
-            >
-              <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-1">
-                Featured provider
-              </p>
-              <p className="font-serif text-lg text-[var(--charcoal)]">
-                Temporary Solutions Group
-              </p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-amber-400 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                <span className="text-xs text-[var(--muted)]">451 reviews</span>
-                <span className="text-xs bg-[#EBF5EF] text-[var(--sage)] px-2 py-0.5 rounded-full">
-                  Insurance &#10003;
-                </span>
-              </div>
-            </div>
+            {/* Rotating featured provider card */}
+            <RotatingProviderCard providers={previewProviders} />
           </div>
         </div>
       </section>
