@@ -33,16 +33,31 @@ async function getHomeData() {
 export default async function HomePage() {
   const { providerCount, previewProviders } = await getHomeData();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "FindAKitchen",
-    description:
-      "Compare every temporary kitchen provider in the UK — domestic pods for renovations, commercial hire for businesses.",
-    url: "https://findakitchen.co.uk",
-    areaServed: "GB",
-    serviceType: "Temporary Kitchen Hire",
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "FindAKitchen",
+      url: "https://findakitchen.co.uk",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://findakitchen.co.uk/providers?q={search_term_string}",
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "FindAKitchen",
+      url: "https://findakitchen.co.uk",
+      description: "The UK's only neutral comparison platform for temporary kitchen hire. Compare domestic pods, commercial units, and catering trailers from verified providers.",
+      foundingDate: "2025",
+      areaServed: "GB",
+    },
+  ];
 
   return (
     <>

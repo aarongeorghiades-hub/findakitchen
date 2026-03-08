@@ -81,6 +81,7 @@ export interface SEOPage {
   published: boolean;
   created_at: string;
   updated_at: string;
+  faq_schema: Array<{ question: string; answer: string }> | null;
 }
 
 export interface ProviderRegion {

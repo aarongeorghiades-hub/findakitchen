@@ -1,0 +1,15 @@
+-- Add faq_schema column to seo_pages
+ALTER TABLE seo_pages ADD COLUMN IF NOT EXISTS faq_schema JSONB;
+
+-- Seed FAQ data for 3 highest-priority blog posts
+UPDATE seo_pages
+SET faq_schema = '[{"question":"How much does temporary kitchen hire cost in the UK?","answer":"Temporary kitchen hire in the UK typically costs between £70 and £150 per day depending on pod size, appliances included, and delivery distance. Weekly rates are usually more cost-effective, ranging from £350 to £800 per week including delivery and collection."},{"question":"Does insurance cover temporary kitchen hire?","answer":"Yes, if you have alternative accommodation cover on your home insurance, your insurer will usually cover the cost of a temporary kitchen pod while your kitchen is being repaired. Most domestic pod providers offer insurer-ready quotes to simplify the claims process."},{"question":"How long can you hire a temporary kitchen for?","answer":"Temporary kitchen hire periods range from as little as two weeks to several months. Most providers offer flexible extensions if your renovation or repair runs over schedule."}]'::jsonb
+WHERE slug = 'how-much-does-temporary-kitchen-hire-cost';
+
+UPDATE seo_pages
+SET faq_schema = '[{"question":"Does home insurance cover temporary kitchen hire?","answer":"Most home insurance policies with alternative accommodation cover will pay for a temporary kitchen pod while your kitchen is being repaired following fire, flood, or accidental damage. Contact your insurer and ask specifically about temporary kitchen hire before booking."},{"question":"What type of insurance claim covers a temporary kitchen?","answer":"Claims arising from kitchen floods, burst pipes, fire damage, and sewage leaks most commonly include temporary kitchen cover. Your loss adjuster will assess the need and approve a suitable provider."},{"question":"How do I get an insurance-approved quote for temporary kitchen hire?","answer":"Most domestic pod providers offer insurer-formatted quotes on request. Provide your insurer or loss adjuster with the quote directly — they will approve or decline based on your policy terms."}]'::jsonb
+WHERE slug = 'does-home-insurance-cover-temporary-kitchen-hire';
+
+UPDATE seo_pages
+SET faq_schema = '[{"question":"How long does it take to install a temporary kitchen?","answer":"Most temporary kitchen pods are delivered and fully installed within 2 to 3 hours. The provider will connect water, waste, and electricity on site and walk you through the appliances before leaving."},{"question":"How quickly can a temporary kitchen be delivered?","answer":"Many UK providers can deliver a temporary kitchen pod within 24 to 48 hours of booking. Emergency same-day or next-day delivery may be available depending on location and stock."},{"question":"What do I need to prepare before a temporary kitchen is installed?","answer":"You will need an outdoor tap within 25 metres, two 13-amp plug sockets, and a drain or gulley within 3 metres of the intended position. A firm, reasonably level surface such as a driveway or patio is required."}]'::jsonb
+WHERE slug = 'how-long-does-temporary-kitchen-installation-take';

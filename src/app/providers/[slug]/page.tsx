@@ -106,8 +106,42 @@ export default async function ProviderProfilePage({ params }: Props) {
     .neq("slug", provider.slug)
     .limit(3);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://findakitchen.co.uk" },
+      { "@type": "ListItem", position: 2, name: "Providers", item: "https://findakitchen.co.uk/providers" },
+      { "@type": "ListItem", position: 3, name: provider.name, item: `https://findakitchen.co.uk/providers/${params.slug}` },
+    ],
+  };
+
+  const aggregateRatingJsonLd = provider.trustpilot_rating && provider.trustpilot_reviews > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: provider.name,
+    url: provider.website || `https://findakitchen.co.uk/providers/${params.slug}`,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: String(provider.trustpilot_rating),
+      reviewCount: String(provider.trustpilot_reviews),
+      bestRating: "5",
+      worstRating: "1",
+    },
+  } : null;
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {aggregateRatingJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingJsonLd) }}
+        />
+      )}
       {/* HERO */}
       <section className="bg-[var(--charcoal)] pt-12 pb-16 px-6 lg:px-12">
         <nav className="text-xs text-white/40 mb-6">

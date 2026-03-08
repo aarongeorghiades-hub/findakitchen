@@ -34,8 +34,41 @@ export default async function BlogPostPage({ params }: Props) {
 
   const htmlContent = await marked(page.content);
 
+  const faqJsonLd = page.faq_schema && page.faq_schema.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faq_schema.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  } : null;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://findakitchen.co.uk" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://findakitchen.co.uk/blog" },
+      { "@type": "ListItem", position: 3, name: page.title, item: `https://findakitchen.co.uk/blog/${params.slug}` },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       {/* Hero */}
       <section className="bg-[var(--charcoal)] pt-12 pb-16 px-6 lg:px-12 relative overflow-hidden">
         {/* Subtle background texture */}

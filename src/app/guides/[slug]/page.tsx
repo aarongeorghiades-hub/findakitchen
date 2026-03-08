@@ -34,8 +34,22 @@ export default async function GuidePage({ params }: Props) {
 
   const htmlContent = await marked(page.content);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://findakitchen.co.uk" },
+      { "@type": "ListItem", position: 2, name: "Guides", item: "https://findakitchen.co.uk/guides" },
+      { "@type": "ListItem", position: 3, name: page.title, item: `https://findakitchen.co.uk/guides/${params.slug}` },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-[var(--charcoal)] pt-12 pb-16 px-6 lg:px-12 relative overflow-hidden">
         <div
