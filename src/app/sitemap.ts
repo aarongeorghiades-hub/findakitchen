@@ -1,83 +1,100 @@
 import { MetadataRoute } from "next";
-import { getAllProviderSlugs } from "@/lib/providers";
-import { getAllKitchenTypeSlugs } from "@/lib/kitchen-types";
-import { getAllRegionSlugs } from "@/lib/regions";
-import { getAllSEOPageSlugs } from "@/lib/seo-pages";
+import { supabase } from "@/lib/supabase";
+
+const LOCATION_CITIES = [
+  "london", "manchester", "birmingham", "leeds", "bristol",
+  "sheffield", "edinburgh", "glasgow", "liverpool", "nottingham",
+  "cardiff", "leicester", "coventry", "newcastle", "brighton",
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://findakitchen.co.uk";
+  const now = new Date();
 
-  const [providerSlugs, kitchenTypeSlugs, regionSlugs, guideSlugs, comparisonSlugs, blogSlugs] =
-    await Promise.all([
-      getAllProviderSlugs(),
-      getAllKitchenTypeSlugs(),
-      getAllRegionSlugs(),
-      getAllSEOPageSlugs("guide"),
-      getAllSEOPageSlugs("comparison"),
-      getAllSEOPageSlugs("blog"),
-    ]);
+  const [
+    { data: providers },
+    { data: blogPages },
+    { data: guidePages },
+    { data: comparePages },
+  ] = await Promise.all([
+    supabase
+      .from("providers")
+      .select("slug, updated_at")
+      .eq("active", true),
+    supabase
+      .from("seo_pages")
+      .select("slug, updated_at")
+      .eq("page_type", "blog")
+      .eq("published", true),
+    supabase
+      .from("seo_pages")
+      .select("slug, updated_at")
+      .eq("page_type", "guide")
+      .eq("published", true),
+    supabase
+      .from("seo_pages")
+      .select("slug, updated_at")
+      .eq("page_type", "comparison")
+      .eq("published", true),
+  ]);
 
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
-    { url: `${baseUrl}/providers`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
-    { url: `${baseUrl}/kitchen-types`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/get-quotes`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${baseUrl}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${baseUrl}/insurance-claims`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/providers`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/locations`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/compare`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/kitchen-types`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/get-quotes`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/tools/driveway-fit-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${baseUrl}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const providerPages: MetadataRoute.Sitemap = providerSlugs.map((slug) => ({
-    url: `${baseUrl}/providers/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
+  const locationRoutes: MetadataRoute.Sitemap = LOCATION_CITIES.map((city) => ({
+    url: `${baseUrl}/locations/${city}`,
+    lastModified: now,
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  const kitchenTypePages: MetadataRoute.Sitemap = kitchenTypeSlugs.map((slug) => ({
-    url: `${baseUrl}/kitchen-types/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
+  const providerRoutes: MetadataRoute.Sitemap = (providers ?? []).map((p) => ({
+    url: `${baseUrl}/providers/${p.slug}`,
+    lastModified: p.updated_at ? new Date(p.updated_at) : now,
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  const regionPages: MetadataRoute.Sitemap = regionSlugs.map((slug) => ({
-    url: `${baseUrl}/temporary-kitchen-hire/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
-
-  const guidePages: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
-    url: `${baseUrl}/guides/${slug}`,
-    lastModified: new Date(),
+  const blogRoutes: MetadataRoute.Sitemap = (blogPages ?? []).map((p) => ({
+    url: `${baseUrl}/blog/${p.slug}`,
+    lastModified: p.updated_at ? new Date(p.updated_at) : now,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const comparisonPages: MetadataRoute.Sitemap = comparisonSlugs.map((slug) => ({
-    url: `${baseUrl}/compare/${slug}`,
-    lastModified: new Date(),
+  const guideRoutes: MetadataRoute.Sitemap = (guidePages ?? []).map((p) => ({
+    url: `${baseUrl}/guides/${p.slug}`,
+    lastModified: p.updated_at ? new Date(p.updated_at) : now,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
+  const compareRoutes: MetadataRoute.Sitemap = (comparePages ?? []).map((p) => ({
+    url: `${baseUrl}/compare/${p.slug}`,
+    lastModified: p.updated_at ? new Date(p.updated_at) : now,
+    changeFrequency: "monthly",
     priority: 0.6,
   }));
 
   return [
-    ...staticPages,
-    ...providerPages,
-    ...kitchenTypePages,
-    ...regionPages,
-    ...guidePages,
-    ...comparisonPages,
-    ...blogPages,
+    ...staticRoutes,
+    ...locationRoutes,
+    ...providerRoutes,
+    ...blogRoutes,
+    ...guideRoutes,
+    ...compareRoutes,
   ];
 }
