@@ -219,6 +219,51 @@ export default async function LocationPage({ params }: Props) {
         </div>
       </section>
 
+      {/* ===== RELATED GUIDES ===== */}
+      <section className="py-16 md:py-24 px-6 lg:px-12">
+        <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-12">
+          Useful guides for {city.name} temporary kitchen hire
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl">
+          {[
+            {
+              href: "/blog/how-much-does-temporary-kitchen-hire-cost",
+              title: "How much does temporary kitchen hire cost?",
+              description: "UK pricing guide covering daily and weekly rates, what affects cost, and how to get the best value.",
+            },
+            {
+              href: "/blog/does-home-insurance-cover-temporary-kitchen-hire",
+              title: "Does home insurance cover temporary kitchen hire?",
+              description: "How to check if your policy covers a temporary pod and what to say to your insurer.",
+            },
+            {
+              href: "/blog/how-long-does-temporary-kitchen-installation-take",
+              title: "How long does installation take?",
+              description: "What happens on delivery day, how long setup takes, and what you need to prepare.",
+            },
+            {
+              href: "/tools/driveway-fit-checker",
+              title: "Driveway Fit Checker",
+              description: "Enter your driveway dimensions and find out which pod sizes will fit your space.",
+            },
+          ].map((guide) => (
+            <Link
+              key={guide.href}
+              href={guide.href}
+              className="group bg-white rounded-2xl p-6 border border-[var(--border)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl block"
+            >
+              <h3 className="font-serif text-lg text-[var(--charcoal)] group-hover:text-[var(--clay)] transition-colors duration-300 mb-2">
+                {guide.title}
+              </h3>
+              <p className="text-sm text-[var(--muted)] leading-relaxed">
+                {guide.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ===== CTA ===== */}
       <section className="bg-[var(--charcoal)] py-16 md:py-24 px-6 lg:px-12 text-center">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
