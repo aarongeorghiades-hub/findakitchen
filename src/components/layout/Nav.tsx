@@ -32,6 +32,12 @@ export function Nav() {
           Providers
         </Link>
         <Link
+          href="/locations"
+          className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
+        >
+          Locations
+        </Link>
+        <Link
           href="/insurance-claims"
           className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
         >
@@ -88,6 +94,7 @@ export function Nav() {
           <div className="flex flex-col px-6 py-4 gap-3">
             {[
               { href: "/providers", label: "Providers" },
+              { href: "/locations", label: "Locations" },
               { href: "/insurance-claims", label: "Insurance Claims" },
               { href: "/kitchen-types", label: "Kitchen Types" },
               { href: "/blog", label: "Blog" },
