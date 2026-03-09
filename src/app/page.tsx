@@ -303,7 +303,102 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== SECTION 6: TOOLS TEASER ===== */}
+      {/* ===== SECTION 6: WHO USES FINDAKITCHEN ===== */}
+      <section className="py-16 md:py-24 px-6 lg:px-12 bg-gray-50">
+        <ScrollReveal>
+          <p className="text-xs uppercase tracking-widest text-[var(--muted)] mb-3">
+            For everyone
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-4">
+            Who uses FindAKitchen?
+          </h2>
+          <p className="text-[var(--muted)] mb-12 max-w-2xl">
+            Whether you&apos;re a homeowner mid-renovation, a business whose
+            kitchen is out of action, or a tradesperson looking to add value for
+            clients &mdash; FindAKitchen has a solution.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {[
+            {
+              href: "/insurance-claims",
+              icon: (
+                <svg className="h-7 w-7 text-[var(--sage)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              ),
+              title: "Kitchen damaged by fire or flood?",
+              body: "If you\u2019re making an insurance claim, we\u2019ll match you to a verified provider and help generate the quote your insurer needs.",
+              cta: "Insurance claims \u2192",
+            },
+            {
+              href: "/events",
+              icon: (
+                <svg className="h-7 w-7 text-[var(--sage)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              ),
+              title: "Catering a festival or event?",
+              body: "Compare catering trailers, food trucks and mobile kitchen units from verified UK providers. Book now for the 2025 season.",
+              cta: "Event kitchens \u2192",
+            },
+            {
+              href: "/commercial",
+              icon: (
+                <svg className="h-7 w-7 text-[var(--sage)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-16 0H3m2 0v-2m14 2v-2M9 7h6m-6 4h6" />
+                </svg>
+              ),
+              title: "Business kitchen out of action?",
+              body: "Restaurants, schools, care homes and hotels \u2014 get a temporary commercial kitchen deployed within 48\u201372 hours.",
+              cta: "Commercial hire \u2192",
+            },
+            {
+              href: "/trade-partners",
+              icon: (
+                <svg className="h-7 w-7 text-[var(--sage)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              ),
+              title: "Kitchen fitter or tradesperson?",
+              body: "Earn \u00A330\u2013\u00A350 every time a client needs a temporary kitchen. Free to join, no targets, no admin.",
+              cta: "Join the programme \u2192",
+            },
+            {
+              href: "/loss-adjusters",
+              icon: (
+                <svg className="h-7 w-7 text-[var(--sage)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              ),
+              title: "Loss adjuster or claims handler?",
+              body: "FindAKitchen sources verified providers and generates insurer-formatted quotes for kitchen damage claims.",
+              cta: "Loss adjuster referrals \u2192",
+            },
+          ].map((card, i) => (
+            <ScrollReveal key={card.href} delay={i * 60}>
+              <Link
+                href={card.href}
+                className="group bg-white rounded-xl p-6 border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg block h-full"
+              >
+                <div className="mb-3">{card.icon}</div>
+                <h3 className="font-serif text-lg text-[var(--charcoal)] mb-2">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
+                  {card.body}
+                </p>
+                <span className="text-sm text-[var(--sage)] group-hover:text-[var(--clay)] transition-colors duration-300">
+                  {card.cta}
+                </span>
+              </Link>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== SECTION 7: TOOLS TEASER ===== */}
       <section className="py-16 md:py-24 px-6 lg:px-12 bg-[var(--charcoal)]">
         <ScrollReveal>
           <p className="text-xs uppercase tracking-widest text-[var(--clay-light)] mb-3">
@@ -373,6 +468,31 @@ export default async function HomePage() {
               </div>
             </ScrollReveal>
           ))}
+        </div>
+      </section>
+
+      {/* ===== TRADE PARTNER CTA ===== */}
+      <section className="py-12 px-6 lg:px-12 bg-teal-50">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 max-w-5xl">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-[var(--clay)] mb-2">
+              For kitchen fitters &amp; tradespeople
+            </p>
+            <h3 className="font-serif text-2xl text-[var(--charcoal)] mb-2">
+              Earn from every renovation you do
+            </h3>
+            <p className="text-sm text-[var(--muted)] leading-relaxed max-w-lg">
+              Join the FindAKitchen trade partner programme &mdash; refer clients
+              who need a temporary kitchen and earn &pound;30&ndash;50 per
+              completed hire.
+            </p>
+          </div>
+          <Link
+            href="/trade-partners"
+            className="flex-shrink-0 bg-[var(--sage)] text-white px-6 py-3 rounded-full hover:bg-[var(--sage)]/90 transition-all duration-300 text-sm font-medium"
+          >
+            Join free &rarr;
+          </Link>
         </div>
       </section>
 
