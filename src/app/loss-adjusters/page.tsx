@@ -281,6 +281,13 @@ export default function LossAdjustersPage() {
           </p>
 
           <LossAdjusterForm />
+
+          <p className="text-sm text-[var(--muted)] leading-relaxed mt-8">
+            Claimant also needs to compare domestic providers? See our{" "}
+            <Link href="/insurance-claims" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              insurance claims page &rarr;
+            </Link>
+          </p>
         </div>
       </section>
     </>

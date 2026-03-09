@@ -236,6 +236,25 @@ export default async function InsuranceClaimsPage() {
         </div>
       </section>
 
+      {/* ===== RELATED ===== */}
+      <section className="py-12 px-6 lg:px-12 bg-gray-50">
+        <div className="max-w-3xl space-y-4">
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Are you a loss adjuster handling a claim? See our{" "}
+            <Link href="/loss-adjusters" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              loss adjuster referral service &rarr;
+            </Link>
+          </p>
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Kitchen fitter or builder? Join our{" "}
+            <Link href="/trade-partners" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              trade partner programme
+            </Link>{" "}
+            and earn from every referral.
+          </p>
+        </div>
+      </section>
+
       {/* ===== SECTION 5: CTA STRIP ===== */}
       <section className="bg-[var(--charcoal)] py-16 md:py-24 px-6 lg:px-12 text-center">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">

@@ -391,6 +391,25 @@ export default async function CommercialPage() {
         </div>
       </section>
 
+      {/* ===== RELATED ===== */}
+      <section className="py-12 px-6 lg:px-12 bg-gray-50">
+        <div className="max-w-3xl space-y-4">
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Damage from fire or flood? Your insurance may cover the cost &mdash; see our{" "}
+            <Link href="/insurance-claims" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              insurance claims
+            </Link>{" "}
+            page.
+          </p>
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Loss adjuster managing a commercial claim? See our{" "}
+            <Link href="/loss-adjusters" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              loss adjuster referral service &rarr;
+            </Link>
+          </p>
+        </div>
+      </section>
+
       {/* ===== SECTION 7: URGENCY CTA STRIP ===== */}
       <section className="bg-[var(--charcoal)] py-16 md:py-24 px-6 lg:px-12 text-center">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">

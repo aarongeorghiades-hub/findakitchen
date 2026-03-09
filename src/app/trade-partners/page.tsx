@@ -138,6 +138,18 @@ export default function TradePartnersPage() {
             </div>
           ))}
         </div>
+
+        <p className="text-sm text-[var(--muted)] leading-relaxed mt-8">
+          Not sure what your clients will get? See our{" "}
+          <Link href="/providers" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+            domestic kitchen hire
+          </Link>{" "}
+          and{" "}
+          <Link href="/insurance-claims" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+            insurance claims
+          </Link>{" "}
+          pages.
+        </p>
       </section>
 
       {/* ===== SECTION 3: WHO IS THIS FOR ===== */}

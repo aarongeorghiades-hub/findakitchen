@@ -305,6 +305,19 @@ export default async function EventsPage() {
         </div>
       </section>
 
+      {/* ===== RELATED ===== */}
+      <section className="py-12 px-6 lg:px-12">
+        <div className="max-w-3xl">
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Need a permanent commercial kitchen solution? See our{" "}
+            <Link href="/commercial" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              commercial kitchen hire
+            </Link>{" "}
+            page.
+          </p>
+        </div>
+      </section>
+
       {/* ===== SECTION 6: SEASONAL CTA STRIP ===== */}
       <section className="bg-[var(--charcoal)] py-16 md:py-24 px-6 lg:px-12 text-center">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">

@@ -262,6 +262,22 @@ export default async function LocationPage({ params }: Props) {
             </Link>
           ))}
         </div>
+
+        <div className="mt-8 max-w-4xl space-y-3">
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Are you a tradesperson in {city.name}?{" "}
+            <Link href="/trade-partners" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              Join our trade partner programme &rarr;
+            </Link>
+          </p>
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Need a{" "}
+            <Link href="/commercial" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              commercial temporary kitchen
+            </Link>{" "}
+            rather than a domestic pod?
+          </p>
+        </div>
       </section>
 
       {/* ===== CTA ===== */}
