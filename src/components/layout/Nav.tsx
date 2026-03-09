@@ -44,6 +44,12 @@ export function Nav() {
           Insurance Claims
         </Link>
         <Link
+          href="/events"
+          className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
+        >
+          Events
+        </Link>
+        <Link
           href="/kitchen-types"
           className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
         >
@@ -96,6 +102,7 @@ export function Nav() {
               { href: "/providers", label: "Providers" },
               { href: "/locations", label: "Locations" },
               { href: "/insurance-claims", label: "Insurance Claims" },
+              { href: "/events", label: "Events" },
               { href: "/kitchen-types", label: "Kitchen Types" },
               { href: "/blog", label: "Blog" },
               { href: "/tools/driveway-fit-checker", label: "Tools" },
