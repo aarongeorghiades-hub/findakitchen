@@ -50,6 +50,12 @@ export function Nav() {
           Events
         </Link>
         <Link
+          href="/commercial"
+          className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
+        >
+          Commercial
+        </Link>
+        <Link
           href="/kitchen-types"
           className="text-sm text-[var(--warm-mid)] hover:text-[var(--clay)] transition-colors"
         >
@@ -103,6 +109,7 @@ export function Nav() {
               { href: "/locations", label: "Locations" },
               { href: "/insurance-claims", label: "Insurance Claims" },
               { href: "/events", label: "Events" },
+              { href: "/commercial", label: "Commercial" },
               { href: "/kitchen-types", label: "Kitchen Types" },
               { href: "/blog", label: "Blog" },
               { href: "/tools/driveway-fit-checker", label: "Tools" },
