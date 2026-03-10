@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { TradePartnerForm } from "./TradePartnerForm";
+// TradePartnerForm import removed — form parked as "coming soon"
 
 export const metadata: Metadata = {
   title: "Trade Partner Referral Programme | FindAKitchen",
@@ -337,7 +337,21 @@ export default function TradePartnersPage() {
             We&apos;ll email your referral link within one business day.
           </p>
 
-          <TradePartnerForm />
+          <div className="bg-gray-50 rounded-2xl p-10 text-center max-w-xl mx-auto">
+            <div className="text-4xl mb-4">🔧</div>
+            <h3 className="font-serif text-2xl text-[var(--charcoal)] mb-3">
+              Programme launching soon
+            </h3>
+            <p className="text-[var(--muted)] leading-relaxed mb-6">
+              We&apos;re finalising the trade partner programme details. Leave your email below and we&apos;ll notify you when registration opens.
+            </p>
+            <a
+              href="mailto:hello@findakitchen.co.uk?subject=Trade Partner Interest"
+              className="inline-block bg-[var(--sage)] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[var(--sage)]/90 transition-all duration-300"
+            >
+              Register interest by email →
+            </a>
+          </div>
         </div>
       </section>
     </>
