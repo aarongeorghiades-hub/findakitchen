@@ -23,16 +23,14 @@ export function TradePartnerForm() {
     setError(false);
 
     const result = await submitEnquiry({
-      situation: "Trade partner registration",
-      location_postcode: "",
-      location_area: businessName || "Independent",
-      timeline: "N/A",
-      duration: "N/A",
-      capacity: monthlyVolume || "Not specified",
-      contact_name: `${firstName} ${lastName}`,
-      contact_email: email,
-      contact_phone: phone,
+      situation: "other",
+      name: `${firstName} ${lastName}`,
+      email: email,
+      phone: phone,
+      timeline: "planning_ahead",
+      market_segment: "domestic",
       additional_notes: [
+        "Trade partner registration",
         `Trade: ${trade}`,
         businessName ? `Business: ${businessName}` : "",
         `Monthly kitchen fits/renovations: ${monthlyVolume || "Not specified"}`,

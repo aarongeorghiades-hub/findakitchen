@@ -23,16 +23,14 @@ export function LossAdjusterForm() {
     setError(false);
 
     const result = await submitEnquiry({
-      situation: "Loss adjuster B2B enquiry",
-      location_postcode: "",
-      location_area: firmName,
-      timeline: "N/A",
-      duration: "N/A",
-      capacity: monthlyClaims || "Not specified",
-      contact_name: `${firstName} ${lastName}`,
-      contact_email: email,
-      contact_phone: phone,
+      situation: "other",
+      name: `${firstName} ${lastName}`,
+      email: email,
+      phone: phone,
+      timeline: "planning_ahead",
+      market_segment: "domestic",
       additional_notes: [
+        "Loss adjuster B2B enquiry",
         `Job title: ${jobTitle}`,
         `Firm: ${firmName}`,
         `Monthly kitchen damage claims: ${monthlyClaims || "Not specified"}`,

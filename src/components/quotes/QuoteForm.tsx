@@ -16,8 +16,8 @@ const situationOptions = [
 
 const timelineOptions = [
   { value: "emergency", label: "Emergency — I need it now" },
-  { value: "within_a_week", label: "Within a week" },
-  { value: "within_a_month", label: "Within a month" },
+  { value: "within_week", label: "Within a week" },
+  { value: "within_month", label: "Within a month" },
   { value: "planning_ahead", label: "Planning ahead (1+ months)" },
 ];
 
@@ -72,7 +72,21 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
   const handleSubmit = async () => {
     setSubmitting(true);
     setError("");
-    const result = await submitEnquiry(formData);
+    const noteParts = [
+      formData.location_area ? `Area: ${formData.location_area}` : "",
+      formData.duration ? `Duration: ${formData.duration}` : "",
+      formData.capacity ? `Capacity: ${formData.capacity}` : "",
+      formData.additional_notes || "",
+    ].filter(Boolean).join(" | ");
+    const result = await submitEnquiry({
+      situation: formData.situation,
+      name: formData.contact_name,
+      email: formData.contact_email,
+      phone: formData.contact_phone,
+      postcode: formData.location_postcode,
+      timeline: formData.timeline,
+      additional_notes: noteParts,
+    });
     if (result.success) {
       setSubmitted(true);
     } else {

@@ -55,14 +55,12 @@ export interface Region {
 export interface Enquiry {
   id?: string;
   situation: string;
-  location_postcode: string;
-  location_area: string;
-  timeline: string;
-  duration: string;
-  capacity: string;
-  contact_name: string;
-  contact_email: string;
-  contact_phone: string;
+  postcode?: string;
+  timeline?: string;
+  market_segment?: string;
+  name: string;
+  email: string;
+  phone?: string;
   additional_notes?: string;
   status?: string;
   created_at?: string;
