@@ -171,33 +171,16 @@ export default async function ProviderProfilePage({ params }: Props) {
           )}
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          {provider.website && (
-            <a
-              href={provider.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300"
-            >
-              Visit website &rarr;
-            </a>
-          )}
-          {provider.phone && (
-            <a
-              href={`tel:${provider.phone}`}
-              className="text-sm border border-white/20 text-white px-6 py-2.5 rounded-full hover:border-white/40 transition-all duration-300"
-            >
-              {provider.phone}
-            </a>
-          )}
-          {provider.email && (
-            <a
-              href={`mailto:${provider.email}`}
-              className="text-sm border border-white/20 text-white px-6 py-2.5 rounded-full hover:border-white/40 transition-all duration-300"
-            >
-              Email
-            </a>
-          )}
+        <div className="flex flex-wrap gap-3 items-center">
+          <Link
+            href="/get-quotes"
+            className="text-sm bg-[var(--clay)] text-white px-8 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
+          >
+            Get quotes &rarr;
+          </Link>
+          <span className="text-xs text-white/40">
+            Free to use &middot; Matched quotes from verified providers &middot; No obligation
+          </span>
         </div>
       </section>
 
@@ -416,18 +399,14 @@ export default async function ProviderProfilePage({ params }: Props) {
           ) : (
             <div className="bg-white rounded-2xl p-6 border border-[var(--border)] text-center">
               <p className="text-[var(--muted)] mb-4">
-                Contact for a personalised quote
+                Request a personalised quote through FindAKitchen
               </p>
-              {provider.website && (
-                <a
-                  href={provider.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
-                >
-                  Get a quote &rarr;
-                </a>
-              )}
+              <Link
+                href="/get-quotes"
+                className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
+              >
+                Get a quote &rarr;
+              </Link>
             </div>
           )}
         </section>
@@ -752,6 +731,19 @@ export default async function ProviderProfilePage({ params }: Props) {
             </div>
           </section>
         )}
+      </div>
+
+      {/* Sticky mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--border)] p-3 md:hidden">
+        <Link
+          href="/get-quotes"
+          className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
+        >
+          Get quotes &rarr;
+        </Link>
+        <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
+          Free &middot; Verified providers &middot; No obligation
+        </p>
       </div>
     </>
   );
