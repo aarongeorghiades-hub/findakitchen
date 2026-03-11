@@ -129,7 +129,7 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
         </div>
         <div className="h-2 rounded-full bg-slate-200">
           <div
-            className="h-2 rounded-full bg-primary-600 transition-all duration-300"
+            className="h-2 rounded-full bg-[var(--clay)] transition-all duration-300"
             style={{ width: `${(step / 5) * 100}%` }}
           />
         </div>
@@ -325,7 +325,7 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
           <button
             onClick={() => setStep(step + 1)}
             disabled={!canProceed()}
-            className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-[var(--clay)] font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Continue &rarr;
           </button>
