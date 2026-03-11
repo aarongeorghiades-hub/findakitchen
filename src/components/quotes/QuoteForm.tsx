@@ -148,7 +148,7 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
                 onClick={() => updateField("situation", opt.value)}
                 className={`rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
                   formData.situation === opt.value
-                    ? "border-primary-500 bg-primary-50 text-primary-700"
+                    ? "border-[var(--clay)] bg-[var(--clay)]/10 text-[var(--clay)]"
                     : "border-slate-200 text-slate-700 hover:border-slate-300"
                 }`}
               >
@@ -203,7 +203,7 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
                 onClick={() => updateField("timeline", opt.value)}
                 className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
                   formData.timeline === opt.value
-                    ? "border-primary-500 bg-primary-50 text-primary-700"
+                    ? "border-[var(--clay)] bg-[var(--clay)]/10 text-[var(--clay)]"
                     : "border-slate-200 text-slate-700 hover:border-slate-300"
                 }`}
               >
