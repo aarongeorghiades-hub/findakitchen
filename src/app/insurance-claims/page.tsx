@@ -245,13 +245,6 @@ export default async function InsuranceClaimsPage() {
               loss adjuster referral service &rarr;
             </Link>
           </p>
-          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
-            Kitchen fitter or builder? Join our{" "}
-            <Link href="/trade-partners" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
-              trade partner programme
-            </Link>{" "}
-            and earn from every referral.
-          </p>
         </div>
       </section>
 

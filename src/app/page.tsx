@@ -314,8 +314,8 @@ export default async function HomePage() {
           </h2>
           <p className="text-[var(--muted)] mb-12 max-w-2xl">
             Whether you&apos;re a homeowner mid-renovation, a business whose
-            kitchen is out of action, or a tradesperson looking to add value for
-            clients &mdash; FindAKitchen has a solution.
+            kitchen is out of action, or a loss adjuster handling a claim
+            &mdash; FindAKitchen has a solution.
           </p>
         </ScrollReveal>
 
@@ -353,17 +353,6 @@ export default async function HomePage() {
               title: "Business kitchen out of action?",
               body: "Restaurants, schools, care homes and hotels \u2014 get a temporary commercial kitchen deployed within 48\u201372 hours.",
               cta: "Commercial hire \u2192",
-            },
-            {
-              href: "/trade-partners",
-              icon: (
-                <svg className="h-7 w-7 text-[var(--sage)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
-              ),
-              title: "Kitchen fitter or tradesperson?",
-              body: "Earn \u00A330\u2013\u00A350 every time a client needs a temporary kitchen. Free to join, no targets, no admin.",
-              cta: "Join the programme \u2192",
             },
             {
               href: "/loss-adjusters",
@@ -468,31 +457,6 @@ export default async function HomePage() {
               </div>
             </ScrollReveal>
           ))}
-        </div>
-      </section>
-
-      {/* ===== TRADE PARTNER CTA ===== */}
-      <section className="py-12 px-6 lg:px-12 bg-teal-50">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 max-w-5xl">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-[var(--clay)] mb-2">
-              For kitchen fitters &amp; tradespeople
-            </p>
-            <h3 className="font-serif text-2xl text-[var(--charcoal)] mb-2">
-              Earn from every renovation you do
-            </h3>
-            <p className="text-sm text-[var(--muted)] leading-relaxed max-w-lg">
-              Join the FindAKitchen trade partner programme &mdash; refer clients
-              who need a temporary kitchen and earn &pound;30&ndash;50 per
-              completed hire.
-            </p>
-          </div>
-          <Link
-            href="/trade-partners"
-            className="flex-shrink-0 bg-[var(--sage)] text-white px-6 py-3 rounded-full hover:bg-[var(--sage)]/90 transition-all duration-300 text-sm font-medium"
-          >
-            Join free &rarr;
-          </Link>
         </div>
       </section>
 
