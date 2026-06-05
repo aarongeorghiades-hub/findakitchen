@@ -16,6 +16,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { data: blogPages },
     { data: guidePages },
     { data: comparePages },
+    { data: kitchenTypes },
+    { data: regions },
   ] = await Promise.all([
     supabase
       .from("providers")
@@ -36,6 +38,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .select("slug, updated_at")
       .eq("page_type", "comparison")
       .eq("published", true),
+    supabase
+      .from("kitchen_types")
+      .select("slug, updated_at"),
+    supabase
+      .from("regions")
+      .select("slug"),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -53,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/get-quotes`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/tools/driveway-fit-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
@@ -92,6 +101,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const kitchenTypeRoutes: MetadataRoute.Sitemap = (kitchenTypes ?? []).map((kt) => ({
+    url: `${baseUrl}/kitchen-types/${kt.slug}`,
+    lastModified: kt.updated_at ? new Date(kt.updated_at) : now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const regionRoutes: MetadataRoute.Sitemap = (regions ?? []).map((r) => ({
+    url: `${baseUrl}/temporary-kitchen-hire/${r.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
   return [
     ...staticRoutes,
     ...locationRoutes,
@@ -99,5 +122,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogRoutes,
     ...guideRoutes,
     ...compareRoutes,
+    ...kitchenTypeRoutes,
+    ...regionRoutes,
   ];
 }
