@@ -34,22 +34,10 @@ const situations = [
     value: "event_festival",
   },
   {
-    icon: "\u{1F3D7}\u{FE0F}",
-    title: "Construction site or temporary facility",
-    subtitle: "Self-contained units that work off-grid on remote sites",
-    value: "construction_site",
-  },
-  {
     icon: "\u{1F373}",
     title: "Restaurant refurbishment",
     subtitle: "Stay open and trading while your kitchen is rebuilt",
     value: "restaurant_refurb",
-  },
-  {
-    icon: "\u{2753}",
-    title: "Something else",
-    subtitle: "We'll help you work out what you need",
-    value: "other",
   },
 ];
 

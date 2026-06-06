@@ -9,9 +9,7 @@ const situationOptions = [
   { value: "insurance_claim", label: "I'm making an insurance claim" },
   { value: "school_hospital_refurb", label: "School or hospital refurbishment" },
   { value: "event_festival", label: "Event or festival catering" },
-  { value: "construction_site", label: "Construction site or temporary facility" },
   { value: "restaurant_refurb", label: "Restaurant refurbishment" },
-  { value: "other", label: "Something else" },
 ];
 
 const timelineOptions = [
@@ -107,9 +105,9 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
           Thank you! Your enquiry has been submitted.
         </h2>
         <p className="text-lg text-slate-500 max-w-lg mx-auto">
-          We&apos;ll match you with the right providers and be in touch within 24
-          hours. In the meantime, feel free to explore our kitchen types and
-          guides.
+          We&apos;ll match you with the right providers and be in touch within 2
+          business days. In the meantime, feel free to explore our kitchen types
+          and guides.
         </p>
       </div>
     );
