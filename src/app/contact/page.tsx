@@ -85,8 +85,8 @@ export default function ContactPage() {
                 Response time
               </h3>
               <p className="text-slate-500 text-sm">
-                We aim to respond to all enquiries within 24 hours during business
-                days. For urgent temporary kitchen needs, please use our{" "}
+                We aim to respond to all enquiries within 2 business days. For
+                urgent temporary kitchen needs, please use our{" "}
                 <Link
                   href="/get-quotes"
                   className="text-primary-700 hover:underline"
