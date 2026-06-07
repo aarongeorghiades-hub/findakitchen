@@ -16,6 +16,9 @@ const nextConfig = {
       // Merged duplicate checklist blog posts → the canonical checklist guide.
       { source: "/blog/5-things-to-check-before-hiring-temporary-kitchen", destination: "/guides/temporary-kitchen-hire-checklist", permanent: true },
       { source: "/blog/5-things-know-before-hiring-temporary-kitchen", destination: "/guides/temporary-kitchen-hire-checklist", permanent: true },
+      // Merged duplicate insurance blog posts → the canonical insurance guides.
+      { source: "/blog/how-to-make-insurance-claim-temporary-kitchen", destination: "/guides/insurance-claim-kitchen-walkthrough", permanent: true },
+      { source: "/blog/does-home-insurance-cover-temporary-kitchen-hire", destination: "/guides/will-insurance-pay-temporary-kitchen", permanent: true },
     ];
   },
 };
