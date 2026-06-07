@@ -19,6 +19,77 @@ const timelineOptions = [
   { value: "planning_ahead", label: "Planning ahead (1+ months)" },
 ];
 
+interface Step4Copy {
+  heading: string;
+  durationLabel: string;
+  durationPlaceholder: string;
+  capacityLabel: string;
+  capacityPlaceholder: string;
+  notesPlaceholder: string;
+}
+
+// Situation-aware copy for Step 4. Field names / data model unchanged — this
+// only varies the visible labels, heading, and placeholders.
+const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
+  default: {
+    heading: "Duration and capacity",
+    durationLabel: "How long do you need the kitchen?",
+    durationPlaceholder: "e.g. 6 weeks, 3 months, 2 days",
+    capacityLabel: "How many people/meals do you need to cater for?",
+    capacityPlaceholder: "e.g. Family of 4, 200 meals/day, 500 guests",
+    notesPlaceholder:
+      "e.g. access restrictions, power availability, specific equipment needed",
+  },
+  renovation: {
+    heading: "Your renovation details",
+    durationLabel: "How long will your renovation take?",
+    durationPlaceholder: "e.g. 6 weeks, 3 months",
+    capacityLabel: "How many people are you cooking for?",
+    capacityPlaceholder: "e.g. family of 4",
+    notesPlaceholder: "e.g. driveway access, power supply, appliances you need",
+  },
+  flood_fire_damage: {
+    heading: "Your emergency details",
+    durationLabel: "How long will you need it?",
+    durationPlaceholder: "e.g. until repairs finish",
+    capacityLabel: "How many people are in the household?",
+    capacityPlaceholder: "e.g. family of 4",
+    notesPlaceholder: "e.g. when it happened, extent of damage, insurer involved",
+  },
+  insurance_claim: {
+    heading: "Your claim details",
+    durationLabel: "How long will you need the kitchen?",
+    durationPlaceholder: "e.g. until repairs complete",
+    capacityLabel: "How many people are in the household?",
+    capacityPlaceholder: "e.g. family of 4",
+    notesPlaceholder: "e.g. claim/policy number, insurer, loss adjuster name",
+  },
+  school_hospital_refurb: {
+    heading: "Catering volume & timeline",
+    durationLabel: "How long is the refurbishment?",
+    durationPlaceholder: "e.g. 6 weeks, 3 months",
+    capacityLabel: "How many meals per day?",
+    capacityPlaceholder: "e.g. 300 meals/day",
+    notesPlaceholder: "e.g. dietary needs, service times, on-site power & water",
+  },
+  event_festival: {
+    heading: "Event size & dates",
+    durationLabel: "What are the event dates?",
+    durationPlaceholder: "e.g. 12-14 July, 3 days",
+    capacityLabel: "How many guests / covers?",
+    capacityPlaceholder: "e.g. 500 guests",
+    notesPlaceholder: "e.g. event type, service times, power on site",
+  },
+  restaurant_refurb: {
+    heading: "Covers & timeline",
+    durationLabel: "How long is the refurbishment?",
+    durationPlaceholder: "e.g. 4 weeks",
+    capacityLabel: "How many covers do you serve?",
+    capacityPlaceholder: "e.g. 80 per service",
+    notesPlaceholder: "e.g. cuisine, equipment needed, peak service times",
+  },
+};
+
 interface QuoteFormProps {
   initialSituation?: string;
 }
@@ -116,6 +187,7 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
   const inputClass =
     "w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-700 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500";
   const labelClass = "block text-sm font-medium text-slate-700 mb-1.5";
+  const step4Copy = STEP4_COPY[formData.situation] ?? STEP4_COPY.default;
 
   return (
     <div>
@@ -216,26 +288,24 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
       {step === 4 && (
         <div>
           <h2 className="text-xl font-semibold text-slate-800 mb-4">
-            Duration and capacity
+            {step4Copy.heading}
           </h2>
           <div className="space-y-4">
             <div>
-              <label className={labelClass}>How long do you need the kitchen?</label>
+              <label className={labelClass}>{step4Copy.durationLabel}</label>
               <input
                 type="text"
-                placeholder="e.g. 6 weeks, 3 months, 2 days"
+                placeholder={step4Copy.durationPlaceholder}
                 value={formData.duration}
                 onChange={(e) => updateField("duration", e.target.value)}
                 className={inputClass}
               />
             </div>
             <div>
-              <label className={labelClass}>
-                How many people/meals do you need to cater for?
-              </label>
+              <label className={labelClass}>{step4Copy.capacityLabel}</label>
               <input
                 type="text"
-                placeholder="e.g. Family of 4, 200 meals/day, 500 guests"
+                placeholder={step4Copy.capacityPlaceholder}
                 value={formData.capacity}
                 onChange={(e) => updateField("capacity", e.target.value)}
                 className={inputClass}
@@ -244,7 +314,7 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
             <div>
               <label className={labelClass}>Any additional details? (optional)</label>
               <textarea
-                placeholder="Tell us anything else that might help — access restrictions, power availability, specific equipment needed..."
+                placeholder={step4Copy.notesPlaceholder}
                 value={formData.additional_notes}
                 onChange={(e) => updateField("additional_notes", e.target.value)}
                 rows={3}
