@@ -13,6 +13,9 @@ const nextConfig = {
       { source: "/guides/the-temporary-kitchen-company", destination: "/providers/the-temporary-kitchen-company", permanent: true },
       { source: "/guides/courtesy-kitchens-and-bathrooms", destination: "/providers/courtesy-kitchens-and-bathrooms", permanent: true },
       { source: "/guides/kitchenpod", destination: "/providers/kitchenpod-pod-solutions-group", permanent: true },
+      // Merged duplicate checklist blog posts → the canonical checklist guide.
+      { source: "/blog/5-things-to-check-before-hiring-temporary-kitchen", destination: "/guides/temporary-kitchen-hire-checklist", permanent: true },
+      { source: "/blog/5-things-know-before-hiring-temporary-kitchen", destination: "/guides/temporary-kitchen-hire-checklist", permanent: true },
     ];
   },
 };
