@@ -2,6 +2,17 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
+// Escape user-supplied values before interpolating into email HTML so a field
+// containing & < > " ' can't break the layout or inject markup. & must go first.
+function esc(value: unknown): string {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(request: Request) {
   try {
     const enquiry = await request.json();
@@ -61,17 +72,17 @@ export async function POST(request: Request) {
           }`,
           html: `
             <h2>New enquiry submitted</h2>
-            <p><strong>Name:</strong> ${enquiry.name}</p>
-            <p><strong>Email:</strong> ${enquiry.email}</p>
-            <p><strong>Phone:</strong> ${enquiry.phone || "—"}</p>
-            <p><strong>Postcode:</strong> ${enquiry.postcode || "—"}</p>
-            <p><strong>Situation:</strong> ${enquiry.situation}</p>
-            <p><strong>Timeline:</strong> ${enquiry.timeline || "planning_ahead"}</p>
-            <p><strong>Market segment:</strong> ${
+            <p><strong>Name:</strong> ${esc(enquiry.name)}</p>
+            <p><strong>Email:</strong> ${esc(enquiry.email)}</p>
+            <p><strong>Phone:</strong> ${esc(enquiry.phone || "—")}</p>
+            <p><strong>Postcode:</strong> ${esc(enquiry.postcode || "—")}</p>
+            <p><strong>Situation:</strong> ${esc(enquiry.situation)}</p>
+            <p><strong>Timeline:</strong> ${esc(enquiry.timeline || "planning_ahead")}</p>
+            <p><strong>Market segment:</strong> ${esc(
               enquiry.market_segment || "domestic"
-            }</p>
+            )}</p>
             <p><strong>Additional notes:</strong></p>
-            <p>${enquiry.additional_notes || "—"}</p>
+            <p>${esc(enquiry.additional_notes || "—")}</p>
             <hr>
             <p style="color:#888;font-size:12px;">Submitted via the quote wizard at https://findakitchen.co.uk</p>
           `,
@@ -87,12 +98,17 @@ export async function POST(request: Request) {
     if (resend && enquiry.email) {
       try {
         const firstName = String(enquiry.name || "").trim().split(/\s+/)[0];
-        const greeting = firstName ? `Hi ${firstName},` : "Hi there,";
-        const situationText = String(enquiry.situation || "")
+        const greeting = firstName ? `Hi ${esc(firstName)},` : "Hi there,";
+        const situationRaw = String(enquiry.situation || "")
           .replace(/_/g, " ")
           .trim();
+        const situationText = situationRaw
+          ? situationRaw.charAt(0).toUpperCase() + situationRaw.slice(1)
+          : "";
         const postcodeText = String(enquiry.postcode || "").trim();
-        const recapParts = [situationText, postcodeText].filter(Boolean);
+        const recapParts = [situationText, postcodeText]
+          .filter(Boolean)
+          .map(esc);
         const recapLine =
           recapParts.length > 0
             ? `<p style="margin:0 0 16px;"><strong style="color:#1C1C1A;">Your enquiry:</strong> ${recapParts.join(
