@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://findakitchen.co.uk/blog" },
 };
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 export default async function BlogIndexPage() {
   const posts = await getSEOPages("blog");

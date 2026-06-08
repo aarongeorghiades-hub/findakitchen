@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://findakitchen.co.uk/compare" },
 };
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 // Grouped by what's actually being weighed up. Anything not listed falls into
 // "More comparisons" so new rows are never dropped.

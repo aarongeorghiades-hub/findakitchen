@@ -7,7 +7,7 @@ import { ScrollReveal } from "@/components/home/ScrollReveal";
 import { HomeProviderPreview } from "@/components/home/HomeProviderPreview";
 import { RotatingProviderCard } from "@/components/home/RotatingProviderCard";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 async function getHomeData() {
   const { count } = await supabase
