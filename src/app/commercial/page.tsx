@@ -407,6 +407,12 @@ export default async function CommercialPage() {
               loss adjuster referral service &rarr;
             </Link>
           </p>
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Trading as a food business from a temporary unit? Your hygiene duties don&apos;t pause &mdash; see our guide to{" "}
+            <Link href="/blog/pest-control-temporary-kitchen-food-safety" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              pest control and food safety in a temporary kitchen
+            </Link>.
+          </p>
         </div>
       </section>
 
