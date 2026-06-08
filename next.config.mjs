@@ -19,6 +19,9 @@ const nextConfig = {
       // Merged duplicate insurance blog posts → the canonical insurance guides.
       { source: "/blog/how-to-make-insurance-claim-temporary-kitchen", destination: "/guides/insurance-claim-kitchen-walkthrough", permanent: true },
       { source: "/blog/does-home-insurance-cover-temporary-kitchen-hire", destination: "/guides/will-insurance-pay-temporary-kitchen", permanent: true },
+      // Merged duplicate indoor-vs-outdoor pages → the canonical guide.
+      { source: "/blog/driveway-pod-vs-indoor-kitchen-unit", destination: "/guides/indoor-vs-outdoor-temporary-kitchen", permanent: true },
+      { source: "/compare/indoor-vs-outdoor-temporary-kitchen-comparison", destination: "/guides/indoor-vs-outdoor-temporary-kitchen", permanent: true },
     ];
   },
 };
