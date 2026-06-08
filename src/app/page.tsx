@@ -149,7 +149,6 @@ export default async function HomePage() {
                   "\u{1F3E0} Homeowners",
                   "\u{1F512} Insurance claimants",
                   "\u{1F37D}\u{FE0F} Restaurants",
-                  "\u{1F3D7}\u{FE0F} Construction sites",
                   "\u{1F3EB} Schools & care homes",
                   "\u{1F3AA} Events & festivals",
                 ].map((item) => (
