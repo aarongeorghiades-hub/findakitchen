@@ -413,6 +413,18 @@ export default async function CommercialPage() {
               pest control and food safety in a temporary kitchen
             </Link>.
           </p>
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Catering through a school refurbishment? See our guide to{" "}
+            <Link href="/blog/temporary-kitchen-hire-for-schools" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              keeping a school&apos;s meal service running during a refit
+            </Link>.
+          </p>
+          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
+            Refurbishing a restaurant kitchen? See how to{" "}
+            <Link href="/blog/temporary-kitchen-hire-for-restaurants" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
+              keep your restaurant trading during the works
+            </Link>.
+          </p>
         </div>
       </section>
 
