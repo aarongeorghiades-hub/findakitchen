@@ -6,7 +6,7 @@ import { ProvidersDirectoryClient } from "./ProvidersDirectoryClient";
 export const metadata: Metadata = {
   title: "UK Temporary Kitchen Providers",
   description:
-    "Browse 26 vetted temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.",
+    "Browse 30 vetted temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.",
   alternates: { canonical: "https://findakitchen.co.uk/providers" },
 };
 

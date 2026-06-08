@@ -26,6 +26,11 @@ const nextConfig = {
       { source: "/blog/how-much-does-temporary-kitchen-hire-cost", destination: "/guides/temporary-kitchen-hire-cost", permanent: true },
       { source: "/blog/how-long-does-kitchen-renovation-take", destination: "/guides/kitchen-renovation-timeline-planning", permanent: true },
       { source: "/blog/electric-vs-gas-temporary-kitchens", destination: "/compare/gas-vs-electric-temporary-kitchen", permanent: true },
+      // Deduplicated near-twin provider profiles → canonical provider slug.
+      { source: "/providers/courtesy-kitchens-bathrooms", destination: "/providers/courtesy-kitchens-and-bathrooms", permanent: true },
+      { source: "/providers/premier-catering-commercial-kitchen-company", destination: "/providers/premier-catering", permanent: true },
+      { source: "/providers/instant-kitchen-company", destination: "/providers/the-instant-kitchen-company", permanent: true },
+      { source: "/providers/kitchen-pod-hire-ni", destination: "/providers/kitchen-pod-hire", permanent: true },
     ];
   },
 };
