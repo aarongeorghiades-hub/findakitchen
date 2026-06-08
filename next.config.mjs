@@ -22,6 +22,10 @@ const nextConfig = {
       // Merged duplicate indoor-vs-outdoor pages → the canonical guide.
       { source: "/blog/driveway-pod-vs-indoor-kitchen-unit", destination: "/guides/indoor-vs-outdoor-temporary-kitchen", permanent: true },
       { source: "/compare/indoor-vs-outdoor-temporary-kitchen-comparison", destination: "/guides/indoor-vs-outdoor-temporary-kitchen", permanent: true },
+      // Merged duplicate cost / renovation-timeline / gas-vs-electric blog posts → canonical survivors.
+      { source: "/blog/how-much-does-temporary-kitchen-hire-cost", destination: "/guides/temporary-kitchen-hire-cost", permanent: true },
+      { source: "/blog/how-long-does-kitchen-renovation-take", destination: "/guides/kitchen-renovation-timeline-planning", permanent: true },
+      { source: "/blog/electric-vs-gas-temporary-kitchens", destination: "/compare/gas-vs-electric-temporary-kitchen", permanent: true },
     ];
   },
 };
