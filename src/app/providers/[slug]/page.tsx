@@ -120,7 +120,7 @@ export default async function ProviderProfilePage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: provider.name,
-    url: provider.website || `https://findakitchen.co.uk/providers/${params.slug}`,
+    url: `https://findakitchen.co.uk/providers/${params.slug}`,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: String(provider.trustpilot_rating),

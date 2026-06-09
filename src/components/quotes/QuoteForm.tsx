@@ -12,6 +12,19 @@ const situationOptions = [
   { value: "restaurant_refurb", label: "Restaurant refurbishment" },
 ];
 
+// The only situation values the enquiries table accepts (enquiries_situation_check).
+// A ?situation= deep link outside this set is ignored so we never seed an invalid
+// value that would fail the DB constraint on submit.
+const VALID_SITUATIONS = [
+  "renovation",
+  "flood_fire_damage",
+  "insurance_claim",
+  "school_hospital_refurb",
+  "event_festival",
+  "restaurant_refurb",
+  "other",
+];
+
 const timelineOptions = [
   { value: "emergency", label: "Emergency — I need it now" },
   { value: "within_week", label: "Within a week" },
@@ -95,13 +108,18 @@ interface QuoteFormProps {
 }
 
 export default function QuoteForm({ initialSituation }: QuoteFormProps) {
-  const [step, setStep] = useState(initialSituation ? 2 : 1);
+  // Ignore any ?situation= value that isn't a valid enquiry situation.
+  const validInitialSituation =
+    initialSituation && VALID_SITUATIONS.includes(initialSituation)
+      ? initialSituation
+      : "";
+  const [step, setStep] = useState(validInitialSituation ? 2 : 1);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
-    situation: initialSituation || "",
+    situation: validInitialSituation,
     location_postcode: "",
     location_area: "",
     timeline: "",
