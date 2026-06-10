@@ -1,12 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
-import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 export const metadata: Metadata = {
   title: "Festival & Event Kitchen Hire UK | FindAKitchen",
   description:
-    "Compare catering trailer hire, mobile kitchen units and food truck hire for UK festivals and events. Book now for the 2025 season. Nationwide delivery.",
+    "A guide to catering trailer hire, mobile kitchen units and food truck hire for UK festivals and events — the unit types, typical costs, and how to find and contact suppliers directly.",
   alternates: {
     canonical: "https://findakitchen.co.uk/events",
   },
@@ -38,20 +36,11 @@ const faqs = [
   {
     question: "How much does festival kitchen hire cost?",
     answer:
-      "Costs vary widely depending on unit type, hire duration, and delivery distance. Catering trailers typically start from \u00A3200\u2013\u00A3500 per day, while larger modular kitchen units can cost \u00A31,000+ per week. Request quotes from multiple providers below to compare.",
+      "Costs vary widely depending on unit type, hire duration, and delivery distance. Catering trailers typically start from \u00A3200\u2013\u00A3500 per day, while larger modular kitchen units can cost \u00A31,000+ per week. Contact several event catering suppliers directly to compare quotes.",
   },
 ];
 
-export default async function EventsPage() {
-  const { data: providers } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, coverage, notable_differentiators, insurance_friendly, power_source"
-    )
-    .eq("active", true)
-    .in("market", ["commercial", "commercial_and_domestic"])
-    .order("name");
-
+export default function EventsPage() {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -118,42 +107,33 @@ export default async function EventsPage() {
           </nav>
 
           <p className="text-xs uppercase tracking-widest text-[var(--clay-light)] mb-4">
-            Festival Season 2025
+            Events &amp; Festivals
           </p>
 
           <h1 className="font-serif text-3xl md:text-5xl text-white leading-tight mb-5">
             Festival &amp; Event Kitchen Hire
           </h1>
 
-          <p className="text-lg text-white/50 font-light leading-relaxed max-w-2xl mb-6">
-            Compare catering trailer hire, mobile kitchen units and food truck
-            hire for UK festivals and events. Nationwide delivery from trusted
-            commercial providers.
+          <p className="text-lg text-white/50 font-light leading-relaxed max-w-2xl mb-8">
+            Catering trailer hire, mobile kitchen units and food truck hire for
+            UK festivals and events. This guide explains the different unit
+            types, what they typically cost, and how to find and contact
+            suppliers for your event.
           </p>
-
-          <div className="inline-block bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs text-white/70 mb-8">
-            Peak booking window: March&ndash;May 2025
-          </div>
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="#providers"
+              href="#unit-types"
               className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300"
             >
-              Compare providers &rarr;
-            </a>
-            <a
-              href="#how-it-works"
-              className="text-sm border border-white/20 text-white px-6 py-2.5 rounded-full hover:border-white/40 transition-all duration-300"
-            >
-              How it works
+              See what you can hire &rarr;
             </a>
           </div>
         </div>
       </section>
 
       {/* ===== SECTION 2: UNIT TYPES ===== */}
-      <section className="py-16 md:py-24 px-6 lg:px-12">
+      <section id="unit-types" className="py-16 md:py-24 px-6 lg:px-12">
         <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-12">
           What can you hire for your event?
         </h2>
@@ -217,51 +197,60 @@ export default async function EventsPage() {
         </div>
       </section>
 
-      {/* ===== SECTION 3: PROVIDER GRID ===== */}
-      <section id="providers" className="py-16 md:py-24 px-6 lg:px-12 bg-gray-50">
+      {/* ===== SECTION 3: FINDING SUPPLIERS ===== */}
+      <section id="finding-suppliers" className="py-16 md:py-24 px-6 lg:px-12 bg-gray-50">
         <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-3">
-          Event &amp; festival kitchen providers
+          Finding event &amp; festival catering
         </h2>
-        <p className="text-[var(--muted)] mb-12 max-w-2xl">
-          Commercial kitchen hire providers covering UK festivals, events, and
-          outdoor catering.
-        </p>
-
-        {providers && providers.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {providers.map((provider) => (
-              <ProviderPreviewCard key={provider.slug} provider={provider} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-[var(--muted)]">
-            No providers found. Please check back soon.
+        <div className="max-w-2xl space-y-4 text-[var(--muted)] leading-relaxed">
+          <p>
+            FindAKitchen helps people who&apos;ve lost their kitchen to a
+            renovation, flood or fire, and businesses that need to keep cooking
+            through a refit. We don&apos;t arrange one-off event catering.
           </p>
-        )}
+          <p>
+            For a festival, party, wedding or corporate event, the quickest route
+            is to search directly for &ldquo;event or festival catering kitchen
+            hire&rdquo; or &ldquo;catering trailer hire&rdquo; in your area, then
+            contact those suppliers yourself to check availability, capacity and
+            pricing for your dates.
+          </p>
+          <p>
+            If instead you run a business that needs a temporary commercial
+            kitchen during a refurbishment, see our{" "}
+            <Link
+              href="/commercial"
+              className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors"
+            >
+              commercial kitchen hire
+            </Link>{" "}
+            page.
+          </p>
+        </div>
       </section>
 
-      {/* ===== SECTION 4: HOW IT WORKS ===== */}
-      <section id="how-it-works" className="py-16 md:py-24 px-6 lg:px-12">
+      {/* ===== SECTION 4: HOW TO SOURCE ===== */}
+      <section id="how-to-source" className="py-16 md:py-24 px-6 lg:px-12">
         <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-12">
-          How to book a festival kitchen
+          How to source an event kitchen
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-[var(--border)] rounded-2xl overflow-hidden">
           {[
             {
               num: "01",
-              title: "Browse & compare",
-              body: "View all commercial kitchen hire providers in one place. Filter by unit type, coverage area, and availability for your event dates.",
+              title: "Work out what you need",
+              body: "Decide on the unit type, the number of covers, your event dates and location, and whether the site has mains power or needs a generator.",
             },
             {
               num: "02",
-              title: "Request a quote",
-              body: "Contact providers directly with your event details \u2014 dates, location, expected covers, and power requirements. Get tailored pricing.",
+              title: "Search for suppliers",
+              body: "Search online for event or festival catering kitchen hire, catering trailer hire, or food truck hire in your area, and shortlist a few suppliers.",
             },
             {
               num: "03",
-              title: "Confirm your booking",
-              body: "Choose your preferred provider, confirm dates, and arrange delivery. Units are delivered and set up on-site before your event.",
+              title: "Contact suppliers directly",
+              body: "Get in touch with the suppliers yourself to confirm availability, pricing, permits and delivery for your dates \u2014 then book directly with them.",
             },
           ].map((step) => (
             <div
@@ -305,33 +294,22 @@ export default async function EventsPage() {
         </div>
       </section>
 
-      {/* ===== RELATED ===== */}
-      <section className="py-12 px-6 lg:px-12">
-        <div className="max-w-3xl">
-          <p className="text-sm text-[var(--warm-mid)] leading-relaxed">
-            Need a permanent commercial kitchen solution? See our{" "}
-            <Link href="/commercial" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors">
-              commercial kitchen hire
-            </Link>{" "}
-            page.
-          </p>
-        </div>
-      </section>
-
-      {/* ===== SECTION 6: SEASONAL CTA STRIP ===== */}
+      {/* ===== SECTION 6: WHO FINDAKITCHEN IS FOR ===== */}
       <section className="bg-[var(--charcoal)] py-16 md:py-24 px-6 lg:px-12 text-center">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-          Don&apos;t miss the booking window
+          Lost your kitchen, rather than catering an event?
         </h2>
-        <p className="text-white/50 mb-8 max-w-lg mx-auto">
-          Popular units book out months in advance for peak festival season.
-          Compare providers now and secure your dates.
+        <p className="text-white/50 mb-8 max-w-xl mx-auto">
+          FindAKitchen is built for households left without a kitchen by a
+          renovation, flood or fire, and for businesses keeping things running
+          through a refurbishment. For one-off events, search for event catering
+          suppliers and contact them directly.
         </p>
         <Link
-          href="/providers"
+          href="/commercial"
           className="inline-block text-sm bg-[var(--sage)] text-white px-8 py-3.5 rounded-full hover:bg-[var(--sage)]/90 transition-all duration-300 font-medium"
         >
-          Compare all providers &rarr;
+          Commercial kitchen hire &rarr;
         </Link>
       </section>
     </>

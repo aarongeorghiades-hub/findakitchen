@@ -339,8 +339,8 @@ export default async function HomePage() {
                 </svg>
               ),
               title: "Catering a festival or event?",
-              body: "Compare catering trailers, food trucks and mobile kitchen units from verified UK providers. Book now for the 2025 season.",
-              cta: "Event kitchens \u2192",
+              body: "Catering trailers, food trucks and mobile kitchen units explained \u2014 plus how to find and contact event catering suppliers yourself.",
+              cta: "Event kitchen guide \u2192",
             },
             {
               href: "/commercial",
