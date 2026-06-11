@@ -409,6 +409,13 @@ export default async function HomePage() {
               live: true,
             },
             {
+              emoji: "\u{2696}\u{FE0F}",
+              title: "Compare Kitchen Types",
+              body: "Driveway pod, indoor capsule, container or trailer? Compare the types side by side to find your fit.",
+              href: "/tools/compare-kitchen-types",
+              live: true,
+            },
+            {
               emoji: "\u{1F4B7}",
               title: "Quote Estimator",
               body: "Get a ballpark price range before you contact providers. Based on real market data.",

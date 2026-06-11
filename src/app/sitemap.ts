@@ -60,6 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/kitchen-types`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     { url: `${baseUrl}/get-quotes`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/tools/driveway-fit-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/tools/compare-kitchen-types`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

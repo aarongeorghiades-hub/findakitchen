@@ -109,6 +109,10 @@ export default async function CompareIndexPage() {
             <Link href="/kitchen-types" className="text-primary-700 font-medium hover:underline">
               type of temporary kitchen
             </Link>
+            . Prefer to weigh the types up interactively? Try our{" "}
+            <Link href="/tools/compare-kitchen-types" className="text-primary-700 font-medium hover:underline">
+              compare kitchen types tool
+            </Link>
             . Already know what you need?{" "}
             <Link href="/get-quotes" className="text-primary-700 font-medium hover:underline">
               Get free quotes
