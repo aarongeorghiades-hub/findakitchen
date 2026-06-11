@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { ProvidersDirectoryClient } from "./ProvidersDirectoryClient";
+import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs";
 
 export const metadata: Metadata = {
   title: "UK Temporary Kitchen Providers",
@@ -43,8 +44,13 @@ export default async function ProvidersPage() {
         </p>
       </section>
 
+      {/* Why request through us */}
+      <section className="pt-12 px-6 lg:px-12">
+        <WhyRequestThroughUs />
+      </section>
+
       {/* Provider grid with filters */}
-      <section className="py-12 px-6 lg:px-12">
+      <section className="pt-8 pb-12 px-6 lg:px-12">
         <ProvidersDirectoryClient providers={allProviders} />
       </section>
     </>

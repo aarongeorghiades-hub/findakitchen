@@ -311,8 +311,8 @@ export function CompareKitchenTypesClient() {
 
       <p className="text-xs text-[var(--muted)] mt-3">
         Specifics vary by provider — always confirm details directly. Hire
-        is often covered in full when your kitchen loss is an insurance claim
-        (flood, fire or escape of water).
+        is often covered by your insurance when your kitchen loss is an
+        insurance claim (flood, fire or escape of water) — check your policy.
       </p>
     </div>
   );

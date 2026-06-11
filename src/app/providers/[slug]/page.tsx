@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
+import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs";
 
 interface Props {
   params: { slug: string };
@@ -185,6 +186,9 @@ export default async function ProviderProfilePage({ params }: Props) {
       </section>
 
       <div className="px-6 lg:px-12 py-12 space-y-12 max-w-5xl">
+        {/* WHY REQUEST THROUGH US */}
+        <WhyRequestThroughUs />
+
         {/* AT A GLANCE */}
         <section>
           <h2 className="font-serif text-2xl text-[var(--charcoal)] mb-6">

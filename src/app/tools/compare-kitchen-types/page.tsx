@@ -56,7 +56,9 @@ export default function CompareKitchenTypesPage() {
           </p>
           <p className="mt-4 text-[var(--muted)] leading-relaxed">
             If your kitchen loss is an insurance claim — a flood, fire or escape
-            of water — the hire is often covered in full by your policy. See our{" "}
+            of water — the hire is often covered by your insurance. Check whether
+            your policy includes alternative accommodation or loss-of-use cover.
+            See our{" "}
             <Link href="/insurance-claims" className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)]">
               insurance claims
             </Link>{" "}
