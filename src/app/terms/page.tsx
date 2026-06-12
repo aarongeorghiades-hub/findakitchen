@@ -35,8 +35,10 @@ export default function TermsPage() {
 
           <h2>Who we are</h2>
           <p>
-            FindAKitchen (findakitchen.co.uk) is a directory and introduction
-            service for temporary kitchen hire. We help people who need a
+            FindAKitchen (findakitchen.co.uk) is operated by ENA Enterprises Ltd,
+            a company registered in England and Wales (company number 17257845).
+            FindAKitchen is a directory and introduction service for temporary
+            kitchen hire. We help people who need a
             temporary kitchen find, and make contact with, temporary kitchen
             providers. References to &quot;we&quot;, &quot;us&quot; and
             &quot;our&quot; in these terms mean FindAKitchen.

@@ -34,6 +34,13 @@ export default function PrivacyPolicyPage() {
             collect, use, and safeguard your personal information.
           </p>
 
+          <p>
+            ENA Enterprises Ltd (company number 17257845) is the data controller
+            responsible for your personal data on this site. ENA Enterprises Ltd
+            is registered with the Information Commissioner&apos;s Office
+            (registration ZC164333).
+          </p>
+
           <h2>Information we collect</h2>
           <p>When you use our service, we may collect:</p>
           <ul>

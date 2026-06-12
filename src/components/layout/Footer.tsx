@@ -25,7 +25,7 @@ export function Footer() {
         ))}
       </div>
       <p className="text-xs text-[var(--muted)]">
-        &copy; 2026 FindAKitchen &middot; findakitchen.co.uk
+        &copy; 2026 FindAKitchen &middot; Operated by ENA Enterprises Ltd
       </p>
     </footer>
   );
