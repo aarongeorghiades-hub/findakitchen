@@ -12,6 +12,7 @@ export function Footer() {
           { label: "Kitchen Types", href: "/kitchen-types" },
           { label: "Blog", href: "/blog" },
           { label: "Privacy", href: "/privacy-policy" },
+          { label: "Terms", href: "/terms" },
           { label: "Contact", href: "/contact" },
         ].map((l) => (
           <Link
