@@ -7,7 +7,7 @@ import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs"
 export const metadata: Metadata = {
   title: "UK Temporary Kitchen Providers",
   description:
-    "Browse 30 vetted temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.",
+    "Browse 30 specialist temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.",
   alternates: { canonical: "https://findakitchen.co.uk/providers" },
 };
 
@@ -39,7 +39,7 @@ export default async function ProvidersPage() {
           Temporary Kitchen Providers
         </h1>
         <p className="text-lg text-white/50 font-light">
-          {allProviders.length} vetted UK suppliers — domestic pods and
+          {allProviders.length} specialist UK suppliers — domestic pods and
           commercial hire
         </p>
       </section>

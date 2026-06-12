@@ -180,7 +180,7 @@ export default async function ProviderProfilePage({ params }: Props) {
             Get quotes &rarr;
           </Link>
           <span className="text-xs text-white/40">
-            Free to use &middot; Matched quotes from verified providers &middot; No obligation
+            Free to use &middot; Matched quotes from specialist providers &middot; No obligation
           </span>
         </div>
       </section>
@@ -746,7 +746,7 @@ export default async function ProviderProfilePage({ params }: Props) {
           Get quotes &rarr;
         </Link>
         <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
-          Free &middot; Verified providers &middot; No obligation
+          Free &middot; Specialist providers &middot; No obligation
         </p>
       </div>
     </>

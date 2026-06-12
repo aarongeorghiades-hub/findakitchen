@@ -5,7 +5,7 @@ import QuoteForm from "@/components/quotes/QuoteForm";
 export const metadata: Metadata = {
   title: "Get Free Temporary Kitchen Quotes",
   description:
-    "Get free, no-obligation quotes from verified temporary kitchen providers. Tell us your situation and we'll match you with the right solution — usually within 2 business days.",
+    "Get free, no-obligation quotes from specialist temporary kitchen providers. Tell us your situation and we'll match you with the right solution — usually within 2 business days.",
   alternates: { canonical: "https://findakitchen.co.uk/get-quotes" },
 };
 
