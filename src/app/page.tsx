@@ -53,7 +53,7 @@ export default async function HomePage() {
       "@type": "Organization",
       name: "FindAKitchen",
       url: "https://findakitchen.co.uk",
-      description: "The UK's only neutral comparison platform for temporary kitchen hire. Compare domestic pods, commercial units, and catering trailers from verified providers.",
+      description: "The UK's only neutral comparison platform for temporary kitchen hire. Compare domestic pods, commercial units, and catering trailers from specialist providers.",
       foundingDate: "2025",
       areaServed: "GB",
     },
@@ -98,7 +98,7 @@ export default async function HomePage() {
                 <p className="font-serif text-3xl text-[var(--charcoal)]">
                   <AnimatedCounter target={providerCount} suffix="+" />
                 </p>
-                <p className="text-xs text-[var(--muted)] mt-1">Vetted providers</p>
+                <p className="text-xs text-[var(--muted)] mt-1">Specialist providers</p>
               </div>
               <div>
                 <p className="font-serif text-3xl text-[var(--charcoal)]">
@@ -328,7 +328,7 @@ export default async function HomePage() {
                 </svg>
               ),
               title: "Kitchen damaged by fire or flood?",
-              body: "If you\u2019re making an insurance claim, we\u2019ll match you to a verified provider and help generate the quote your insurer needs.",
+              body: "If you\u2019re making an insurance claim, we\u2019ll match you to an insurance-ready provider and help generate the quote your insurer needs.",
               cta: "Insurance claims \u2192",
             },
             {
@@ -361,7 +361,7 @@ export default async function HomePage() {
                 </svg>
               ),
               title: "Loss adjuster or claims handler?",
-              body: "FindAKitchen sources verified providers and generates insurer-formatted quotes for kitchen damage claims.",
+              body: "FindAKitchen sources specialist providers and generates insurer-formatted quotes for kitchen damage claims.",
               cta: "Loss adjuster referrals \u2192",
             },
           ].map((card, i) => (

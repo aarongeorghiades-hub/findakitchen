@@ -41,7 +41,7 @@ export function HomeProviderPreview({
             Provider directory
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)]">
-            {totalCount} vetted suppliers,{" "}
+            {totalCount} specialist suppliers,{" "}
             <em className="text-[var(--clay)]">zero</em> guesswork.
           </h2>
         </div>

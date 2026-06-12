@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Loss Adjuster Kitchen Referral Service | FindAKitchen",
   description:
-    "A specialist referral service for loss adjusters handling kitchen damage claims. FindAKitchen sources verified temporary kitchen providers and generates insurer-formatted quotes. \u00A3100\u2013\u00A3150 referral fee per completed hire.",
+    "A specialist referral service for loss adjusters handling kitchen damage claims. FindAKitchen sources specialist temporary kitchen providers and generates insurer-formatted quotes. \u00A3100\u2013\u00A3150 referral fee per completed hire.",
   alternates: {
     canonical: "https://findakitchen.co.uk/loss-adjusters",
   },
@@ -102,7 +102,7 @@ export default function LossAdjustersPage() {
 
           <div className="space-y-5">
             {[
-              "Claimants struggle to find verified, insured providers",
+              "Claimants struggle to find specialist, insured providers",
               "Quotes arrive in inconsistent formats \u2014 not insurer-ready",
               "Delays in sourcing extend claim duration and increase costs",
             ].map((point) => (
@@ -135,7 +135,7 @@ export default function LossAdjustersPage() {
             {
               num: "02",
               title: "We source and match",
-              body: "FindAKitchen matches the claimant to verified local providers based on kitchen type, location and availability. We contact the claimant directly.",
+              body: "FindAKitchen matches the claimant to specialist local providers based on kitchen type, location and availability. We contact the claimant directly.",
             },
             {
               num: "03",
@@ -180,9 +180,9 @@ export default function LossAdjustersPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               ),
-              title: "Verified providers only",
+              title: "Insurance-ready providers",
               description:
-                "Every provider on FindAKitchen is vetted for public liability insurance, gas safety certification and food hygiene compliance. No cowboy operators.",
+                "Many providers on FindAKitchen work on insurance claims and operate with public liability insurance, gas safety and food hygiene compliance. Confirm the specifics for your claim directly with the provider.",
             },
             {
               icon: (
