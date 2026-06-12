@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Festival & Event Kitchen Hire UK | FindAKitchen",
+  title: "Festival & Event Kitchen Hire UK",
   description:
     "A guide to catering trailer hire, mobile kitchen units and food truck hire for UK festivals and events — the unit types, typical costs, and how to find and contact suppliers directly.",
   alternates: {

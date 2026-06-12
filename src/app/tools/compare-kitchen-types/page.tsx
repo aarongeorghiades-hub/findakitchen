@@ -5,7 +5,7 @@ import CTABanner from "@/components/shared/CTABanner";
 import { CompareKitchenTypesClient } from "./CompareKitchenTypesClient";
 
 export const metadata: Metadata = {
-  title: "Compare Temporary Kitchen Types — Which Do You Need? | FindAKitchen",
+  title: "Compare Temporary Kitchen Types — Which Do You Need?",
   description:
     "Compare driveway pods, indoor capsules, container and trailer kitchens side by side — space, appliances, install time and typical cost — to work out which temporary kitchen fits your home. Free interactive tool.",
   alternates: {

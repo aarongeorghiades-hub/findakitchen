@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 export const metadata: Metadata = {
-  title: "Commercial Temporary Kitchen Hire UK | FindAKitchen",
+  title: "Commercial Temporary Kitchen Hire UK",
   description:
     "Hire a temporary commercial kitchen for your restaurant, school, hospital or care home. Compare specialist UK providers. Fast deployment, nationwide coverage.",
   alternates: {

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Temporary Kitchen Hire by Location | FindAKitchen",
+  title: "Temporary Kitchen Hire by Location",
   description:
     "Find temporary kitchen hire providers in your area. Browse by UK city to compare domestic pods and commercial kitchen units near you.",
   alternates: {

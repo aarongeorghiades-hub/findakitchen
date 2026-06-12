@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const city = CITIES[params.city];
   if (!city) return {};
   return {
-    title: `Temporary Kitchen Hire ${city.name} | FindAKitchen`,
+    title: `Temporary Kitchen Hire ${city.name}`,
     description: `Compare temporary kitchen hire providers covering ${city.name}. Domestic pods for renovations and insurance claims. Commercial units for businesses. Fast UK delivery.`,
     alternates: {
       canonical: `https://findakitchen.co.uk/locations/${params.city}`,
