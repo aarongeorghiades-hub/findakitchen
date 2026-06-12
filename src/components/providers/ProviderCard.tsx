@@ -10,11 +10,6 @@ export default function ProviderCard({ provider }: { provider: Provider }) {
             <h3 className="text-lg font-semibold text-slate-800">
               {provider.name}
             </h3>
-            {provider.verified && (
-              <span className="inline-flex items-center rounded-full bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-700">
-                Verified
-              </span>
-            )}
             {provider.featured && (
               <span className="inline-flex items-center rounded-full bg-accent-50 px-2 py-0.5 text-xs font-medium text-accent-700">
                 Featured

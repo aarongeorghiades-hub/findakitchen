@@ -18,11 +18,6 @@ export default function ProviderProfile({ provider }: { provider: ProviderWithRe
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">
                 {provider.name}
               </h1>
-              {provider.verified && (
-                <span className="inline-flex items-center rounded-full bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700">
-                  Verified Provider
-                </span>
-              )}
             </div>
             <p className="text-slate-500 text-lg leading-relaxed">
               {provider.description || "Temporary kitchen hire provider."}

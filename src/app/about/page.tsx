@@ -47,7 +47,7 @@ export default function AboutPage() {
               temporary kitchen market. We&apos;re not a generic directory —
               we&apos;re a guide. We educate you about the options available, help
               you understand what type of kitchen you actually need, and connect
-              you with verified providers who can deliver.
+              you with specialist providers who can deliver.
             </p>
 
             <h2>How it works</h2>
@@ -92,11 +92,13 @@ export default function AboutPage() {
 
             <h2>Our commitment</h2>
             <p>
-              We only work with providers we trust. Every provider on our platform
-              is vetted, and we stand behind the quality of our recommendations.
-              If you have a problem with a provider we&apos;ve recommended,{" "}
-              <Link href="/contact">get in touch</Link> and we&apos;ll help
-              resolve it.
+              We research the temporary kitchen market and list specialist
+              providers across the UK, so you can find one that fits your
+              situation without ringing round a dozen companies. We don&apos;t run
+              a formal vetting process, so make your own enquiries before you book.
+              If you have a problem with a provider you found through us,{" "}
+              <Link href="/contact">get in touch</Link> and we&apos;ll do what we
+              can to help.
             </p>
           </div>
         </div>

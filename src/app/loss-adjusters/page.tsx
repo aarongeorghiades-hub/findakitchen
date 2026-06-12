@@ -3,7 +3,7 @@ import Link from "next/link";
 // LossAdjusterForm import removed — form parked as "coming soon"
 
 export const metadata: Metadata = {
-  title: "Loss Adjuster Kitchen Referral Service | FindAKitchen",
+  title: "Loss Adjuster Kitchen Referral Service",
   description:
     "A specialist referral service for loss adjusters handling kitchen damage claims. FindAKitchen sources specialist temporary kitchen providers and generates insurer-formatted quotes. \u00A3100\u2013\u00A3150 referral fee per completed hire.",
   alternates: {

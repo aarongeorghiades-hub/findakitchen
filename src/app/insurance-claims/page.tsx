@@ -4,9 +4,9 @@ import { supabase } from "@/lib/supabase";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 export const metadata: Metadata = {
-  title: "Temporary Kitchen Hire for Insurance Claims | FindAKitchen",
+  title: "Temporary Kitchen Hire for Insurance Claims",
   description:
-    "Need a temporary kitchen while your kitchen is repaired after flood, fire or water damage? Compare insurance-ready providers across the UK. Most policies cover the cost.",
+    "Need a temporary kitchen while your kitchen is repaired after flood, fire or water damage? Compare insurance-ready providers across the UK. Hire is often covered by your insurance — check your policy.",
   alternates: {
     canonical: "https://findakitchen.co.uk/insurance-claims",
   },
@@ -128,7 +128,7 @@ export default async function InsuranceClaimsPage() {
           <p className="text-lg text-white/50 font-light leading-relaxed max-w-2xl mb-8">
             Need a temporary kitchen while your kitchen is repaired after flood,
             fire or water damage? Compare insurance-ready providers across the
-            UK. Most policies cover the cost.
+            UK. Hire is often covered by your insurance — check your policy.
           </p>
 
           <div className="flex flex-wrap gap-4">

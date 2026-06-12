@@ -6,7 +6,7 @@ import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 export const metadata: Metadata = {
   title: "Commercial Temporary Kitchen Hire UK | FindAKitchen",
   description:
-    "Hire a temporary commercial kitchen for your restaurant, school, hospital or care home. Compare verified UK providers. Fast deployment, nationwide coverage.",
+    "Hire a temporary commercial kitchen for your restaurant, school, hospital or care home. Compare specialist UK providers. Fast deployment, nationwide coverage.",
   alternates: {
     canonical: "https://findakitchen.co.uk/commercial",
   },
@@ -242,7 +242,7 @@ export default async function CommercialPage() {
           Commercial kitchen hire providers
         </h2>
         <p className="text-[var(--muted)] mb-12 max-w-2xl">
-          Verified UK providers supplying temporary commercial kitchens for
+          Specialist UK providers supplying temporary commercial kitchens for
           businesses, institutions and public sector organisations.
         </p>
 
@@ -434,7 +434,7 @@ export default async function CommercialPage() {
           Kitchen down? We can help today.
         </h2>
         <p className="text-white/50 mb-8 max-w-lg mx-auto">
-          FindAKitchen connects you with verified commercial kitchen hire
+          FindAKitchen connects you with specialist commercial kitchen hire
           providers across the UK. Most can carry out a site assessment within
           24 hours.
         </p>
