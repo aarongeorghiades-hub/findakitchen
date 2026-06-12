@@ -64,6 +64,13 @@ export interface Enquiry {
   additional_notes?: string;
   status?: string;
   created_at?: string;
+  funding_source?: string | null;
+  budget_band?: string | null;
+  start_date?: string | null;
+  appliances?: string | null;
+  access_type?: string | null;
+  water_on_site?: string | null;
+  power_on_site?: string | null;
 }
 
 export interface SEOPage {

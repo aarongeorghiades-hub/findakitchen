@@ -10,6 +10,7 @@ const situationOptions = [
   { value: "school_hospital_refurb", label: "School or hospital refurbishment" },
   { value: "event_festival", label: "Event or festival catering" },
   { value: "restaurant_refurb", label: "Restaurant refurbishment" },
+  { value: "other", label: "Something else" },
 ];
 
 // The only situation values the enquiries table accepts (enquiries_situation_check).
@@ -25,11 +26,72 @@ const VALID_SITUATIONS = [
   "other",
 ];
 
+// Situations that route to the commercial path (funding step skipped, no
+// appliances picker, market_segment = "commercial").
+const COMMERCIAL_SITUATIONS = [
+  "school_hospital_refurb",
+  "event_festival",
+  "restaurant_refurb",
+];
+
+// Ordered step keys per path. Commercial skips "funding".
+const DOMESTIC_STEPS = [
+  "situation",
+  "location",
+  "timing",
+  "funding",
+  "details",
+  "spec",
+  "contact",
+];
+const COMMERCIAL_STEPS = [
+  "situation",
+  "location",
+  "timing",
+  "details",
+  "spec",
+  "contact",
+];
+
 const timelineOptions = [
   { value: "emergency", label: "Emergency — I need it now" },
   { value: "within_week", label: "Within a week" },
   { value: "within_month", label: "Within a month" },
   { value: "planning_ahead", label: "Planning ahead (1+ months)" },
+];
+
+const fundingOptions = [
+  { value: "insurance", label: "Through an insurance claim" },
+  { value: "self_funded", label: "I'm paying for it myself" },
+  { value: "not_sure", label: "Not sure yet" },
+];
+
+const budgetOptions = [
+  { value: "under_500", label: "Under £500/week" },
+  { value: "500_800", label: "£500–£800/week" },
+  { value: "over_800", label: "£800+/week" },
+  { value: "not_sure", label: "Not sure yet" },
+];
+
+const applianceOptions = [
+  { value: "cooker", label: "Cooker / oven & hob" },
+  { value: "fridge", label: "Fridge" },
+  { value: "freezer", label: "Freezer" },
+  { value: "dishwasher", label: "Dishwasher" },
+  { value: "washing_machine", label: "Washing machine" },
+];
+
+const accessOptions = [
+  { value: "driveway", label: "Driveway / private space" },
+  { value: "street_only", label: "Street parking only" },
+  { value: "gated", label: "Gated entrance" },
+  { value: "restricted", label: "Restricted / difficult access" },
+];
+
+const utilityOptions = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+  { value: "unsure", label: "Not sure" },
 ];
 
 interface Step4Copy {
@@ -41,8 +103,8 @@ interface Step4Copy {
   notesPlaceholder: string;
 }
 
-// Situation-aware copy for Step 4. Field names / data model unchanged — this
-// only varies the visible labels, heading, and placeholders.
+// Situation-aware copy for the details step. Field names / data model unchanged —
+// this only varies the visible labels, heading, and placeholders.
 const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
   default: {
     heading: "Duration and capacity",
@@ -51,7 +113,7 @@ const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
     capacityLabel: "How many people/meals do you need to cater for?",
     capacityPlaceholder: "e.g. Family of 4, 200 meals/day, 500 guests",
     notesPlaceholder:
-      "e.g. access restrictions, power availability, specific equipment needed",
+      "e.g. specific equipment, site constraints, anything unusual",
   },
   renovation: {
     heading: "Your renovation details",
@@ -59,7 +121,8 @@ const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
     durationPlaceholder: "e.g. 6 weeks, 3 months",
     capacityLabel: "How many people are you cooking for?",
     capacityPlaceholder: "e.g. family of 4",
-    notesPlaceholder: "e.g. driveway access, power supply, appliances you need",
+    notesPlaceholder:
+      "e.g. preferred delivery times, anything unusual about the property",
   },
   flood_fire_damage: {
     heading: "Your emergency details",
@@ -67,7 +130,7 @@ const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
     durationPlaceholder: "e.g. until repairs finish",
     capacityLabel: "How many people are in the household?",
     capacityPlaceholder: "e.g. family of 4",
-    notesPlaceholder: "e.g. when it happened, extent of damage, insurer involved",
+    notesPlaceholder: "e.g. extent of damage, insurer involved",
   },
   insurance_claim: {
     heading: "Your claim details",
@@ -83,7 +146,7 @@ const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
     durationPlaceholder: "e.g. 6 weeks, 3 months",
     capacityLabel: "How many meals per day?",
     capacityPlaceholder: "e.g. 300 meals/day",
-    notesPlaceholder: "e.g. dietary needs, service times, on-site power & water",
+    notesPlaceholder: "e.g. dietary needs, service times",
   },
   event_festival: {
     heading: "Event size & dates",
@@ -91,7 +154,7 @@ const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
     durationPlaceholder: "e.g. 12-14 July, 3 days",
     capacityLabel: "How many guests / covers?",
     capacityPlaceholder: "e.g. 500 guests",
-    notesPlaceholder: "e.g. event type, service times, power on site",
+    notesPlaceholder: "e.g. event type, service times, cuisine",
   },
   restaurant_refurb: {
     heading: "Covers & timeline",
@@ -99,7 +162,7 @@ const STEP4_COPY: Record<string, Step4Copy> & { default: Step4Copy } = {
     durationPlaceholder: "e.g. 4 weeks",
     capacityLabel: "How many covers do you serve?",
     capacityPlaceholder: "e.g. 80 per service",
-    notesPlaceholder: "e.g. cuisine, equipment needed, peak service times",
+    notesPlaceholder: "e.g. cuisine, specialist equipment, peak service times",
   },
 };
 
@@ -113,7 +176,8 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
     initialSituation && VALID_SITUATIONS.includes(initialSituation)
       ? initialSituation
       : "";
-  const [step, setStep] = useState(validInitialSituation ? 2 : 1);
+  // Deep link with a valid situation starts on the location step (index 1).
+  const [stepIndex, setStepIndex] = useState(validInitialSituation ? 1 : 0);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -123,29 +187,83 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
     location_postcode: "",
     location_area: "",
     timeline: "",
+    start_date: "",
+    funding_source: "",
+    budget_band: "",
     duration: "",
     capacity: "",
+    appliances: [] as string[],
+    access_type: "",
+    water_on_site: "",
+    power_on_site: "",
     contact_name: "",
     contact_email: "",
     contact_phone: "",
     additional_notes: "",
   });
 
+  const isCommercial = COMMERCIAL_SITUATIONS.includes(formData.situation);
+  const steps = isCommercial ? COMMERCIAL_STEPS : DOMESTIC_STEPS;
+  const currentStepKey = steps[stepIndex];
+  const totalSteps = steps.length;
+
   const updateField = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Single-select fields that can be deselected by clicking the chosen option.
+  const toggleField = (field: string, value: string) => {
+    setFormData((prev) => {
+      const current = (prev as Record<string, unknown>)[field];
+      return { ...prev, [field]: current === value ? "" : value };
+    });
+  };
+
+  // Choosing a situation. If it routes commercial, clear domestic-only funding
+  // fields so a domestic→commercial switch via Back never leaks stale data.
+  const selectSituation = (value: string) => {
+    const commercial = COMMERCIAL_SITUATIONS.includes(value);
+    setFormData((prev) => ({
+      ...prev,
+      situation: value,
+      funding_source: commercial ? "" : prev.funding_source,
+      budget_band: commercial ? "" : prev.budget_band,
+    }));
+  };
+
+  // Funding is single-select (required). Clear budget if leaving self_funded.
+  const selectFunding = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      funding_source: value,
+      budget_band: value === "self_funded" ? prev.budget_band : "",
+    }));
+  };
+
+  const toggleAppliance = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      appliances: prev.appliances.includes(value)
+        ? prev.appliances.filter((a) => a !== value)
+        : [...prev.appliances, value],
+    }));
+  };
+
   const canProceed = () => {
-    switch (step) {
-      case 1:
+    switch (currentStepKey) {
+      case "situation":
         return formData.situation !== "";
-      case 2:
+      case "location":
         return formData.location_postcode !== "" && formData.location_area !== "";
-      case 3:
-        return formData.timeline !== "";
-      case 4:
+      case "timing":
+        return formData.timeline !== "" && formData.start_date !== "";
+      case "funding":
+        return formData.funding_source !== "";
+      case "details":
         return formData.duration !== "" && formData.capacity !== "";
-      case 5:
+      case "spec":
+        return true;
+      case "contact":
         return (
           formData.contact_name !== "" &&
           formData.contact_email !== "" &&
@@ -164,7 +282,9 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
       formData.duration ? `Duration: ${formData.duration}` : "",
       formData.capacity ? `Capacity: ${formData.capacity}` : "",
       formData.additional_notes || "",
-    ].filter(Boolean).join(" | ");
+    ]
+      .filter(Boolean)
+      .join(" | ");
     const result = await submitEnquiry({
       situation: formData.situation,
       name: formData.contact_name,
@@ -173,6 +293,15 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
       postcode: formData.location_postcode,
       timeline: formData.timeline,
       additional_notes: noteParts,
+      funding_source: isCommercial ? null : formData.funding_source || null,
+      budget_band: isCommercial ? null : formData.budget_band || null,
+      start_date: formData.start_date || null,
+      appliances:
+        formData.appliances.length > 0 ? formData.appliances.join(",") : null,
+      access_type: formData.access_type || null,
+      water_on_site: formData.water_on_site || null,
+      power_on_site: formData.power_on_site || null,
+      market_segment: isCommercial ? "commercial" : "domestic",
     });
     if (result.success) {
       setSubmitted(true);
@@ -207,24 +336,33 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
   const labelClass = "block text-sm font-medium text-slate-700 mb-1.5";
   const step4Copy = STEP4_COPY[formData.situation] ?? STEP4_COPY.default;
 
+  // Shared selected/unselected button treatments (matches existing aesthetic).
+  const selBtn =
+    "border-[var(--clay)] bg-[var(--clay)]/10 text-[var(--clay)]";
+  const unselBtn = "border-slate-200 text-slate-700 hover:border-slate-300";
+
+  const isLast = stepIndex === totalSteps - 1;
+
   return (
     <div>
       {/* Progress bar */}
       <div className="mb-8">
         <div className="flex items-center justify-between text-sm text-slate-500 mb-2">
-          <span>Step {step} of 5</span>
-          <span>{Math.round((step / 5) * 100)}% complete</span>
+          <span>
+            Step {stepIndex + 1} of {totalSteps}
+          </span>
+          <span>{Math.round(((stepIndex + 1) / totalSteps) * 100)}% complete</span>
         </div>
         <div className="h-2 rounded-full bg-slate-200">
           <div
             className="h-2 rounded-full bg-[var(--clay)] transition-all duration-300"
-            style={{ width: `${(step / 5) * 100}%` }}
+            style={{ width: `${((stepIndex + 1) / totalSteps) * 100}%` }}
           />
         </div>
       </div>
 
-      {/* Step 1: Situation */}
-      {step === 1 && (
+      {/* Step: Situation */}
+      {currentStepKey === "situation" && (
         <div>
           <h2 className="text-xl font-semibold text-slate-800 mb-4">
             What&apos;s your situation?
@@ -233,11 +371,9 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
             {situationOptions.map((opt) => (
               <button
                 key={opt.value}
-                onClick={() => updateField("situation", opt.value)}
+                onClick={() => selectSituation(opt.value)}
                 className={`rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
-                  formData.situation === opt.value
-                    ? "border-[var(--clay)] bg-[var(--clay)]/10 text-[var(--clay)]"
-                    : "border-slate-200 text-slate-700 hover:border-slate-300"
+                  formData.situation === opt.value ? selBtn : unselBtn
                 }`}
               >
                 {opt.label}
@@ -247,8 +383,8 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
         </div>
       )}
 
-      {/* Step 2: Location */}
-      {step === 2 && (
+      {/* Step: Location */}
+      {currentStepKey === "location" && (
         <div>
           <h2 className="text-xl font-semibold text-slate-800 mb-4">
             Where do you need the kitchen?
@@ -278,8 +414,8 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
         </div>
       )}
 
-      {/* Step 3: Timeline */}
-      {step === 3 && (
+      {/* Step: Timing */}
+      {currentStepKey === "timing" && (
         <div>
           <h2 className="text-xl font-semibold text-slate-800 mb-4">
             When do you need it?
@@ -290,20 +426,80 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
                 key={opt.value}
                 onClick={() => updateField("timeline", opt.value)}
                 className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
-                  formData.timeline === opt.value
-                    ? "border-[var(--clay)] bg-[var(--clay)]/10 text-[var(--clay)]"
-                    : "border-slate-200 text-slate-700 hover:border-slate-300"
+                  formData.timeline === opt.value ? selBtn : unselBtn
                 }`}
               >
                 {opt.label}
               </button>
             ))}
           </div>
+          <div className="mt-5">
+            <label className={labelClass}>
+              When would the kitchen need to arrive?
+            </label>
+            <input
+              type="date"
+              value={formData.start_date}
+              onChange={(e) => updateField("start_date", e.target.value)}
+              className={inputClass}
+            />
+            <p className="mt-1.5 text-sm text-slate-500">
+              Your best estimate is fine — providers need a target date to quote
+              availability.
+            </p>
+          </div>
         </div>
       )}
 
-      {/* Step 4: Duration + Capacity */}
-      {step === 4 && (
+      {/* Step: Funding (domestic only) */}
+      {currentStepKey === "funding" && (
+        <div>
+          <h2 className="text-xl font-semibold text-slate-800 mb-1">
+            How will this be paid for?
+          </h2>
+          <p className="text-sm text-slate-500 mb-4">
+            This helps us match you with the right providers — it doesn&apos;t
+            affect your quotes.
+          </p>
+          <div className="space-y-3">
+            {fundingOptions.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => selectFunding(opt.value)}
+                className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
+                  formData.funding_source === opt.value ? selBtn : unselBtn
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
+          {formData.funding_source === "self_funded" && (
+            <div className="mt-6">
+              <label className={labelClass}>
+                Rough weekly budget in mind? (optional)
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {budgetOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => updateField("budget_band", opt.value)}
+                    className={`rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
+                      formData.budget_band === opt.value ? selBtn : unselBtn
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Step: Details (duration + capacity) */}
+      {currentStepKey === "details" && (
         <div>
           <h2 className="text-xl font-semibold text-slate-800 mb-4">
             {step4Copy.heading}
@@ -329,22 +525,113 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
                 className={inputClass}
               />
             </div>
-            <div>
-              <label className={labelClass}>Any additional details? (optional)</label>
-              <textarea
-                placeholder={step4Copy.notesPlaceholder}
-                value={formData.additional_notes}
-                onChange={(e) => updateField("additional_notes", e.target.value)}
-                rows={3}
-                className={inputClass}
-              />
-            </div>
           </div>
         </div>
       )}
 
-      {/* Step 5: Contact details */}
-      {step === 5 && (
+      {/* Step: Spec (site & requirements — all optional) */}
+      {currentStepKey === "spec" && (
+        <div>
+          <h2 className="text-xl font-semibold text-slate-800 mb-1">
+            Your site and requirements
+          </h2>
+          <p className="text-sm text-slate-500 mb-5">
+            All optional — but the more you tell us, the more accurate your
+            quotes.
+          </p>
+
+          {/* (a) Appliances — domestic only */}
+          {!isCommercial && (
+            <div className="mb-6">
+              <label className={labelClass}>Which appliances do you need?</label>
+              <div className="flex flex-wrap gap-2">
+                {applianceOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => toggleAppliance(opt.value)}
+                    className={`rounded-full border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      formData.appliances.includes(opt.value) ? selBtn : unselBtn
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* (b) Access — all situations */}
+          <div className="mb-6">
+            <label className={labelClass}>Access at the property</label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {accessOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => toggleField("access_type", opt.value)}
+                  className={`rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
+                    formData.access_type === opt.value ? selBtn : unselBtn
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* (c) Utilities — all situations */}
+          <div className="mb-6 space-y-4">
+            <div>
+              <label className={labelClass}>Water available on site?</label>
+              <div className="flex flex-wrap gap-2">
+                {utilityOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => toggleField("water_on_site", opt.value)}
+                    className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      formData.water_on_site === opt.value ? selBtn : unselBtn
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className={labelClass}>Power available on site?</label>
+              <div className="flex flex-wrap gap-2">
+                {utilityOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => toggleField("power_on_site", opt.value)}
+                    className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                      formData.power_on_site === opt.value ? selBtn : unselBtn
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* (d) Notes — all situations */}
+          <div>
+            <label className={labelClass}>
+              Anything else providers should know? (optional)
+            </label>
+            <textarea
+              placeholder={step4Copy.notesPlaceholder}
+              value={formData.additional_notes}
+              onChange={(e) => updateField("additional_notes", e.target.value)}
+              rows={3}
+              className={inputClass}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Step: Contact */}
+      {currentStepKey === "contact" && (
         <div>
           <h2 className="text-xl font-semibold text-slate-800 mb-4">
             Your contact details
@@ -396,9 +683,9 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
 
       {/* Navigation */}
       <div className="mt-8 flex items-center justify-between">
-        {step > 1 ? (
+        {stepIndex > 0 ? (
           <button
-            onClick={() => setStep(step - 1)}
+            onClick={() => setStepIndex(stepIndex - 1)}
             className="text-sm font-medium text-slate-600 hover:text-slate-800"
           >
             &larr; Back
@@ -407,9 +694,9 @@ export default function QuoteForm({ initialSituation }: QuoteFormProps) {
           <div />
         )}
 
-        {step < 5 ? (
+        {!isLast ? (
           <button
-            onClick={() => setStep(step + 1)}
+            onClick={() => setStepIndex(stepIndex + 1)}
             disabled={!canProceed()}
             className="text-[var(--clay)] font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >

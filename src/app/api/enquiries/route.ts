@@ -13,6 +13,54 @@ function esc(value: unknown): string {
     .replace(/'/g, "&#39;");
 }
 
+// Human-readable label maps so the internal lead email never shows raw codes.
+const FUNDING_LABELS: Record<string, string> = {
+  insurance: "Insurance claim",
+  self_funded: "Self-funded",
+  not_sure: "Not sure yet",
+};
+const BUDGET_LABELS: Record<string, string> = {
+  under_500: "Under £500/week",
+  "500_800": "£500–£800/week",
+  over_800: "£800+/week",
+  not_sure: "Not sure",
+};
+const ACCESS_LABELS: Record<string, string> = {
+  driveway: "Driveway / private space",
+  street_only: "Street parking only",
+  gated: "Gated entrance",
+  restricted: "Restricted / difficult access",
+};
+const YESNO_LABELS: Record<string, string> = {
+  yes: "Yes",
+  no: "No",
+  unsure: "Not sure",
+};
+const APPLIANCE_LABELS: Record<string, string> = {
+  cooker: "Cooker/oven & hob",
+  fridge: "Fridge",
+  freezer: "Freezer",
+  dishwasher: "Dishwasher",
+  washing_machine: "Washing machine",
+};
+
+// en-GB long date (e.g. "29 June 2026"); falls back to the raw string.
+function fmtDate(raw: string): string {
+  const d = new Date(raw);
+  if (isNaN(d.getTime())) return raw;
+  return d.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+// Render an email line only when there's a value; otherwise omit it entirely.
+function emailLine(label: string, value: string): string {
+  if (!value) return "";
+  return `<p><strong>${label}:</strong> ${esc(value)}</p>`;
+}
+
 export async function POST(request: Request) {
   try {
     const enquiry = await request.json();
@@ -39,6 +87,13 @@ export async function POST(request: Request) {
       timeline: enquiry.timeline || "planning_ahead",
       market_segment: enquiry.market_segment || "domestic",
       additional_notes: enquiry.additional_notes || "",
+      funding_source: enquiry.funding_source ?? null,
+      budget_band: enquiry.budget_band ?? null,
+      start_date: enquiry.start_date ?? null,
+      appliances: enquiry.appliances ?? null,
+      access_type: enquiry.access_type ?? null,
+      water_on_site: enquiry.water_on_site ?? null,
+      power_on_site: enquiry.power_on_site ?? null,
       status: "new",
     });
 
@@ -64,6 +119,33 @@ export async function POST(request: Request) {
     // 1) Internal lead notification to NOTIFICATION_TO.
     if (resend && notificationTo) {
       try {
+        const startDateText = enquiry.start_date
+          ? fmtDate(String(enquiry.start_date))
+          : "";
+        const fundingText = enquiry.funding_source
+          ? FUNDING_LABELS[enquiry.funding_source] || String(enquiry.funding_source)
+          : "";
+        const budgetText = enquiry.budget_band
+          ? BUDGET_LABELS[enquiry.budget_band] || String(enquiry.budget_band)
+          : "";
+        const appliancesText = enquiry.appliances
+          ? String(enquiry.appliances)
+              .split(",")
+              .map((a: string) => a.trim())
+              .filter(Boolean)
+              .map((a: string) => APPLIANCE_LABELS[a] || a)
+              .join(", ")
+          : "";
+        const accessText = enquiry.access_type
+          ? ACCESS_LABELS[enquiry.access_type] || String(enquiry.access_type)
+          : "";
+        const waterText = enquiry.water_on_site
+          ? YESNO_LABELS[enquiry.water_on_site] || String(enquiry.water_on_site)
+          : "";
+        const powerText = enquiry.power_on_site
+          ? YESNO_LABELS[enquiry.power_on_site] || String(enquiry.power_on_site)
+          : "";
+
         await resend.emails.send({
           from: "FindAKitchen Leads <leads@send.findakitchen.co.uk>",
           to: notificationTo,
@@ -78,6 +160,13 @@ export async function POST(request: Request) {
             <p><strong>Postcode:</strong> ${esc(enquiry.postcode || "—")}</p>
             <p><strong>Situation:</strong> ${esc(enquiry.situation)}</p>
             <p><strong>Timeline:</strong> ${esc(enquiry.timeline || "planning_ahead")}</p>
+            ${emailLine("Start date", startDateText)}
+            ${emailLine("Funding", fundingText)}
+            ${emailLine("Budget band", budgetText)}
+            ${emailLine("Appliances", appliancesText)}
+            ${emailLine("Access", accessText)}
+            ${emailLine("Water on site", waterText)}
+            ${emailLine("Power on site", powerText)}
             <p><strong>Market segment:</strong> ${esc(
               enquiry.market_segment || "domestic"
             )}</p>
