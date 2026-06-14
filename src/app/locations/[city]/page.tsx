@@ -69,7 +69,7 @@ export default async function LocationPage({ params }: Props) {
     },
     {
       question: `Can I use insurance to pay for temporary kitchen hire in ${city.name}?`,
-      answer: `Yes \u2014 if your kitchen in ${city.name} has been damaged by flood, fire, or water damage, your home insurance policy may cover the cost of a temporary kitchen pod. Request an insurer-formatted quote from any provider below.`,
+      answer: `Yes \u2014 if your kitchen in ${city.name} has been damaged by flood, fire, or water damage, your home insurance policy may cover the cost of a temporary kitchen pod. Request a free quote through FindAKitchen and we'll match you with insurance-ready providers.`,
     },
   ];
 
