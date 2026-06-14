@@ -5,14 +5,19 @@ import { FilterBar } from "./FilterBar";
 import { ProviderPreviewCard } from "./ProviderPreviewCard";
 
 interface Provider {
-  slug: string;
-  name: string;
+  id: number;
   market: string;
-  region_base: string | null;
-  coverage: string | null;
-  notable_differentiators: string[] | null;
-  insurance_friendly: boolean;
+  kitchen_types: string[] | null;
   power_source: string | null;
+  insurance_friendly: boolean;
+  insurance_ready_quotes?: boolean | null;
+  min_hire?: string | null;
+  max_hire?: string | null;
+  hire_cycle?: string | null;
+  delivery_speed?: string | null;
+  setup_time?: string | null;
+  sectors?: string[] | null;
+  capacity?: string | null;
 }
 
 export function HomeProviderPreview({
@@ -44,12 +49,16 @@ export function HomeProviderPreview({
             {totalCount} specialist suppliers,{" "}
             <em className="text-[var(--clay)]">zero</em> guesswork.
           </h2>
+          <p className="text-sm text-[var(--muted)] mt-3 max-w-lg">
+            Filter by capability, then enter your postcode to see which providers
+            cover your area.
+          </p>
         </div>
         <Link
-          href="/providers"
-          className="text-sm border border-[var(--border)] text-[var(--warm-mid)] px-5 py-2.5 rounded-full hover:border-[var(--charcoal)] hover:text-[var(--charcoal)] transition-all duration-300 whitespace-nowrap self-start"
+          href="/get-quotes"
+          className="text-sm bg-[var(--clay)] text-white px-6 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 whitespace-nowrap self-start font-medium"
         >
-          View all {totalCount} providers &rarr;
+          Get matched with providers &rarr;
         </Link>
       </div>
 
@@ -59,22 +68,22 @@ export function HomeProviderPreview({
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map((p) => (
-          <div
-            key={p.slug}
-            className="transition-all duration-300"
-            style={{
-              opacity: 1,
-              transform: "scale(1)",
-            }}
-          >
-            <ProviderPreviewCard provider={p} />
-          </div>
+          <ProviderPreviewCard key={p.id} provider={p} />
         ))}
         {filtered.length === 0 && (
           <div className="col-span-full text-center py-12">
             <p className="text-[var(--muted)]">No providers match this filter.</p>
           </div>
         )}
+      </div>
+
+      <div className="mt-8 text-center">
+        <Link
+          href="/providers"
+          className="text-sm border border-[var(--border)] text-[var(--warm-mid)] px-6 py-3 rounded-full hover:border-[var(--charcoal)] hover:text-[var(--charcoal)] transition-all duration-300"
+        >
+          Browse the full directory &rarr;
+        </Link>
       </div>
     </div>
   );

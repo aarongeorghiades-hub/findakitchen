@@ -46,7 +46,7 @@ export default async function InsuranceClaimsPage() {
   const { data: providers } = await supabase
     .from("providers")
     .select(
-      "slug, name, market, region_base, coverage, notable_differentiators, insurance_friendly, power_source"
+      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
     )
     .eq("active", true)
     .in("market", ["domestic", "both"])
@@ -203,7 +203,7 @@ export default async function InsuranceClaimsPage() {
         {providers && providers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {providers.map((provider) => (
-              <ProviderPreviewCard key={provider.slug} provider={provider} />
+              <ProviderPreviewCard key={provider.id} provider={provider} />
             ))}
           </div>
         ) : (
@@ -211,6 +211,15 @@ export default async function InsuranceClaimsPage() {
             No providers found. Please check back soon.
           </p>
         )}
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/get-quotes"
+            className="inline-block text-sm bg-[var(--clay)] text-white px-8 py-3.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
+          >
+            Get matched with insurance-ready providers — request free quotes &rarr;
+          </Link>
+        </div>
       </section>
 
       {/* ===== SECTION 4: FAQ ===== */}

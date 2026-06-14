@@ -12,17 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const [
-    { data: providers },
     { data: blogPages },
     { data: guidePages },
     { data: comparePages },
     { data: kitchenTypes },
     { data: regions },
   ] = await Promise.all([
-    supabase
-      .from("providers")
-      .select("slug, updated_at")
-      .eq("active", true),
     supabase
       .from("seo_pages")
       .select("slug, updated_at")
@@ -74,13 +69,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const providerRoutes: MetadataRoute.Sitemap = (providers ?? []).map((p) => ({
-    url: `${baseUrl}/providers/${p.slug}`,
-    lastModified: p.updated_at ? new Date(p.updated_at) : now,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
   const blogRoutes: MetadataRoute.Sitemap = (blogPages ?? []).map((p) => ({
     url: `${baseUrl}/blog/${p.slug}`,
     lastModified: p.updated_at ? new Date(p.updated_at) : now,
@@ -119,7 +107,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticRoutes,
     ...locationRoutes,
-    ...providerRoutes,
     ...blogRoutes,
     ...guideRoutes,
     ...compareRoutes,

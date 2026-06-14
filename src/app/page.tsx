@@ -18,7 +18,7 @@ async function getHomeData() {
   const { data: previewProviders } = await supabase
     .from("providers")
     .select(
-      "slug, name, market, region_base, coverage, notable_differentiators, insurance_friendly, power_source, trustpilot_rating, trustpilot_reviews"
+      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
     )
     .eq("active", true)
     .order("id")

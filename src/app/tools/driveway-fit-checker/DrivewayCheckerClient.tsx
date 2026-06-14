@@ -11,7 +11,6 @@ interface PodType {
   idealWidth: number;
   description: string;
   features: string[];
-  providerSlugs: { slug: string; name: string }[];
   kitchenType: string;
 }
 
@@ -25,9 +24,6 @@ const podTypes: PodType[] = [
     idealWidth: 2.0,
     description: "A compact self-contained unit that installs inside your home — in a garage, utility room, or large hallway. No driveway needed.",
     features: ["No outdoor space required", "Works in garage or utility room", "Electric only", "Minimal installation"],
-    providerSlugs: [
-      { slug: "galleys", name: "Galleys" },
-    ],
     kitchenType: "Indoor Capsule",
   },
   {
@@ -39,11 +35,6 @@ const podTypes: PodType[] = [
     idealWidth: 3.0,
     description: "The most popular option for home renovations. Sits on your driveway, connects to your existing utilities, and is ready to use within hours of delivery.",
     features: ["Delivered same or next day", "Gas or electric", "Full cooking facilities", "Minimal planning required"],
-    providerSlugs: [
-      { slug: "temporary-solutions-group", name: "Temporary Solutions Group" },
-      { slug: "kitchen-rescue", name: "Kitchen Rescue" },
-      { slug: "galleykit", name: "GalleyKit" },
-    ],
     kitchenType: "Driveway Pod",
   },
   {
@@ -55,10 +46,6 @@ const podTypes: PodType[] = [
     idealWidth: 3.5,
     description: "A larger driveway pod with more worktop space and appliances. Ideal for larger families or longer renovation projects.",
     features: ["More worktop space", "Additional appliances", "Gas or electric", "Suitable for longer hire"],
-    providerSlugs: [
-      { slug: "temporary-solutions-group", name: "Temporary Solutions Group" },
-      { slug: "kitchen-rescue", name: "Kitchen Rescue" },
-    ],
     kitchenType: "Driveway Pod (Large)",
   },
   {
@@ -70,9 +57,6 @@ const podTypes: PodType[] = [
     idealWidth: 3.5,
     description: "A towable trailer-mounted kitchen. Needs a flat surface and a clear access route. Popular for longer-term domestic hire and events.",
     features: ["Towable — can be repositioned", "Larger cooking capacity", "Gas or electric", "Suitable for events"],
-    providerSlugs: [
-      { slug: "mobile-kitchen-hire", name: "Mobile Kitchen Hire" },
-    ],
     kitchenType: "Trailer Kitchen",
   },
   {
@@ -84,11 +68,6 @@ const podTypes: PodType[] = [
     idealWidth: 4.0,
     description: "A full commercial kitchen unit capable of serving 200–800+ meals per day. Used by schools, hospitals, restaurants, and construction sites.",
     features: ["Serves 200–800+ meals/day", "3-phase electric or gas", "Full commercial equipment", "HACCP compliant"],
-    providerSlugs: [
-      { slug: "pkl-group", name: "PKL Group" },
-      { slug: "the-kitchen-hire-company", name: "The Kitchen Hire Company" },
-      { slug: "mobile-kitchens-ltd", name: "Mobile Kitchens Ltd" },
-    ],
     kitchenType: "Modular Cabin",
   },
   {
@@ -100,9 +79,6 @@ const podTypes: PodType[] = [
     idealWidth: 3.5,
     description: "A converted shipping container fitted as a full commercial kitchen. Robust, weatherproof, and suitable for construction sites and festivals.",
     features: ["Extremely durable", "Weatherproof", "Suitable for rough terrain", "Stackable"],
-    providerSlugs: [
-      { slug: "pod-kitchens", name: "Pod Kitchens" },
-    ],
     kitchenType: "Container Kitchen",
   },
 ];
@@ -290,30 +266,13 @@ export function DrivewayCheckerClient() {
                   <>
                     <p className="text-sm text-[var(--warm-mid)] leading-relaxed mb-4">{pod.description}</p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2">
                       {pod.features.map((f) => (
                         <span key={f} className="text-xs bg-[var(--cream)] text-[var(--warm-mid)] px-3 py-1 rounded-full border border-[var(--border)]">
                           {f}
                         </span>
                       ))}
                     </div>
-
-                    {pod.providerSlugs.length > 0 && (
-                      <div>
-                        <p className="text-xs uppercase tracking-widest text-[var(--muted)] mb-2">Providers offering this</p>
-                        <div className="flex flex-wrap gap-2">
-                          {pod.providerSlugs.map((p) => (
-                            <Link
-                              key={p.slug}
-                              href={`/providers/${p.slug}`}
-                              className="text-xs bg-[var(--charcoal)] text-white px-4 py-1.5 rounded-full hover:bg-[var(--clay)] transition-all duration-200"
-                            >
-                              {p.name} &rarr;
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </>
                 )}
 
@@ -334,10 +293,10 @@ export function DrivewayCheckerClient() {
               We&apos;ll match you with the right providers for your space and situation.
             </p>
             <Link
-              href="/providers"
+              href="/get-quotes"
               className="bg-[var(--clay)] text-white px-8 py-3.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 text-sm font-medium"
             >
-              Browse providers &rarr;
+              Get matched with providers who offer these &rarr;
             </Link>
           </div>
         </div>

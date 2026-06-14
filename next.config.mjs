@@ -2,17 +2,19 @@
 const nextConfig = {
   async redirects() {
     return [
-      // Retired thin provider-stub guide pages → their real provider profiles.
-      { source: "/guides/premier-catering", destination: "/providers/premier-catering", permanent: true },
-      { source: "/guides/the-instant-kitchen-company", destination: "/providers/the-instant-kitchen-company", permanent: true },
-      { source: "/guides/temporary-kitchens-com", destination: "/providers/temporary-kitchens-com", permanent: true },
-      { source: "/guides/jongor", destination: "/providers/jongor-hire", permanent: true },
-      { source: "/guides/big-kahuna", destination: "/providers/big-kahuna", permanent: true },
-      { source: "/guides/rolling-stock", destination: "/providers/rolling-stock", permanent: true },
-      { source: "/guides/kitchen-pod-hire", destination: "/providers/kitchen-pod-hire", permanent: true },
-      { source: "/guides/the-temporary-kitchen-company", destination: "/providers/the-temporary-kitchen-company", permanent: true },
-      { source: "/guides/courtesy-kitchens-and-bathrooms", destination: "/providers/courtesy-kitchens-and-bathrooms", permanent: true },
-      { source: "/guides/kitchenpod", destination: "/providers/kitchenpod-pod-solutions-group", permanent: true },
+      // Retired thin provider-stub guide pages. The named /providers/<slug>
+      // detail pages no longer exist (the directory is now anonymised), so these
+      // go straight to the /providers index — single hop, no redirect chains.
+      { source: "/guides/premier-catering", destination: "/providers", permanent: true },
+      { source: "/guides/the-instant-kitchen-company", destination: "/providers", permanent: true },
+      { source: "/guides/temporary-kitchens-com", destination: "/providers", permanent: true },
+      { source: "/guides/jongor", destination: "/providers", permanent: true },
+      { source: "/guides/big-kahuna", destination: "/providers", permanent: true },
+      { source: "/guides/rolling-stock", destination: "/providers", permanent: true },
+      { source: "/guides/kitchen-pod-hire", destination: "/providers", permanent: true },
+      { source: "/guides/the-temporary-kitchen-company", destination: "/providers", permanent: true },
+      { source: "/guides/courtesy-kitchens-and-bathrooms", destination: "/providers", permanent: true },
+      { source: "/guides/kitchenpod", destination: "/providers", permanent: true },
       // Merged duplicate checklist blog posts → the canonical checklist guide.
       { source: "/blog/5-things-to-check-before-hiring-temporary-kitchen", destination: "/guides/temporary-kitchen-hire-checklist", permanent: true },
       { source: "/blog/5-things-know-before-hiring-temporary-kitchen", destination: "/guides/temporary-kitchen-hire-checklist", permanent: true },
@@ -26,11 +28,10 @@ const nextConfig = {
       { source: "/blog/how-much-does-temporary-kitchen-hire-cost", destination: "/guides/temporary-kitchen-hire-cost", permanent: true },
       { source: "/blog/how-long-does-kitchen-renovation-take", destination: "/guides/kitchen-renovation-timeline-planning", permanent: true },
       { source: "/blog/electric-vs-gas-temporary-kitchens", destination: "/compare/gas-vs-electric-temporary-kitchen", permanent: true },
-      // Deduplicated near-twin provider profiles → canonical provider slug.
-      { source: "/providers/courtesy-kitchens-bathrooms", destination: "/providers/courtesy-kitchens-and-bathrooms", permanent: true },
-      { source: "/providers/premier-catering-commercial-kitchen-company", destination: "/providers/premier-catering", permanent: true },
-      { source: "/providers/instant-kitchen-company", destination: "/providers/the-instant-kitchen-company", permanent: true },
-      { source: "/providers/kitchen-pod-hire-ni", destination: "/providers/kitchen-pod-hire", permanent: true },
+      // Retired named provider detail pages → the anonymised directory index.
+      // This catch-all also subsumes the former provider-dedup redirects.
+      // ":slug" requires a path segment, so it never matches /providers itself.
+      { source: "/providers/:slug", destination: "/providers", permanent: true },
     ];
   },
 };

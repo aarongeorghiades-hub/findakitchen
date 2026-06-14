@@ -5,19 +5,18 @@ import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 interface Provider {
   id: number;
-  slug: string;
-  name: string;
   market: string;
-  region_base: string | null;
-  coverage: string | null;
   kitchen_types: string[] | null;
   power_source: string | null;
   insurance_friendly: boolean;
-  pricing_model: string | null;
-  pricing: string | null;
-  trustpilot_reviews: number | null;
-  trustpilot_rating: number | null;
-  notable_differentiators: string[] | null;
+  insurance_ready_quotes?: boolean | null;
+  min_hire?: string | null;
+  max_hire?: string | null;
+  hire_cycle?: string | null;
+  delivery_speed?: string | null;
+  setup_time?: string | null;
+  sectors?: string[] | null;
+  capacity?: string | null;
 }
 
 export function ProvidersDirectoryClient({
@@ -45,7 +44,7 @@ export function ProvidersDirectoryClient({
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
         {filtered.map((p) => (
-          <ProviderPreviewCard key={p.slug} provider={p} />
+          <ProviderPreviewCard key={p.id} provider={p} />
         ))}
         {filtered.length === 0 && (
           <div className="col-span-full text-center py-16">

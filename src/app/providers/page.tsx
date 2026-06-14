@@ -17,7 +17,7 @@ export default async function ProvidersPage() {
   const { data: providers } = await supabase
     .from("providers")
     .select(
-      "id, slug, name, market, region_base, coverage, kitchen_types, power_source, insurance_friendly, pricing_model, pricing, trustpilot_reviews, trustpilot_rating, notable_differentiators"
+      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
     )
     .eq("active", true)
     .order("id");
@@ -42,6 +42,18 @@ export default async function ProvidersPage() {
           {allProviders.length} specialist UK suppliers — domestic pods and
           commercial hire
         </p>
+        <p className="text-sm text-white/40 mt-3 max-w-xl">
+          Browse by capability below, then enter your postcode to see which
+          providers cover your area.
+        </p>
+        <div className="mt-6">
+          <Link
+            href="/get-quotes"
+            className="inline-block text-sm bg-[var(--clay)] text-white px-7 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
+          >
+            Get matched with providers — request free quotes &rarr;
+          </Link>
+        </div>
       </section>
 
       {/* Why request through us */}

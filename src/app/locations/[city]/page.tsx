@@ -51,10 +51,10 @@ export default async function LocationPage({ params }: Props) {
   const { data: providers } = await supabase
     .from("providers")
     .select(
-      "slug, name, market, region_base, coverage, notable_differentiators, insurance_friendly, power_source"
+      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
     )
     .eq("active", true)
-    .order("name");
+    .order("id");
 
   const providerCount = providers?.length ?? 0;
 
@@ -155,7 +155,7 @@ export default async function LocationPage({ params }: Props) {
         {providers && providers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {providers.map((provider) => (
-              <ProviderPreviewCard key={provider.slug} provider={provider} />
+              <ProviderPreviewCard key={provider.id} provider={provider} />
             ))}
           </div>
         ) : (
