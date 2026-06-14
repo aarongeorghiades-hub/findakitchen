@@ -154,8 +154,8 @@ export default async function LocationPage({ params }: Props) {
 
         {providers && providers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {providers.map((provider) => (
-              <ProviderPreviewCard key={provider.id} provider={provider} />
+            {providers.map((provider, i) => (
+              <ProviderPreviewCard key={provider.id} provider={provider} index={i} />
             ))}
           </div>
         ) : (

@@ -67,8 +67,8 @@ export function HomeProviderPreview({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((p) => (
-          <ProviderPreviewCard key={p.id} provider={p} />
+        {filtered.map((p, i) => (
+          <ProviderPreviewCard key={p.id} provider={p} index={i} />
         ))}
         {filtered.length === 0 && (
           <div className="col-span-full text-center py-12">

@@ -70,7 +70,13 @@ function marketBadge(market: string) {
   return { label: "Domestic & Commercial", cls: "bg-purple-50 text-purple-700" };
 }
 
-export function ProviderPreviewCard({ provider }: { provider: Provider }) {
+export function ProviderPreviewCard({
+  provider,
+  index,
+}: {
+  provider: Provider;
+  index?: number;
+}) {
   const badge = marketBadge(provider.market);
   const insurance = !!(provider.insurance_friendly || provider.insurance_ready_quotes);
   const electric = provider.power_source === "electric";
@@ -109,6 +115,13 @@ export function ProviderPreviewCard({ provider }: { provider: Provider }) {
 
   return (
     <div className="relative bg-white rounded-2xl p-6 border border-[var(--border)] h-full">
+      {typeof index === "number" && (
+        // Positional reference label only — purely the card's index in the grid.
+        // Not a name, rank, or highlighted badge.
+        <h3 className="font-serif text-lg text-[var(--charcoal)] mb-3">
+          Provider {index + 1}
+        </h3>
+      )}
       <div className="flex flex-wrap gap-2 mb-4">
         <span className={`text-xs font-medium px-3 py-1 rounded-full ${badge.cls}`}>
           {badge.label}
