@@ -83,6 +83,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // File-based guides (their own route, not seo_pages rows) — listed manually.
+  const fileGuideRoutes: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/guides/temporary-kitchen-survival-kit`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ];
+
   const compareRoutes: MetadataRoute.Sitemap = (comparePages ?? []).map((p) => ({
     url: `${baseUrl}/compare/${p.slug}`,
     lastModified: p.updated_at ? new Date(p.updated_at) : now,
@@ -109,6 +119,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...locationRoutes,
     ...blogRoutes,
     ...guideRoutes,
+    ...fileGuideRoutes,
     ...compareRoutes,
     ...kitchenTypeRoutes,
     ...regionRoutes,

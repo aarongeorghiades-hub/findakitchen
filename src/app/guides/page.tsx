@@ -78,6 +78,23 @@ const GROUPS: { heading: string; blurb: string; slugs: string[] }[] = [
   },
 ];
 
+// File-based guides that live as their own route (not seo_pages rows), so they
+// must be listed here manually. `group` matches a GROUPS heading above.
+const FILE_GUIDES: {
+  slug: string;
+  title: string;
+  meta_description: string;
+  group: string;
+}[] = [
+  {
+    slug: "temporary-kitchen-survival-kit",
+    title: "Temporary Kitchen Survival Kit: How to Cook During a Renovation",
+    meta_description:
+      "The countertop kit that makes cooking through a kitchen renovation or insurance repair bearable when you're not hiring a full pod — what to get, and how to set it up safely.",
+    group: "Living through a renovation",
+  },
+];
+
 export default async function GuidesIndexPage() {
   const guides = await getSEOPages("guide");
   const bySlug = new Map(guides.map((g) => [g.slug, g]));
@@ -159,6 +176,23 @@ export default async function GuidesIndexPage() {
                   </h3>
                   <p className="text-slate-500 text-sm leading-relaxed line-clamp-3">
                     {guide.meta_description}
+                  </p>
+                  <p className="mt-4 text-sm font-medium text-primary-700">
+                    Read the guide &rarr;
+                  </p>
+                </Link>
+              ))}
+              {FILE_GUIDES.filter((g) => g.group === section.heading).map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/guides/${g.slug}`}
+                  className="group rounded-xl border border-slate-200 bg-white p-6 transition-all hover:border-primary-500 hover:shadow-lg"
+                >
+                  <h3 className="text-lg font-semibold text-slate-800 group-hover:text-primary-700 transition-colors mb-2">
+                    {g.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed line-clamp-3">
+                    {g.meta_description}
                   </p>
                   <p className="mt-4 text-sm font-medium text-primary-700">
                     Read the guide &rarr;

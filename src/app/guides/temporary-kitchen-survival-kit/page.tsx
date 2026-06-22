@@ -4,27 +4,25 @@ import CTABanner from "@/components/shared/CTABanner";
 
 // ---------------------------------------------------------------------------
 // Affiliate links. Every "Check price on Amazon" button reads its href from
-// this map. Values are intentionally empty until the real Amazon SiteStripe
-// affiliate URLs are pasted in — until then each button renders disabled so we
-// never ship a broken or guessed link. Do NOT hardcode product URLs or ASINs.
+// this map. These are Amazon affiliate short-links with the findakitchen-21
+// tracking tag baked in — paste exactly, do not alter or strip query strings.
+// Do NOT hardcode product URLs or ASINs beyond these supplied short-links.
 // ---------------------------------------------------------------------------
 const AFFILIATE_LINKS: Record<string, string> = {
-  inductionHob: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  airFryer: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  kettle: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  miniFridge: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  microwave: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  slowCooker: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  dishwasher: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
-  toaster: "", // TODO: Aaron to paste Amazon SiteStripe affiliate URL
+  inductionHob: "https://amzn.to/4emI5jw",
+  airFryer: "https://amzn.to/3QFMepw",
+  kettle: "https://amzn.to/3SiN8Ji",
+  miniFridge: "https://amzn.to/4em9gLo",
+  microwave: "https://amzn.to/4xJgsIU",
+  slowCooker: "https://amzn.to/4uKKyZX",
+  dishwasher: "https://amzn.to/4agkqii",
+  toaster: "https://amzn.to/4uIZJTn",
 };
 
-// Non-public for now: keep it out of the index until the affiliate links are in.
 export const metadata: Metadata = {
   title: "Temporary Kitchen Survival Kit: How to Cook During a Renovation",
   description:
     "The countertop kit that makes cooking through a kitchen renovation or insurance repair bearable when you're not hiring a full pod — what to get, and how to set it up safely.",
-  robots: { index: false },
 };
 
 type Product = {
