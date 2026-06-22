@@ -39,14 +39,6 @@ export default async function HomePage() {
       "@type": "WebSite",
       name: "FindAKitchen",
       url: "https://findakitchen.co.uk",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: "https://findakitchen.co.uk/providers?q={search_term_string}",
-        },
-        "query-input": "required name=search_term_string",
-      },
     },
     {
       "@context": "https://schema.org",
