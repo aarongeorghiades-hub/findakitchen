@@ -1,51 +1,22 @@
 "use client";
+// Floating "Featured provider" card that rotates through named providers in the
+// hero. Shows name, segment, insurance flag, region, and (only when present) a
+// Trustpilot rating/review count. It renders NO contact path and no outbound
+// link — rating numbers only, never the trustpilot_url.
 import { useState, useEffect } from "react";
 
-// Anonymised capability highlight that rotates through providers in the hero.
-// No name, no review metrics, no specific location — a structured capability
-// phrase plus segment/insurance/electric badges only.
 interface ProviderSlim {
+  name: string;
   market: string;
-  kitchen_types: string[] | null;
-  power_source: string | null;
+  region_base: string | null;
   insurance_friendly: boolean;
-  insurance_ready_quotes?: boolean | null;
+  trustpilot_rating: number | null;
+  trustpilot_reviews: number | null;
 }
 
-const TYPE_PHRASES: Record<string, string> = {
-  driveway_pod: "driveway pods",
-  driveway_suite: "driveway kitchen suites",
-  indoor_capsule: "indoor capsule kitchens",
-  indoor_trailer: "indoor kitchen units",
-  container: "container kitchens",
-  container_cabin: "container kitchens",
-  container_kitchen: "container kitchens",
-  trailer: "trailer kitchens",
-  trailer_kitchen: "trailer kitchens",
-  modular: "modular kitchen units",
-  modular_cabin: "modular kitchen units",
-  modular_linked: "modular kitchen units",
-  modular_flatpack: "flat-pack kitchens",
-  flat_pack: "flat-pack kitchens",
-  marquee: "marquee kitchens",
-  marquee_kitchen: "marquee kitchens",
-  lorry: "lorry kitchens",
-  open_plan_kitchen: "large-scale kitchen builds",
-};
-
-function capabilityPhrase(p: ProviderSlim): string {
-  const isCommercial =
-    p.market === "commercial" || p.market === "commercial_and_domestic" || p.market === "both";
-  const insurance = !!(p.insurance_friendly || p.insurance_ready_quotes);
-  const firstType = (p.kitchen_types ?? [])[0];
-  const noun = firstType
-    ? TYPE_PHRASES[firstType] || "temporary kitchens"
-    : isCommercial
-    ? "commercial kitchen units"
-    : "temporary kitchen pods";
-  if (insurance) return `Insurance-ready ${noun}`;
-  if (isCommercial) return `Commercial ${noun}`;
-  return noun.charAt(0).toUpperCase() + noun.slice(1);
+function regionLabel(region: string | null): string {
+  if (region && region !== "Unknown") return region;
+  return "UK-wide";
 }
 
 export function RotatingProviderCard({ providers }: { providers: ProviderSlim[] }) {
@@ -69,8 +40,7 @@ export function RotatingProviderCard({ providers }: { providers: ProviderSlim[] 
   if (!providers.length) return null;
 
   const provider = providers[index];
-  const phrase = capabilityPhrase(provider);
-  const insurance = !!(provider.insurance_friendly || provider.insurance_ready_quotes);
+  const stars = provider.trustpilot_rating ? Math.round(provider.trustpilot_rating) : null;
 
   return (
     <div
@@ -82,33 +52,34 @@ export function RotatingProviderCard({ providers }: { providers: ProviderSlim[] 
       }}
     >
       <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-1">
-        Specialist providers
+        Featured provider
       </p>
       <p className="font-serif text-lg text-[var(--charcoal)] leading-snug mb-2">
-        {phrase}
+        {provider.name}
       </p>
       <div className="flex flex-wrap items-center gap-2">
-        {insurance && (
+        {stars && (
+          <span className="text-amber-400 text-sm">
+            {"★".repeat(stars)}{"☆".repeat(5 - stars)}
+          </span>
+        )}
+        {provider.trustpilot_reviews && (
+          <span className="text-xs text-[var(--muted)]">
+            {provider.trustpilot_reviews} reviews
+          </span>
+        )}
+        {provider.insurance_friendly && (
           <span className="text-xs bg-[#EBF5EF] text-[var(--sage)] px-2 py-0.5 rounded-full">
             Insurance ✓
           </span>
         )}
-        {!insurance && (
+        {!provider.insurance_friendly && (
           <span className="text-xs bg-[#EBF0F9] text-[#3B65C4] px-2 py-0.5 rounded-full capitalize">
-            {provider.market === "commercial"
-              ? "Commercial"
-              : provider.market === "both" || provider.market === "commercial_and_domestic"
-              ? "Dom + Com"
-              : "Domestic"}
-          </span>
-        )}
-        {provider.power_source === "electric" && (
-          <span className="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">
-            ⚡ Electric
+            {provider.market === "commercial" ? "Commercial" : provider.market === "both" || provider.market === "commercial_and_domestic" ? "Dom + Com" : "Domestic"}
           </span>
         )}
       </div>
-      <p className="text-[11px] text-[var(--muted)] mt-2">UK-wide</p>
+      <p className="text-[11px] text-[var(--muted)] mt-2">{regionLabel(provider.region_base)}</p>
 
       {/* Progress bar showing time until next card */}
       <div className="mt-3 h-0.5 bg-[var(--border)] rounded-full overflow-hidden">

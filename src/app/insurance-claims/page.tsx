@@ -46,7 +46,7 @@ export default async function InsuranceClaimsPage() {
   const { data: providers } = await supabase
     .from("providers")
     .select(
-      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
+      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
     )
     .eq("active", true)
     .in("market", ["domestic", "both"])
@@ -202,8 +202,8 @@ export default async function InsuranceClaimsPage() {
 
         {providers && providers.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {providers.map((provider, i) => (
-              <ProviderPreviewCard key={provider.id} provider={provider} index={i} />
+            {providers.map((provider) => (
+              <ProviderPreviewCard key={provider.slug} provider={provider} />
             ))}
           </div>
         ) : (

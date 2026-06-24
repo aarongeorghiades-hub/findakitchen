@@ -12,13 +12,13 @@ export const revalidate = 300;
 async function getHomeData() {
   const { count } = await supabase
     .from("providers")
-    .select("*", { count: "exact", head: true })
+    .select("id", { count: "exact", head: true })
     .eq("active", true);
 
   const { data: previewProviders } = await supabase
     .from("providers")
     .select(
-      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
+      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source, trustpilot_rating, trustpilot_reviews"
     )
     .eq("active", true)
     .order("id")

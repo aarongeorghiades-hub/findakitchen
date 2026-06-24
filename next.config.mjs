@@ -28,10 +28,14 @@ const nextConfig = {
       { source: "/blog/how-much-does-temporary-kitchen-hire-cost", destination: "/guides/temporary-kitchen-hire-cost", permanent: true },
       { source: "/blog/how-long-does-kitchen-renovation-take", destination: "/guides/kitchen-renovation-timeline-planning", permanent: true },
       { source: "/blog/electric-vs-gas-temporary-kitchens", destination: "/compare/gas-vs-electric-temporary-kitchen", permanent: true },
-      // Retired named provider detail pages → the anonymised directory index.
-      // This catch-all also subsumes the former provider-dedup redirects.
-      // ":slug" requires a path segment, so it never matches /providers itself.
-      { source: "/providers/:slug", destination: "/providers", permanent: true },
+      // Deduplicated near-twin provider profiles → canonical provider slug.
+      // The named detail route is live again, so these merged/duplicate slugs
+      // (their own rows are inactive) must 301 to the canonical living page
+      // rather than 404.
+      { source: "/providers/courtesy-kitchens-bathrooms", destination: "/providers/courtesy-kitchens-and-bathrooms", permanent: true },
+      { source: "/providers/premier-catering-commercial-kitchen-company", destination: "/providers/premier-catering", permanent: true },
+      { source: "/providers/instant-kitchen-company", destination: "/providers/the-instant-kitchen-company", permanent: true },
+      { source: "/providers/kitchen-pod-hire-ni", destination: "/providers/kitchen-pod-hire", permanent: true },
     ];
   },
 };

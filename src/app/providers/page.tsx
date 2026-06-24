@@ -17,7 +17,7 @@ export default async function ProvidersPage() {
   const { data: providers } = await supabase
     .from("providers")
     .select(
-      "id, market, kitchen_types, power_source, insurance_friendly, insurance_ready_quotes, min_hire, max_hire, hire_cycle, delivery_speed, setup_time, sectors, capacity"
+      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
     )
     .eq("active", true)
     .order("id");
