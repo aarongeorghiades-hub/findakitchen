@@ -4,6 +4,10 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs";
+import {
+  ProviderViewBeacon,
+  TrackedQuoteLink,
+} from "@/components/providers/ProviderTracking";
 
 interface Props {
   params: { slug: string };
@@ -161,6 +165,8 @@ export default async function ProviderProfilePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingJsonLd) }}
         />
       )}
+      {/* In-house view tracking: one `view` per provider per browser session. */}
+      <ProviderViewBeacon slug={params.slug} />
       {/* HERO */}
       <section className="bg-[var(--charcoal)] pt-12 pb-16 px-6 lg:px-12">
         <nav className="text-xs text-white/40 mb-6">
@@ -189,12 +195,13 @@ export default async function ProviderProfilePage({ params }: Props) {
         </div>
 
         <div className="flex flex-wrap gap-3 items-center">
-          <Link
+          <TrackedQuoteLink
+            slug={params.slug}
             href="/get-quotes"
             className="text-sm bg-[var(--clay)] text-white px-8 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
           >
             Get quotes &rarr;
-          </Link>
+          </TrackedQuoteLink>
           <span className="text-xs text-white/40">
             Free to use &middot; Matched quotes from specialist providers &middot; No obligation
           </span>
@@ -421,12 +428,13 @@ export default async function ProviderProfilePage({ params }: Props) {
               <p className="text-[var(--muted)] mb-4">
                 Request a personalised quote through FindAKitchen
               </p>
-              <Link
+              <TrackedQuoteLink
+                slug={params.slug}
                 href="/get-quotes"
                 className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
               >
                 Get a quote &rarr;
-              </Link>
+              </TrackedQuoteLink>
             </div>
           )}
         </section>
@@ -720,12 +728,13 @@ export default async function ProviderProfilePage({ params }: Props) {
 
       {/* Sticky mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--border)] p-3 md:hidden">
-        <Link
+        <TrackedQuoteLink
+          slug={params.slug}
           href="/get-quotes"
           className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
         >
           Get quotes &rarr;
-        </Link>
+        </TrackedQuoteLink>
         <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
           Free &middot; Specialist providers &middot; No obligation
         </p>
