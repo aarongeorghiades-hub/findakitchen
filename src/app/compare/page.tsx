@@ -113,8 +113,8 @@ export default async function CompareIndexPage() {
               compare kitchen types tool
             </Link>
             . Already know what you need?{" "}
-            <Link href="/get-quotes" className="text-primary-700 font-medium hover:underline">
-              Get free quotes
+            <Link href="/providers" className="text-primary-700 font-medium hover:underline">
+              Browse providers
             </Link>
             .
           </p>

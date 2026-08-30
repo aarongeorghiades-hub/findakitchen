@@ -275,21 +275,21 @@ export default async function LocationPage({ params }: Props) {
           Need a temporary kitchen in {city.name}?
         </h2>
         <p className="text-white/50 mb-8 max-w-lg mx-auto">
-          Compare all providers, check pricing, and get free quotes — all in
-          one place.
+          Compare all providers, check what they supply, and go straight to the
+          ones covering {city.name}.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/get-quotes"
+            href="/providers"
             className="bg-[var(--clay)] text-white px-8 py-3.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 text-sm font-medium"
           >
-            Get free quotes &rarr;
+            Browse providers &rarr;
           </Link>
           <Link
-            href="/providers"
+            href="/kitchen-types"
             className="border border-white/20 text-white px-8 py-3.5 rounded-full hover:border-white/40 transition-all duration-300 text-sm font-medium"
           >
-            Browse all providers
+            Explore kitchen types
           </Link>
         </div>
       </section>

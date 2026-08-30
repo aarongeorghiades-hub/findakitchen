@@ -108,7 +108,7 @@ export default async function RegionLandingPage({ params }: Props) {
             ].map((item) => (
               <Link
                 key={item.situation}
-                href={`/get-quotes?situation=${item.situation}`}
+                href="/providers"
                 className="rounded-xl border border-slate-200 bg-white p-5 hover:border-primary-500 hover:shadow-md transition-all"
               >
                 <h3 className="font-semibold text-slate-800 mb-2">

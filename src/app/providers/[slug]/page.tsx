@@ -168,13 +168,13 @@ export default async function ProviderProfilePage({ params }: Props) {
 
         <div className="flex flex-wrap gap-3 items-center">
           <Link
-            href="/get-quotes"
+            href="/providers"
             className="text-sm bg-[var(--clay)] text-white px-8 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
           >
-            Get quotes &rarr;
+            Browse all providers &rarr;
           </Link>
           <span className="text-xs text-white/40">
-            Free to use &middot; Matched quotes from specialist providers &middot; No obligation
+            Free to use &middot; Specialist UK providers &middot; No obligation
           </span>
         </div>
       </section>
@@ -396,16 +396,10 @@ export default async function ProviderProfilePage({ params }: Props) {
             </div>
           ) : (
             <div className="bg-white rounded-2xl p-6 border border-[var(--border)] text-center">
-              <p className="text-[var(--muted)] mb-4">
+              <p className="text-[var(--muted)]">
                 This provider doesn&apos;t publish pricing. Ask them for a
-                personalised quote.
+                personalised quote when you get in touch.
               </p>
-              <Link
-                href="/get-quotes"
-                className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
-              >
-                How to get a quote &rarr;
-              </Link>
             </div>
           )}
         </section>
@@ -700,10 +694,10 @@ export default async function ProviderProfilePage({ params }: Props) {
       {/* Sticky mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--border)] p-3 md:hidden">
         <Link
-          href="/get-quotes"
+          href="/providers"
           className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
         >
-          Get quotes &rarr;
+          Browse all providers &rarr;
         </Link>
         <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
           Free &middot; Specialist providers &middot; No obligation

@@ -80,10 +80,10 @@ export function Nav() {
           About
         </Link>
         <Link
-          href="/get-quotes"
+          href="/providers"
           className="text-sm bg-[var(--charcoal)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay)] transition-all duration-300"
         >
-          Get quotes &rarr;
+          Browse providers &rarr;
         </Link>
       </div>
 
@@ -125,11 +125,11 @@ export function Nav() {
               </Link>
             ))}
             <Link
-              href="/get-quotes"
+              href="/providers"
               onClick={() => setMobileOpen(false)}
               className="text-sm bg-[var(--charcoal)] text-white px-6 py-2.5 rounded-full text-center hover:bg-[var(--clay)] transition-all duration-300"
             >
-              Get quotes &rarr;
+              Browse providers &rarr;
             </Link>
           </div>
         </div>

@@ -150,8 +150,8 @@ export default async function GuidesIndexPage() {
               types of temporary kitchen
             </Link>
             , or{" "}
-            <Link href="/get-quotes" className="text-primary-700 font-medium hover:underline">
-              get free quotes
+            <Link href="/providers" className="text-primary-700 font-medium hover:underline">
+              browse the providers
             </Link>{" "}
             when you&apos;re ready.
           </p>

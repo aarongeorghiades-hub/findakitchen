@@ -62,15 +62,15 @@ export default async function BlogIndexPage() {
             </h2>
             <p className="text-slate-500 mb-6">
               We&apos;re working on expert guides and advice about temporary
-              kitchen hire. In the meantime, explore our kitchen types or get a
-              free quote.
+              kitchen hire. In the meantime, explore our kitchen types or browse
+              the provider directory.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/kitchen-types" className="btn-primary">
                 Explore Kitchen Types
               </Link>
-              <Link href="/get-quotes" className="btn-secondary">
-                Get Free Quotes
+              <Link href="/providers" className="btn-secondary">
+                Browse Providers
               </Link>
             </div>
           </div>

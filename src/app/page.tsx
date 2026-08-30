@@ -427,7 +427,7 @@ export default async function HomePage() {
             Ready to find your kitchen?
           </h2>
           <p className="text-[var(--muted)] mb-8 max-w-lg mx-auto">
-            Browse providers, compare options, and get free quotes — all in one place.
+            Browse providers, compare what they offer, and go straight to the ones that fit.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -440,7 +440,7 @@ export default async function HomePage() {
               href="/get-quotes"
               className="border border-[var(--border)] text-[var(--warm-mid)] px-8 py-3.5 rounded-full hover:border-[var(--charcoal)] hover:text-[var(--charcoal)] transition-all duration-300 text-sm font-medium"
             >
-              Get free quotes
+              Email us a question
             </Link>
           </div>
         </ScrollReveal>

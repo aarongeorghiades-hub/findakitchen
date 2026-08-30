@@ -49,7 +49,7 @@ export function HomeProviderPreview({
           </p>
         </div>
         <Link
-          href="/get-quotes"
+          href="/providers"
           className="text-sm bg-[var(--clay)] text-white px-6 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 whitespace-nowrap self-start font-medium"
         >
           Browse all providers &rarr;

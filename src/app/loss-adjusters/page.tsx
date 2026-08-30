@@ -10,9 +10,9 @@ const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
 )}`;
 
 export const metadata: Metadata = {
-  title: "Loss Adjuster Kitchen Referral Service",
+  title: "Temporary Kitchen Hire for Loss Adjusters",
   description:
-    "A guide for loss adjusters and claims handlers on temporary kitchen hire in kitchen damage claims — what claimants need, what insurers expect from a quote, and where to find specialist UK providers.",
+    "A guide for loss adjusters and claims handlers on temporary kitchen hire in kitchen damage claims \u2014 what a claimant needs, what an insurer-ready quote should show, and where to find specialist UK providers.",
   alternates: {
     canonical: "https://findakitchen.co.uk/loss-adjusters",
   },
@@ -72,7 +72,7 @@ export default function LossAdjustersPage() {
           </p>
 
           <h1 className="font-serif text-3xl md:text-5xl text-white leading-tight mb-5">
-            Temporary Kitchen Referrals for Insurance Claims
+            Temporary Kitchen Hire on Insurance Claims
           </h1>
 
           <p className="text-lg text-white/50 font-light leading-relaxed max-w-2xl mb-8">
@@ -91,28 +91,36 @@ export default function LossAdjustersPage() {
         </div>
       </section>
 
-      {/* ===== SECTION 2: THE PROBLEM WE SOLVE ===== */}
+      {/* ===== SECTION 2: WHAT MAKES SOURCING HARD ===== */}
       <section className="py-16 md:py-24 px-6 lg:px-12">
         <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-12">
-          The challenge with kitchen damage claims
+          Why sourcing a temporary kitchen is awkward
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl">
           <div className="text-[var(--warm-mid)] leading-relaxed">
             <p>
-              When a kitchen is damaged by fire, flood or escape of water, the
-              claimant needs a temporary replacement quickly. Loss adjusters
-              currently have no dedicated referral network for temporary kitchens
-              &mdash; sourcing falls to the claimant, delays extend the claim,
-              and quotes rarely arrive in the format insurers need.
+              Temporary kitchen hire is a small, specialist trade. There are
+              only a few dozen firms in the UK, most of them regional, and they
+              do not turn up in a general search alongside builders and kitchen
+              fitters. That is usually where the time goes on a claim. The{" "}
+              <Link
+                href="/providers"
+                className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors"
+              >
+                provider directory
+              </Link>{" "}
+              lists who they are, where each one covers, what they supply and
+              how fast they deliver, so the shortlist is a five-minute job
+              rather than an afternoon.
             </p>
           </div>
 
           <div className="space-y-5">
             {[
-              "Claimants struggle to find specialist, insured providers",
-              "Quotes arrive in inconsistent formats \u2014 not insurer-ready",
-              "Delays in sourcing extend claim duration and increase costs",
+              "Specialist providers are hard to find and easily confused with general builders",
+              "Coverage is regional, so who can actually serve the address is rarely obvious",
+              "Quotes arrive in inconsistent formats unless an insurer-ready one is asked for up front",
             ].map((point) => (
               <div key={point} className="flex items-start gap-3">
                 <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-xs font-bold">
@@ -212,43 +220,7 @@ export default function LossAdjustersPage() {
         </div>
       </section>
 
-      {/* ===== SECTION 5: TARGET FIRMS ===== */}
-      <section className="py-16 md:py-24 px-6 lg:px-12 bg-gray-50">
-        <div className="max-w-3xl">
-          <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-6">
-            Built for the UK loss adjusting industry
-          </h2>
-
-          <p className="text-[var(--warm-mid)] leading-relaxed mb-10">
-            This page is written for loss adjusters and claims handlers at firms
-            of all sizes &mdash; from major nationals to independent practices
-            &mdash; who deal with kitchen damage claims.
-          </p>
-
-          <div className="flex flex-wrap gap-3 mb-6">
-            {[
-              "Sedgwick",
-              "Crawford & Company",
-              "Davies Group",
-              "Woodgate & Clark",
-            ].map((firm) => (
-              <span
-                key={firm}
-                className="bg-white border border-[var(--border)] rounded-full px-5 py-2 text-sm text-[var(--charcoal)] font-medium"
-              >
-                {firm}
-              </span>
-            ))}
-          </div>
-
-          <p className="text-xs text-[var(--muted)]">
-            These firms are named only as examples of the sector this page is
-            written for. FindAKitchen has no arrangement with any of them.
-          </p>
-        </div>
-      </section>
-
-      {/* ===== SECTION 6: NEXT STEPS ===== */}
+      {/* ===== SECTION 5: NEXT STEPS ===== */}
       <section className="py-16 md:py-24 px-6 lg:px-12">
         <div className="max-w-2xl">
           <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-3">
