@@ -4,19 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "rm -rf .next/cache/fetch-cache",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.98.0",
     "@tailwindcss/typography": "^0.5.19",
     "marked": "^17.0.3",
     "next": "14.2.35",
     "react": "^18",
-    "react-dom": "^18",
-    "resend": "^6.12.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -36,6 +36,11 @@ const nextConfig = {
       { source: "/providers/premier-catering-commercial-kitchen-company", destination: "/providers/premier-catering", permanent: true },
       { source: "/providers/instant-kitchen-company", destination: "/providers/the-instant-kitchen-company", permanent: true },
       { source: "/providers/kitchen-pod-hire-ni", destination: "/providers/kitchen-pod-hire", permanent: true },
+      // Retired trade-partner content. The programme is dead: the /trade-partners
+      // page was deleted, and the blog post that pitched a builder/installer
+      // referral arrangement has now gone with it. Both 301 to the homepage.
+      { source: "/trade-partners", destination: "/", statusCode: 301 },
+      { source: "/blog/how-builders-can-offer-temporary-kitchens", destination: "/", statusCode: 301 },
     ];
   },
 };

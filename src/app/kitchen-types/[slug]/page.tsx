@@ -8,6 +8,9 @@ interface Props {
   params: { slug: string };
 }
 
+// Every route below is baked at build time; anything else is a 404.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const slugs = await getAllKitchenTypeSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -28,7 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 3600;
 
 export default async function KitchenTypeDetailPage({ params }: Props) {
   const kitchenType = await getKitchenTypeBySlug(params.slug);

@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://findakitchen.co.uk/kitchen-types" },
 };
 
-export const revalidate = 3600;
 
 export default async function KitchenTypesPage() {
   const kitchenTypes = await getKitchenTypes();

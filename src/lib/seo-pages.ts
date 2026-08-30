@@ -1,47 +1,27 @@
-import { supabase } from "./supabase";
+import seoPagesData from "@/data/seo-pages.json";
 import { SEOPage } from "@/types";
 
+// Static snapshot of the former `seo_pages` table, baked into the repo at
+// src/data/seo-pages.json. Rows are stored published-only and pre-sorted by
+// created_at descending — the exact order the live query used to return.
+const SEO_PAGES = seoPagesData as SEOPage[];
+
 export async function getSEOPages(pageType?: string): Promise<SEOPage[]> {
-  let query = supabase
-    .from("seo_pages")
-    .select("*")
-    .eq("published", true)
-    .order("created_at", { ascending: false });
-
-  if (pageType) {
-    query = query.eq("page_type", pageType);
-  }
-
-  const { data, error } = await query;
-  if (error) {
-    console.error("Error fetching SEO pages:", error);
-    return [];
-  }
-
-  return data as SEOPage[];
+  return SEO_PAGES.filter(
+    (p) => p.published && (!pageType || p.page_type === pageType)
+  );
 }
 
 export async function getSEOPageBySlug(slug: string, pageType?: string): Promise<SEOPage | null> {
-  let query = supabase
-    .from("seo_pages")
-    .select("*")
-    .eq("slug", slug)
-    .eq("published", true);
-
-  if (pageType) {
-    query = query.eq("page_type", pageType);
-  }
-
-  const { data, error } = await query.single();
-  if (error || !data) return null;
-  return data as SEOPage;
+  const page = SEO_PAGES.find(
+    (p) =>
+      p.slug === slug &&
+      p.published &&
+      (!pageType || p.page_type === pageType)
+  );
+  return page ?? null;
 }
 
 export async function getAllSEOPageSlugs(pageType?: string): Promise<string[]> {
-  let query = supabase.from("seo_pages").select("slug").eq("published", true);
-  if (pageType) {
-    query = query.eq("page_type", pageType);
-  }
-  const { data } = await query;
-  return data?.map((p) => p.slug) || [];
+  return (await getSEOPages(pageType)).map((p) => p.slug);
 }

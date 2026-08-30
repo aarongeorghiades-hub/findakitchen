@@ -1,32 +1,18 @@
-import { supabase } from "./supabase";
+import regionsData from "@/data/regions.json";
 import { Region } from "@/types";
 
+// Static snapshot of the former `regions` table, baked into the repo at
+// src/data/regions.json, pre-sorted by name ascending.
+const REGIONS = regionsData as Region[];
+
 export async function getRegions(): Promise<Region[]> {
-  const { data, error } = await supabase
-    .from("regions")
-    .select("*")
-    .order("name");
-
-  if (error) {
-    console.error("Error fetching regions:", error);
-    return [];
-  }
-
-  return data as Region[];
+  return REGIONS;
 }
 
 export async function getRegionBySlug(slug: string): Promise<Region | null> {
-  const { data, error } = await supabase
-    .from("regions")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-
-  if (error || !data) return null;
-  return data as Region;
+  return REGIONS.find((r) => r.slug === slug) ?? null;
 }
 
 export async function getAllRegionSlugs(): Promise<string[]> {
-  const { data } = await supabase.from("regions").select("slug");
-  return data?.map((r) => r.slug) || [];
+  return REGIONS.map((r) => r.slug);
 }

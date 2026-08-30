@@ -9,11 +9,23 @@ Live site: https://findakitchen.co.uk
 ## Stack and hosting
 
 - **Next.js 14** (App Router), **TypeScript**, **Tailwind CSS**
-- **Supabase** — project ref `tipqtvxwqzhqakpfcjzx`
+- **Fully static.** Every route is prerendered at build time from JSON files in
+  `src/data/`. **No database, no API routes, no email pipeline, no cron, no
+  environment variables.** Supabase and Resend were removed in the 2026-08-30
+  wind-down — do not reintroduce either, or any other external service.
 - **Railway** hosting — project `lavish-courage`, region `us-west2`
 - **Repo:** https://github.com/aarongeorghiades-hub/findakitchen — `main` branch
 - Railway **auto-deploys on push** to `main`
 - **HARD RULE: Railway only. NEVER mention or use Vercel under any circumstance.**
+
+### Editing content
+
+Content changes are edits to `src/data/*.json`, not database writes:
+`providers.json`, `kitchen-types.json`, `regions.json`, `seo-pages.json`.
+`providers.json` holds no provider contact details by design.
+
+Enquiries arrive by email at **hello@findakitchen.co.uk**; `/get-quotes` is a
+static page with a mailto link, not a form.
 
 ## Market and product
 
@@ -46,6 +58,8 @@ Defined as CSS variables in `src/app/globals.css` (with matching Tailwind tokens
 - **General contractors, builders, kitchen fitters, kitchen installers** — permanently dropped from referral strategy. Cowboy risk. CEO directive.
 - **Kitchen showroom retailers** (Wren, Howdens, Magnet) — excluded by extension (their channel is fitters).
 - `/trade-partners` page deleted 2026-06-04 — trade-partner strategy permanently dropped (cowboy risk). Do not propose rebuilding.
+- Trade-partner blog post `/blog/how-builders-can-offer-temporary-kitchens` deleted 2026-08-30; both URLs now 301 to the homepage.
+- **Published referral fee offers are gone.** The `/loss-adjusters` page no longer advertises a £100–£150 per-completed-hire fee. Do not republish a fee figure.
 
 ### Parked items (not active, do not propose)
 
@@ -63,5 +77,6 @@ Lead generation. Targeting **£150+ per qualified lead**, or **10–15% commissi
 - **Aaron = CEO.** Non-technical. Strategic decisions only.
 - **Claude (chat) = Project Manager.** Drives implementation, writes CC prompts, tracks workflow.
 - **Claude Code (this) = sole deployer.** Commits and pushes to GitHub; Railway auto-deploys.
+- The site is in **set-and-forget wind-down**. Prefer no change over a change that adds a service, a dependency, or a runtime.
 - SQL blocks contain **SQL only**. CC prompts contain **prompt text only**. Never mix prose into code blocks.
 - All deliverables (docs, prompts) go via **downloadable files**, not inline.

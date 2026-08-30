@@ -8,6 +8,9 @@ interface Props {
   params: { slug: string };
 }
 
+// Every route below is baked at build time; anything else is a 404.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const slugs = await getAllSEOPageSlugs("guide");
   return slugs.map((slug) => ({ slug }));
@@ -26,7 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 300;
 
 export default async function GuidePage({ params }: Props) {
   const page = await getSEOPageBySlug(params.slug, "guide");

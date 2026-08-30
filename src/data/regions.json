@@ -1,0 +1,302 @@
+[
+  {
+    "id": "9a59f575-f54e-4c58-ba43-4689bf18b784",
+    "name": "Bath",
+    "slug": "bath",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 51.3758,
+    "longitude": -2.3599,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "8238dd11-32b3-4cb2-abdb-3386bf75ef08",
+    "name": "Belfast",
+    "slug": "belfast",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 54.5973,
+    "longitude": -5.9301,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "fc27bf6c-fad8-4799-b357-c173d5acecfe",
+    "name": "Birmingham",
+    "slug": "birmingham",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 52.4862,
+    "longitude": -1.8904,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "f9aa45d5-2360-481b-8065-2bcc5527a801",
+    "name": "Brighton",
+    "slug": "brighton",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 50.8225,
+    "longitude": -0.1372,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "1b96c0a8-4e62-4e4b-bd90-a1387d9b6955",
+    "name": "Bristol",
+    "slug": "bristol",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 51.4545,
+    "longitude": -2.5879,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "cc7883f2-1059-49c1-83d9-00935837a726",
+    "name": "Cambridge",
+    "slug": "cambridge",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 52.2053,
+    "longitude": 0.1218,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "90d5d00d-c24a-4e43-8948-f6e37bda00ac",
+    "name": "Cardiff",
+    "slug": "cardiff",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 51.4816,
+    "longitude": -3.1791,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "a146e82e-65e5-4b44-b314-f9c5cac3b1da",
+    "name": "Coventry",
+    "slug": "coventry",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 52.4068,
+    "longitude": -1.5197,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "9c6b2920-bb2b-4cbe-b6be-40f5727504e6",
+    "name": "Edinburgh",
+    "slug": "edinburgh",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 55.9533,
+    "longitude": -3.1883,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "92faa900-a257-4628-b15f-a903a715817a",
+    "name": "Essex",
+    "slug": "essex",
+    "type": "county",
+    "parent_id": null,
+    "latitude": 51.7343,
+    "longitude": 0.4691,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "d4b5a661-f163-4eaa-883d-64d3776df27a",
+    "name": "Exeter",
+    "slug": "exeter",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 50.7184,
+    "longitude": -3.5339,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "0216d5da-eb3c-41ba-abda-62bda0eb2055",
+    "name": "Glasgow",
+    "slug": "glasgow",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 55.8642,
+    "longitude": -4.2518,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "12959a54-fbf0-42e1-aad8-a59c0e4aec07",
+    "name": "Hampshire",
+    "slug": "hampshire",
+    "type": "county",
+    "parent_id": null,
+    "latitude": 51.0577,
+    "longitude": -1.3081,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "7641e899-6529-4c5e-a881-dae124b00d40",
+    "name": "Hertfordshire",
+    "slug": "hertfordshire",
+    "type": "county",
+    "parent_id": null,
+    "latitude": 51.8098,
+    "longitude": -0.2377,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "5f182a35-7729-4979-8344-e743bbcf7870",
+    "name": "Kent",
+    "slug": "kent",
+    "type": "county",
+    "parent_id": null,
+    "latitude": 51.2787,
+    "longitude": 0.5217,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "a1303bef-bb4b-4629-b236-357bfb3f8771",
+    "name": "Leeds",
+    "slug": "leeds",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 53.8008,
+    "longitude": -1.5491,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "ca00e69f-56ec-410e-801b-b5969f71ad6d",
+    "name": "Leicester",
+    "slug": "leicester",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 52.6369,
+    "longitude": -1.1398,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "9cdaa006-4b4f-4ef2-9bf9-e28c2e64e08f",
+    "name": "Liverpool",
+    "slug": "liverpool",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 53.4084,
+    "longitude": -2.9916,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "cbb22c9c-04e5-4ca8-b682-eef680572ac3",
+    "name": "London",
+    "slug": "london",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 51.5074,
+    "longitude": -0.1278,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "5f16c7e3-27b2-4553-aeb1-2eac398dd3ca",
+    "name": "Manchester",
+    "slug": "manchester",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 53.4808,
+    "longitude": -2.2426,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "4fd1525e-3405-4b1e-9fef-352e05404822",
+    "name": "Newcastle",
+    "slug": "newcastle",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 54.9783,
+    "longitude": -1.6178,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "1b24ff15-6b95-4a7d-bef0-e21a84cac4b5",
+    "name": "Norwich",
+    "slug": "norwich",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 52.6309,
+    "longitude": 1.2974,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "576139c2-33fc-4e06-9d51-0d74eb21d082",
+    "name": "Nottingham",
+    "slug": "nottingham",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 52.9548,
+    "longitude": -1.1581,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "8a865a74-064d-422e-94da-ae31c05f179a",
+    "name": "Oxford",
+    "slug": "oxford",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 51.752,
+    "longitude": -1.2577,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "b0ea3085-6b00-4de6-999b-b4c8e230980a",
+    "name": "Reading",
+    "slug": "reading",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 51.4543,
+    "longitude": -0.9781,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "05626413-38f4-43b2-b098-3ba3dd3f0e5a",
+    "name": "Sheffield",
+    "slug": "sheffield",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 53.3811,
+    "longitude": -1.4701,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "667b6169-0b28-43a3-a5c9-23f228f49799",
+    "name": "Southampton",
+    "slug": "southampton",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 50.9097,
+    "longitude": -1.4044,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "7af353c6-fd4d-4cb8-82eb-039bb24d68f6",
+    "name": "Surrey",
+    "slug": "surrey",
+    "type": "county",
+    "parent_id": null,
+    "latitude": 51.2465,
+    "longitude": -0.4178,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "323ed28b-4409-4642-aed3-f4943e1cb15a",
+    "name": "Sussex",
+    "slug": "sussex",
+    "type": "county",
+    "parent_id": null,
+    "latitude": 50.927,
+    "longitude": -0.1534,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  },
+  {
+    "id": "3a52e38c-4077-4fb7-8d35-2d5b4b6542a6",
+    "name": "York",
+    "slug": "york",
+    "type": "city",
+    "parent_id": null,
+    "latitude": 53.9591,
+    "longitude": -1.0815,
+    "created_at": "2026-03-02T15:39:37.272013+00:00"
+  }
+]

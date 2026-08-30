@@ -1,33 +1,27 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { getProviderBySlug, getActiveProviderSlugs, getRelatedProviders } from "@/lib/providers";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs";
-import {
-  ProviderViewBeacon,
-  TrackedQuoteLink,
-} from "@/components/providers/ProviderTracking";
 
 interface Props {
   params: { slug: string };
 }
 
-// Explicit column allowlist — NEVER select("*"). Contact / external-identifier
-// columns (phone, email, website, address, postcode, social_links,
-// online_quote_form, preferred_contact, companies_house, trustpilot_url, etc.)
-// are deliberately excluded so they can never reach the page, the client bundle,
-// or structured data. The only forward path to a provider is /get-quotes.
-const DETAIL_COLUMNS =
-  "name, market, region_base, coverage, coverage_detail, kitchen_types, power_source, gas_type, insurance_friendly, pricing, pricing_model, pricing_detail, pricing_tiers, min_hire, delivery_speed, delivery_free_radius, setup_time, appliances, optional_appliances, pod_models, kitchen_models, utility_requirements, surface_types, driveway_min_length, driveway_min_length_regular, driveway_min_length_large, internal_height, certifications, features, trustpilot_rating, trustpilot_reviews, google_rating, instagram_followers, testimonials, year_established, notable_differentiators";
+// The static snapshot in src/data/providers.json deliberately omits every
+// contact / external-identifier column (phone, email, website, address,
+// postcode, social_links, online_quote_form, preferred_contact,
+// companies_house, trustpilot_url, …) so they can never reach the page, the
+// client bundle, or structured data. The only forward path to a provider is
+// /get-quotes.
 
 export async function generateStaticParams() {
-  const { data } = await supabase
-    .from("providers")
-    .select("slug")
-    .eq("active", true);
-  return data?.map((p) => ({ slug: p.slug })) ?? [];
+  return getActiveProviderSlugs().map((slug) => ({ slug }));
 }
+
+// Every provider route is baked at build time; anything else is a 404.
+export const dynamicParams = false;
 
 // Consistent region label across every provider surface: show the base region
 // unless it is missing or the literal "Unknown", then fall back to "UK-wide".
@@ -37,12 +31,7 @@ function regionLabel(region: string | null): string {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { data: provider } = await supabase
-    .from("providers")
-    .select("name, coverage, region_base, notable_differentiators")
-    .eq("slug", params.slug)
-    .eq("active", true)
-    .single();
+  const provider = getProviderBySlug(params.slug);
 
   if (!provider) return { title: "Provider Not Found" };
 
@@ -56,8 +45,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
-export const revalidate = 3600;
 
 function formatSnakeCase(s: string): string {
   return s
@@ -106,27 +93,14 @@ function formatPowerSource(s: string): string {
 }
 
 export default async function ProviderProfilePage({ params }: Props) {
-  const { data: provider } = await supabase
-    .from("providers")
-    .select(DETAIL_COLUMNS)
-    .eq("slug", params.slug)
-    .eq("active", true)
-    .single();
+  const provider = getProviderBySlug(params.slug);
 
   if (!provider) notFound();
 
   const badge = marketBadge(provider.market);
 
   // Related providers — named card columns only (no contact paths).
-  const { data: related } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
-    )
-    .eq("active", true)
-    .eq("market", provider.market)
-    .neq("slug", params.slug)
-    .limit(3);
+  const related = getRelatedProviders(params.slug, provider.market, 3);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -139,7 +113,7 @@ export default async function ProviderProfilePage({ params }: Props) {
   };
 
   // Emit aggregateRating JSON-LD ONLY when real rating data exists.
-  const aggregateRatingJsonLd = provider.trustpilot_rating && provider.trustpilot_reviews > 0 ? {
+  const aggregateRatingJsonLd = provider.trustpilot_rating && (provider.trustpilot_reviews ?? 0) > 0 ? {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: provider.name,
@@ -165,8 +139,6 @@ export default async function ProviderProfilePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingJsonLd) }}
         />
       )}
-      {/* In-house view tracking: one `view` per provider per browser session. */}
-      <ProviderViewBeacon slug={params.slug} />
       {/* HERO */}
       <section className="bg-[var(--charcoal)] pt-12 pb-16 px-6 lg:px-12">
         <nav className="text-xs text-white/40 mb-6">
@@ -195,13 +167,12 @@ export default async function ProviderProfilePage({ params }: Props) {
         </div>
 
         <div className="flex flex-wrap gap-3 items-center">
-          <TrackedQuoteLink
-            slug={params.slug}
+          <Link
             href="/get-quotes"
             className="text-sm bg-[var(--clay)] text-white px-8 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
           >
             Get quotes &rarr;
-          </TrackedQuoteLink>
+          </Link>
           <span className="text-xs text-white/40">
             Free to use &middot; Matched quotes from specialist providers &middot; No obligation
           </span>
@@ -408,7 +379,7 @@ export default async function ProviderProfilePage({ params }: Props) {
           ) : provider.pricing_tiers ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {Object.entries(
-                provider.pricing_tiers as Record<string, unknown>
+                provider.pricing_tiers as unknown as Record<string, unknown>
               ).map(([tier, detail]) => (
                 <div
                   key={tier}
@@ -428,13 +399,12 @@ export default async function ProviderProfilePage({ params }: Props) {
               <p className="text-[var(--muted)] mb-4">
                 Request a personalised quote through FindAKitchen
               </p>
-              <TrackedQuoteLink
-                slug={params.slug}
+              <Link
                 href="/get-quotes"
                 className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
               >
                 Get a quote &rarr;
-              </TrackedQuoteLink>
+              </Link>
             </div>
           )}
         </section>
@@ -728,13 +698,12 @@ export default async function ProviderProfilePage({ params }: Props) {
 
       {/* Sticky mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--border)] p-3 md:hidden">
-        <TrackedQuoteLink
-          slug={params.slug}
+        <Link
           href="/get-quotes"
           className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
         >
           Get quotes &rarr;
-        </TrackedQuoteLink>
+        </Link>
         <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
           Free &middot; Specialist providers &middot; No obligation
         </p>

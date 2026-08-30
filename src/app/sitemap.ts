@@ -1,5 +1,8 @@
 import { MetadataRoute } from "next";
-import { supabase } from "@/lib/supabase";
+import { getActiveProviders } from "@/lib/providers";
+import { getSEOPages } from "@/lib/seo-pages";
+import { getKitchenTypes } from "@/lib/kitchen-types";
+import { getRegions } from "@/lib/regions";
 
 const LOCATION_CITIES = [
   "london", "manchester", "birmingham", "leeds", "bristol",
@@ -11,40 +14,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://findakitchen.co.uk";
   const now = new Date();
 
-  const [
-    { data: providers },
-    { data: blogPages },
-    { data: guidePages },
-    { data: comparePages },
-    { data: kitchenTypes },
-    { data: regions },
-  ] = await Promise.all([
-    supabase
-      .from("providers")
-      .select("slug, updated_at")
-      .eq("active", true),
-    supabase
-      .from("seo_pages")
-      .select("slug, updated_at")
-      .eq("page_type", "blog")
-      .eq("published", true),
-    supabase
-      .from("seo_pages")
-      .select("slug, updated_at")
-      .eq("page_type", "guide")
-      .eq("published", true),
-    supabase
-      .from("seo_pages")
-      .select("slug, updated_at")
-      .eq("page_type", "comparison")
-      .eq("published", true),
-    supabase
-      .from("kitchen_types")
-      .select("slug, updated_at"),
-    supabase
-      .from("regions")
-      .select("slug"),
-  ]);
+  const [providers, blogPages, guidePages, comparePages, kitchenTypes, regions] =
+    await Promise.all([
+      getActiveProviders(),
+      getSEOPages("blog"),
+      getSEOPages("guide"),
+      getSEOPages("comparison"),
+      getKitchenTypes(),
+      getRegions(),
+    ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
@@ -74,21 +52,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const providerRoutes: MetadataRoute.Sitemap = (providers ?? []).map((p) => ({
+  const providerRoutes: MetadataRoute.Sitemap = providers.map((p) => ({
     url: `${baseUrl}/providers/${p.slug}`,
     lastModified: p.updated_at ? new Date(p.updated_at) : now,
     changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  const blogRoutes: MetadataRoute.Sitemap = (blogPages ?? []).map((p) => ({
+  const blogRoutes: MetadataRoute.Sitemap = blogPages.map((p) => ({
     url: `${baseUrl}/blog/${p.slug}`,
     lastModified: p.updated_at ? new Date(p.updated_at) : now,
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const guideRoutes: MetadataRoute.Sitemap = (guidePages ?? []).map((p) => ({
+  const guideRoutes: MetadataRoute.Sitemap = guidePages.map((p) => ({
     url: `${baseUrl}/guides/${p.slug}`,
     lastModified: p.updated_at ? new Date(p.updated_at) : now,
     changeFrequency: "monthly",
@@ -105,21 +83,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const compareRoutes: MetadataRoute.Sitemap = (comparePages ?? []).map((p) => ({
+  const compareRoutes: MetadataRoute.Sitemap = comparePages.map((p) => ({
     url: `${baseUrl}/compare/${p.slug}`,
     lastModified: p.updated_at ? new Date(p.updated_at) : now,
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const kitchenTypeRoutes: MetadataRoute.Sitemap = (kitchenTypes ?? []).map((kt) => ({
+  const kitchenTypeRoutes: MetadataRoute.Sitemap = kitchenTypes.map((kt) => ({
     url: `${baseUrl}/kitchen-types/${kt.slug}`,
     lastModified: kt.updated_at ? new Date(kt.updated_at) : now,
     changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  const regionRoutes: MetadataRoute.Sitemap = (regions ?? []).map((r) => ({
+  const regionRoutes: MetadataRoute.Sitemap = regions.map((r) => ({
     url: `${baseUrl}/temporary-kitchen-hire/${r.slug}`,
     lastModified: now,
     changeFrequency: "monthly",

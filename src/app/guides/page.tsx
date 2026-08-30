@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://findakitchen.co.uk/guides" },
 };
 
-export const revalidate = 300;
 
 // Curated, human-readable groupings. Any guide whose slug isn't listed here
 // still appears under "More guides", so new rows are never dropped.

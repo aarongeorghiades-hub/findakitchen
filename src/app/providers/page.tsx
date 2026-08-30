@@ -1,28 +1,19 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { getActiveProviders } from "@/lib/providers";
 import { ProvidersDirectoryClient } from "./ProvidersDirectoryClient";
 import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs";
 
+// Both the meta description and the on-page subhead below read the same count
+// from src/data/providers.json, so they can never drift apart.
 export const metadata: Metadata = {
   title: "UK Temporary Kitchen Providers",
-  description:
-    "Browse specialist temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.",
+  description: `Browse ${getActiveProviders().length} specialist temporary kitchen hire providers across the UK. Filter by domestic, commercial, insurance-ready, and electric-only. Compare and get free quotes.`,
   alternates: { canonical: "https://findakitchen.co.uk/providers" },
 };
 
-export const revalidate = 3600;
-
 export default async function ProvidersPage() {
-  const { data: providers } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
-    )
-    .eq("active", true)
-    .order("id");
-
-  const allProviders = providers || [];
+  const allProviders = getActiveProviders();
 
   return (
     <>

@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Loss Adjuster Kitchen Referral Service",
   description:
-    "A specialist referral service for loss adjusters handling kitchen damage claims. FindAKitchen sources specialist temporary kitchen providers and generates insurer-formatted quotes. \u00A3100\u2013\u00A3150 referral fee per completed hire.",
+    "A specialist referral service for loss adjusters handling kitchen damage claims. FindAKitchen sources specialist temporary kitchen providers and generates insurer-formatted quotes.",
   alternates: {
     canonical: "https://findakitchen.co.uk/loss-adjusters",
   },
@@ -144,8 +144,8 @@ export default function LossAdjustersPage() {
             },
             {
               num: "04",
-              title: "You receive the referral fee",
-              body: "Once the hire is confirmed, we pay \u00A3100\u2013\u00A3150 per completed placement directly to your firm or nominated account.",
+              title: "The claimant is placed",
+              body: "The claimant books directly with the provider. We keep you updated so the placement can be recorded against the claim file.",
             },
           ].map((step) => (
             <div
@@ -210,9 +210,9 @@ export default function LossAdjustersPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               ),
-              title: "Fee per completed hire",
+              title: "Free to use",
               description:
-                "No subscription, no monthly cost. You earn \u00A3100\u2013\u00A3150 for every hire that completes. Zero risk, zero admin overhead.",
+                "No subscription, no monthly cost, no minimum volume. Refer a claimant when it helps the claim, and not when it doesn\u2019t.",
             },
           ].map((card) => (
             <div

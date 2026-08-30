@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FindAKitchen
 
-## Getting Started
+UK guide to hiring a temporary kitchen when your permanent one is out of action.
+Live at **https://findakitchen.co.uk**, hosted on **Railway** (auto-deploys on
+push to `main`).
 
-First, run the development server:
+## This site is fully static
+
+Every page is prerendered at build time from JSON files committed in this repo.
+There is **no database, no API routes, no email pipeline, no cron, and no
+environment variables**. `npm run build` needs nothing but this repo and npm.
+
+If a build ever fails or a page looks wrong, the cause is in this repo — there
+is no external service to check.
+
+## Content lives in `src/data/`
+
+| File | What it feeds |
+|---|---|
+| `providers.json` | `/providers`, `/providers/<slug>`, and the provider cards on the home, commercial, insurance-claims and location pages |
+| `kitchen-types.json` | `/kitchen-types` and `/kitchen-types/<slug>` |
+| `regions.json` | `/temporary-kitchen-hire/<slug>` |
+| `seo-pages.json` | `/blog/<slug>`, `/guides/<slug>`, `/compare/<slug>` |
+
+To change site content, edit the relevant JSON file and push. Railway rebuilds
+and redeploys.
+
+`providers.json` deliberately holds **no provider contact details** — no phone,
+email, website, address, postcode or company number. No page has ever rendered
+them, and the only forward path to a provider is `/get-quotes`.
+
+Enquiries arrive by email at **hello@findakitchen.co.uk** (`/get-quotes` is a
+mailto link).
+
+## Commands
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # local dev server on :3000
+npm run build   # production build — prerenders every route
+npm run start   # serve the build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Adding or retiring a page
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+URLs are load-bearing for SEO. If you retire a page, add a permanent redirect in
+`next.config.mjs` rather than letting the URL 404.

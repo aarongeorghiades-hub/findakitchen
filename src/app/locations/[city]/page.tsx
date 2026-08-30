@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { getActiveProviders } from "@/lib/providers";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 const CITIES: Record<string, { name: string; region: string; description: string }> = {
@@ -26,6 +26,9 @@ interface Props {
   params: { city: string };
 }
 
+// Every route below is baked at build time; anything else is a 404.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return Object.keys(CITIES).map((city) => ({ city }));
 }
@@ -42,21 +45,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 3600;
-
 export default async function LocationPage({ params }: Props) {
   const city = CITIES[params.city];
   if (!city) notFound();
 
-  const { data: providers } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
-    )
-    .eq("active", true)
-    .order("id");
+  const providers = getActiveProviders();
 
-  const providerCount = providers?.length ?? 0;
+  const providerCount = providers.length;
 
   const faqs = [
     {

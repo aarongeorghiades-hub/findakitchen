@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { getCommercialProviders } from "@/lib/providers";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 export const metadata: Metadata = {
@@ -11,8 +11,6 @@ export const metadata: Metadata = {
     canonical: "https://findakitchen.co.uk/commercial",
   },
 };
-
-export const revalidate = 3600;
 
 const faqs = [
   {
@@ -44,14 +42,7 @@ const faqs = [
 ];
 
 export default async function CommercialPage() {
-  const { data: providers } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
-    )
-    .eq("active", true)
-    .in("market", ["commercial", "commercial_and_domestic"])
-    .order("id");
+  const providers = getCommercialProviders();
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",

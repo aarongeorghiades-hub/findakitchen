@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { getInsuranceProviders } from "@/lib/providers";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 
 export const metadata: Metadata = {
@@ -11,8 +11,6 @@ export const metadata: Metadata = {
     canonical: "https://findakitchen.co.uk/insurance-claims",
   },
 };
-
-export const revalidate = 3600;
 
 const faqs = [
   {
@@ -43,14 +41,7 @@ const faqs = [
 ];
 
 export default async function InsuranceClaimsPage() {
-  const { data: providers } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source"
-    )
-    .eq("active", true)
-    .in("market", ["domestic", "both"])
-    .order("insurance_friendly", { ascending: false });
+  const providers = getInsuranceProviders();
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",

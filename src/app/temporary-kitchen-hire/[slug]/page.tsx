@@ -11,6 +11,9 @@ interface Props {
   params: { slug: string };
 }
 
+// Every route below is baked at build time; anything else is a 404.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const slugs = await getAllRegionSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -29,7 +32,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 3600;
 
 export default async function RegionLandingPage({ params }: Props) {
   const [region, kitchenTypes, allRegions] = await Promise.all([

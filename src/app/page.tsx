@@ -1,32 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { supabase } from "@/lib/supabase";
+import { getActiveProviders, getActiveProviderCount } from "@/lib/providers";
 import { PostcodeSearch } from "@/components/home/PostcodeSearch";
 import { AnimatedCounter } from "@/components/home/AnimatedCounter";
 import { ScrollReveal } from "@/components/home/ScrollReveal";
 import { HomeProviderPreview } from "@/components/home/HomeProviderPreview";
 import { RotatingProviderCard } from "@/components/home/RotatingProviderCard";
 
-export const revalidate = 300;
-
 async function getHomeData() {
-  const { count } = await supabase
-    .from("providers")
-    .select("id", { count: "exact", head: true })
-    .eq("active", true);
-
-  const { data: previewProviders } = await supabase
-    .from("providers")
-    .select(
-      "slug, name, market, region_base, notable_differentiators, insurance_friendly, power_source, trustpilot_rating, trustpilot_reviews"
-    )
-    .eq("active", true)
-    .order("id")
-    .limit(8);
-
   return {
-    providerCount: count || 0,
-    previewProviders: previewProviders || [],
+    providerCount: getActiveProviderCount(),
+    previewProviders: getActiveProviders().slice(0, 8),
   };
 }
 
