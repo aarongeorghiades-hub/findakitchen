@@ -1,13 +1,14 @@
 // Types for the static data snapshots in src/data/. The site no longer talks to
 // a database — these describe the shape of the committed JSON files.
 
-// Provider — mirrors src/data/providers.json. Contact and external-identifier
-// columns (phone, email, website, address, postcode, social links, Companies
-// House number, Trustpilot URL, …) were deliberately NOT baked into the
-// snapshot: no page has ever rendered them, and the only forward path to a
-// provider is /get-quotes.
+// Provider — mirrors src/data/providers.json.
+//
+// Public contact details (website, phone, Trustpilot) ARE included: they are
+// the page's primary action, since the site no longer takes enquiries itself.
+// Deliberately NOT included, and not to be added: postcode, street address,
+// Companies House number, social links, and any individual's name.
 export interface Provider {
-  id: string;
+  id: number;
   slug: string;
   active: boolean;
   updated_at: string;
@@ -21,6 +22,15 @@ export interface Provider {
   power_source: string | null;
   trustpilot_rating: number | null;
   trustpilot_reviews: number | null;
+
+  // Public contact routes. Every active provider currently has a website;
+  // `email` is a fallback carried only where a provider has no website, so it
+  // is null throughout today. Any of these may be null — never render an empty
+  // field or a bare label.
+  website: string | null;
+  phone: string | null;
+  trustpilot_url: string | null;
+  email: string | null;
 
   // Detail-page fields (/providers/<slug>)
   coverage: string | null;

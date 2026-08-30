@@ -1,8 +1,12 @@
 // Named provider card. Renders provider identity + capability summary and links
-// to the named detail page (/providers/<slug>). It deliberately renders NO
-// contact path — no phone, email, website, address, or external link. The only
-// forward action from a provider is the detail page, which itself funnels to
-// /get-quotes.
+// to the named detail page (/providers/<slug>).
+//
+// With `showContact`, the directory index also surfaces the provider's own
+// website and phone so a visitor can act without a second click. The card body
+// is covered by a stretched link rather than wrapped in one, so those contact
+// links are real, clickable anchors and not illegal nested <a> elements.
+// Address, postcode, Companies House identifiers and social links are never
+// rendered here.
 import Link from "next/link";
 
 interface Provider {
@@ -13,6 +17,8 @@ interface Provider {
   notable_differentiators: string[] | null;
   insurance_friendly: boolean;
   power_source: string | null;
+  website?: string | null;
+  phone?: string | null;
 }
 
 function marketBadge(market: string) {
@@ -31,20 +37,47 @@ function regionLabel(region: string | null): string {
   return "UK-wide";
 }
 
-export function ProviderPreviewCard({ provider }: { provider: Provider }) {
+function telHref(phone: string): string {
+  return `tel:${phone.trim().replace(/(?!^\+)[^\d]/g, "")}`;
+}
+
+function websiteLabel(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
+  }
+}
+
+export function ProviderPreviewCard({
+  provider,
+  showContact = false,
+}: {
+  provider: Provider;
+  showContact?: boolean;
+}) {
   const badge = marketBadge(provider.market);
+  // Only render the contact row when there is something real to put in it.
+  const contact = showContact && (provider.website || provider.phone);
 
   return (
-    <Link
-      href={`/providers/${provider.slug}`}
+    <div
       data-market={provider.market}
       data-insurance={provider.insurance_friendly ? "true" : "false"}
       data-electric={provider.power_source === "electric" ? "true" : "false"}
-      className="group relative bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden block"
+      className="group relative bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden"
     >
       <div className="absolute inset-0 bg-[var(--charcoal)] translate-y-full group-hover:translate-y-0 transition-transform duration-500 rounded-2xl" />
 
-      <div className="relative z-10">
+      {/* Stretched link: covers the card so the whole thing stays clickable,
+          while the contact links below sit above it. */}
+      <Link
+        href={`/providers/${provider.slug}`}
+        aria-label={`${provider.name} — full profile`}
+        className="absolute inset-0 z-10 rounded-2xl"
+      />
+
+      <div className="relative z-10 pointer-events-none">
         <div className="flex items-start justify-between mb-4">
           <div className="flex flex-wrap gap-2">
             <span className={`text-xs font-medium px-3 py-1 rounded-full ${badge.cls} group-hover:bg-white/15 group-hover:text-white transition-colors duration-300`}>
@@ -78,6 +111,29 @@ export function ProviderPreviewCard({ provider }: { provider: Provider }) {
           </p>
         )}
       </div>
-    </Link>
+
+      {contact && (
+        <div className="relative z-20 mt-4 pt-3 border-t border-[var(--border)] group-hover:border-white/15 transition-colors duration-300 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+          {provider.phone && (
+            <a
+              href={telHref(provider.phone)}
+              className="text-xs text-[var(--muted)] group-hover:text-white/70 hover:!text-[var(--clay)] transition-colors duration-300"
+            >
+              <span aria-hidden="true">&#9742;</span> {provider.phone}
+            </a>
+          )}
+          {provider.website && (
+            <a
+              href={provider.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-[var(--muted)] group-hover:text-white/70 hover:!text-[var(--clay)] transition-colors duration-300"
+            >
+              {websiteLabel(provider.website)} <span aria-hidden="true">&#8599;</span>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

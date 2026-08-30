@@ -11,6 +11,8 @@ interface Provider {
   notable_differentiators: string[] | null;
   insurance_friendly: boolean;
   power_source: string | null;
+  website?: string | null;
+  phone?: string | null;
 }
 
 export function ProvidersDirectoryClient({
@@ -38,7 +40,7 @@ export function ProvidersDirectoryClient({
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
         {filtered.map((p) => (
-          <ProviderPreviewCard key={p.slug} provider={p} />
+          <ProviderPreviewCard key={p.slug} provider={p} showContact />
         ))}
         {filtered.length === 0 && (
           <div className="col-span-full text-center py-16">

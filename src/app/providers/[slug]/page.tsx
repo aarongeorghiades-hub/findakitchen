@@ -4,17 +4,16 @@ import Link from "next/link";
 import { getProviderBySlug, getActiveProviderSlugs, getRelatedProviders } from "@/lib/providers";
 import { ProviderPreviewCard } from "@/components/home/ProviderPreviewCard";
 import { WhyRequestThroughUs } from "@/components/providers/WhyRequestThroughUs";
+import { ProviderContact, telHref } from "@/components/providers/ProviderContact";
 
 interface Props {
   params: { slug: string };
 }
 
-// The static snapshot in src/data/providers.json deliberately omits every
-// contact / external-identifier column (phone, email, website, address,
-// postcode, social_links, online_quote_form, preferred_contact,
-// companies_house, trustpilot_url, …) so they can never reach the page, the
-// client bundle, or structured data. The only forward path to a provider is
-// /get-quotes.
+// Public contact routes (website, phone, Trustpilot) are the primary action on
+// this page — the site takes no enquiries itself. Street address, postcode,
+// Companies House identifiers, social links and individual names are still
+// deliberately absent from the snapshot and must stay that way.
 
 export async function generateStaticParams() {
   return getActiveProviderSlugs().map((slug) => ({ slug }));
@@ -99,6 +98,12 @@ export default async function ProviderProfilePage({ params }: Props) {
 
   const badge = marketBadge(provider.market);
 
+  // Does this provider have any public route at all? Drives the contact block,
+  // the sticky mobile bar and the pricing fallback wording.
+  const hasContact = Boolean(
+    provider.website || provider.phone || provider.email
+  );
+
   // Related providers — named card columns only (no contact paths).
   const related = getRelatedProviders(params.slug, provider.market, 3);
 
@@ -166,17 +171,13 @@ export default async function ProviderProfilePage({ params }: Props) {
           </span>
         </div>
 
-        <div className="flex flex-wrap gap-3 items-center">
-          <Link
-            href="/providers"
-            className="text-sm bg-[var(--clay)] text-white px-8 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
-          >
-            Browse all providers &rarr;
-          </Link>
-          <span className="text-xs text-white/40">
-            Free to use &middot; Specialist UK providers &middot; No obligation
-          </span>
-        </div>
+        <ProviderContact
+          name={provider.name}
+          website={provider.website}
+          phone={provider.phone}
+          email={provider.email}
+          trustpilot_url={provider.trustpilot_url}
+        />
       </section>
 
       <div className="px-6 lg:px-12 py-12 space-y-12 max-w-5xl">
@@ -397,8 +398,20 @@ export default async function ProviderProfilePage({ params }: Props) {
           ) : (
             <div className="bg-white rounded-2xl p-6 border border-[var(--border)] text-center">
               <p className="text-[var(--muted)]">
-                This provider doesn&apos;t publish pricing. Ask them for a
-                personalised quote when you get in touch.
+                This provider doesn&apos;t publish pricing.{" "}
+                {hasContact ? (
+                  <>
+                    <a
+                      href="#contact"
+                      className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors"
+                    >
+                      Contact them
+                    </a>{" "}
+                    for a personalised quote.
+                  </>
+                ) : (
+                  "Ask them for a personalised quote."
+                )}
               </p>
             </div>
           )}
@@ -691,18 +704,33 @@ export default async function ProviderProfilePage({ params }: Props) {
         )}
       </div>
 
-      {/* Sticky mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--border)] p-3 md:hidden">
-        <Link
-          href="/providers"
-          className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
-        >
-          Browse all providers &rarr;
-        </Link>
-        <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
-          Free &middot; Specialist providers &middot; No obligation
-        </p>
-      </div>
+      {/* Sticky mobile CTA — the provider's own strongest contact route.
+          Renders nothing at all if this provider has no contact details. */}
+      {hasContact && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[var(--border)] p-3 md:hidden">
+          {provider.phone ? (
+            <a
+              href={telHref(provider.phone)}
+              className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
+            >
+              Call {provider.phone}
+            </a>
+          ) : (
+            <a
+              href={(provider.website ?? `mailto:${provider.email}`) as string}
+              {...(provider.website
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="block w-full bg-[var(--charcoal)] text-white text-center px-8 py-4 rounded-full font-medium"
+            >
+              {provider.website ? `Visit ${provider.name}` : `Email ${provider.name}`}
+            </a>
+          )}
+          <p className="text-[10px] text-[var(--muted)] text-center mt-1.5">
+            You deal with the provider directly &middot; No fee to you
+          </p>
+        </div>
+      )}
     </>
   );
 }

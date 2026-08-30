@@ -1,6 +1,8 @@
-# FindAKitchen — Project Context
+# FindAKitchen — Developer Notes
 
-UK web platform that helps people find and book a **temporary kitchen** when their permanent kitchen is out of action. Guide-led service (not a neutral directory) that educates the visitor on their situation and routes them through a quote wizard.
+A UK directory and guide site for **temporary kitchen hire** — the units people
+hire when their permanent kitchen is out of action (renovation, fire, flood,
+burst pipe, or a commercial refurbishment).
 
 Live site: https://findakitchen.co.uk
 
@@ -11,72 +13,78 @@ Live site: https://findakitchen.co.uk
 - **Next.js 14** (App Router), **TypeScript**, **Tailwind CSS**
 - **Fully static.** Every route is prerendered at build time from JSON files in
   `src/data/`. **No database, no API routes, no email pipeline, no cron, no
-  environment variables.** Supabase and Resend were removed in the 2026-08-30
-  wind-down — do not reintroduce either, or any other external service.
+  environment variables.** `npm run build` needs nothing but this repo and npm.
 - **Railway** hosting — project `lavish-courage`, region `us-west2`
 - **Repo:** https://github.com/aarongeorghiades-hub/findakitchen — `main` branch
 - Railway **auto-deploys on push** to `main`
-- **HARD RULE: Railway only. NEVER mention or use Vercel under any circumstance.**
+- **Deploy target is Railway only.** Do not introduce another host or any
+  external service — the site is deliberately dependency-free.
 
-### Editing content
+## Content lives in `src/data/`
 
-Content changes are edits to `src/data/*.json`, not database writes:
-`providers.json`, `kitchen-types.json`, `regions.json`, `seo-pages.json`.
-`providers.json` holds no provider contact details by design.
+Content changes are edits to JSON files, not database writes:
 
-Enquiries arrive by email at **hello@findakitchen.co.uk**; `/get-quotes` is a
-static page with a mailto link, not a form.
+| File | Feeds |
+|---|---|
+| `providers.json` | `/providers`, `/providers/<slug>`, and the provider cards on the home, commercial, insurance-claims and location pages |
+| `kitchen-types.json` | `/kitchen-types`, `/kitchen-types/<slug>` |
+| `regions.json` | `/temporary-kitchen-hire/<slug>` |
+| `seo-pages.json` | `/blog/<slug>`, `/guides/<slug>`, `/compare/<slug>` |
 
-## Market and product
+Row order in `providers.json` is load-bearing: the "related providers" block
+reads the file's natural order, and the listing pages sort by `id`. Preserve
+the existing order when editing.
 
-- Two markets, **domestic-weighted**:
-  - **B2C** — homeowners (insurance claims, renovations, fire / flood / burst-pipe situations)
-  - **B2B** — loss adjusters, restoration firms, insurers
-- **NOT a neutral directory** — a guide-led service that educates the visitor and routes them through a quote wizard.
-- Hero positioning: **"Your kitchen is out of action. We'll fix that."**
+### Provider contact data
 
-### Colour scheme
+`providers.json` carries each provider's **public** contact routes — `website`,
+`phone`, `trustpilot_url`, and `email` as a fallback where a provider has no
+website. These render on `/providers/<slug>` and on the directory cards; they
+are the site's primary call to action, since the site takes no enquiries
+itself.
 
-Defined as CSS variables in `src/app/globals.css` (with matching Tailwind tokens in `tailwind.config.ts`):
+**Never add** street address, postcode, Companies House identifiers, social
+links, or any individual's name to this file. That exclusion is deliberate.
+
+Providers asking to be amended or removed are pointed at
+`providers@findakitchen.co.uk` from the `/providers` index.
+
+## Site contact addresses
+
+- `hello@findakitchen.co.uk` — general enquiries; `/get-quotes` is a static
+  page with a mailto link, not a form
+- `providers@findakitchen.co.uk` — listing amendments and removals
+- `privacy@findakitchen.co.uk` — data requests, cited in the privacy policy
+
+## Colour scheme
+
+Defined as CSS variables in `src/app/globals.css` (with matching Tailwind
+tokens in `tailwind.config.ts`):
 
 - **Background** — `--cream` `#FAF7F2`
 - **Body text** — `--charcoal` `#1C1C1A`
 - **Primary action / CTA** — `--clay` `#C2593A` (terracotta/orange)
 - **Secondary accent** — `--sage` `#4A7C59`
 - **Tertiary accent** — `--amber` `#D4830A`
-- Legacy teal/amber/slate Tailwind tokens (`primary`, `accent`, `slate`) still exist but are used only for incidental UI (e.g. input focus rings) — **not** the brand palette.
 
-## Referral strategy (lead gen)
+Legacy teal/amber/slate Tailwind tokens (`primary`, `accent`, `slate`) still
+exist but are used only for incidental UI (e.g. input focus rings) — they are
+not the brand palette.
 
-- **Primary channel: loss adjuster direct relationships** — Sedgwick, Crawford & Company, Davies Group, Woodgate & Clark, McLarens, QuestGates, plus regional independents.
-- **Loss assessors (claimant-side):** Aspray, Morgan Clark.
-- **Restoration / disaster recovery firms:** Belfor UK, Polygon UK, Rainbow International, ServiceMaster Restore, Munters.
-- **Insurers (longer-term):** Aviva, AXA, Allianz, Direct Line, LV=, Hiscox, NFU Mutual, Zurich UK, RSA, Ageas, Saga, Admiral.
+## URLs and redirects
 
-### Hard exclusions (do not propose, do not resurrect)
+URLs are load-bearing for SEO. **Do not rename or remove a route.** If a page
+is retired, add a permanent redirect in `next.config.mjs` rather than letting
+the URL 404 — that file already holds the redirects for every page retired so
+far, including several merged duplicate guides and provider profiles.
 
-- **General contractors, builders, kitchen fitters, kitchen installers** — permanently dropped from referral strategy. Cowboy risk. CEO directive.
-- **Kitchen showroom retailers** (Wren, Howdens, Magnet) — excluded by extension (their channel is fitters).
-- `/trade-partners` page deleted 2026-06-04 — trade-partner strategy permanently dropped (cowboy risk). Do not propose rebuilding.
-- Trade-partner blog post `/blog/how-builders-can-offer-temporary-kitchens` deleted 2026-08-30; both URLs now 301 to the homepage.
-- **Published referral fee offers are gone.** The `/loss-adjusters` page no longer advertises a £100–£150 per-completed-hire fee. Do not republish a fee figure.
+## Conventions
 
-### Parked items (not active, do not propose)
-
-- **Google Ads** — parked until free channels prove out and referral fees are £150+ per lead or commission-based.
-- **Meta / Facebook Ads** — secondary, not active.
-- **OpenClaw automation** — overkill at current stage.
-- **Food safety compliance SaaS** — researched and parked.
-
-## Revenue model
-
-Lead generation. Targeting **£150+ per qualified lead**, or **10–15% commission** of total hire value.
-
-## Working style
-
-- **Aaron = CEO.** Non-technical. Strategic decisions only.
-- **Claude (chat) = Project Manager.** Drives implementation, writes CC prompts, tracks workflow.
-- **Claude Code (this) = sole deployer.** Commits and pushes to GitHub; Railway auto-deploys.
-- The site is in **set-and-forget wind-down**. Prefer no change over a change that adds a service, a dependency, or a runtime.
-- SQL blocks contain **SQL only**. CC prompts contain **prompt text only**. Never mix prose into code blocks.
-- All deliverables (docs, prompts) go via **downloadable files**, not inline.
+- Dynamic segments set `dynamicParams = false` and are fully prerendered via
+  `generateStaticParams`; unknown slugs 404 rather than rendering on demand.
+- No page may claim the site performs an action on a visitor's behalf —
+  matching, routing, passing details to providers, or replying within a stated
+  time. It does none of those. Copy should describe what the site actually
+  does: list providers and let the visitor contact them directly.
+- No analytics, cookies, or third-party scripts. The privacy policy says so
+  explicitly, so adding any would make it inaccurate.

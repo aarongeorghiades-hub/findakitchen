@@ -53,8 +53,23 @@ export default async function ProvidersPage() {
       </section>
 
       {/* Provider grid with filters */}
-      <section className="pt-8 pb-12 px-6 lg:px-12">
+      <section className="pt-8 pb-6 px-6 lg:px-12">
         <ProvidersDirectoryClient providers={allProviders} />
+      </section>
+
+      {/* Removal / amendment route. Index only — deliberately not repeated on
+          individual provider pages. */}
+      <section className="pb-12 px-6 lg:px-12">
+        <p className="text-sm text-[var(--muted)]">
+          Listed here and want your entry amended or removed? Email{" "}
+          <a
+            href="mailto:providers@findakitchen.co.uk?subject=Listing%20amendment%20or%20removal"
+            className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors"
+          >
+            providers@findakitchen.co.uk
+          </a>
+          .
+        </p>
       </section>
     </>
   );
