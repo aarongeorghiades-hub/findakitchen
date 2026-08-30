@@ -4,7 +4,7 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Get Free Temporary Kitchen Quotes",
   description:
-    "Get free, no-obligation quotes from specialist temporary kitchen providers. Tell us your situation and we'll match you with the right solution — usually within 2 business days.",
+    "How to get quotes from specialist UK temporary kitchen providers — browse the directory and contact them directly, or email FindAKitchen if you would rather talk it through first.",
   alternates: { canonical: "https://findakitchen.co.uk/get-quotes" },
 };
 
@@ -15,7 +15,7 @@ const MAILTO =
   "&body=" +
   encodeURIComponent(
     [
-      "Tell us a little about what you need and we'll come back to you:",
+      "A few details about what you need:",
       "",
       "Your situation (renovation, insurance claim, fire, flood, burst pipe, commercial, event):",
       "Postcode:",
@@ -44,8 +44,9 @@ export default function GetQuotesPage() {
             Get Free Quotes
           </h1>
           <p className="mt-3 text-lg text-slate-500">
-            Tell us what you need and we&apos;ll match you with the right
-            temporary kitchen providers. It takes less than 2 minutes.
+            Every specialist UK provider we know of is listed in the directory
+            with the details you need to pick the right ones. Contact them
+            directly, or email us if you would rather talk it through first.
           </p>
         </div>
 
@@ -54,9 +55,9 @@ export default function GetQuotesPage() {
             Email us your details
           </h2>
           <p className="text-slate-500 leading-relaxed mb-6">
+            Not sure where to start, or want a second opinion on what you need?
             Send us a short email with your situation, postcode and rough dates.
-            We&apos;ll read every one and come back to you with the providers
-            worth talking to.
+            Email is read by a person, so replies are not immediate.
           </p>
           <a href={MAILTO} className="btn-primary inline-block">
             Email hello@findakitchen.co.uk
@@ -70,8 +71,8 @@ export default function GetQuotesPage() {
 
         <div className="mt-8 text-center text-sm text-slate-500">
           <p>
-            Your information is kept secure and only shared with providers we
-            match you with. Read our{" "}
+            Anything you email us stays with us &mdash; we do not pass your
+            details to providers. Read our{" "}
             <a href="/privacy-policy" className="text-primary-700 hover:underline">
               privacy policy
             </a>

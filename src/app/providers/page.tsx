@@ -42,7 +42,7 @@ export default async function ProvidersPage() {
             href="/get-quotes"
             className="inline-block text-sm bg-[var(--clay)] text-white px-7 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
           >
-            Get matched with providers — request free quotes &rarr;
+            Email us if you&apos;d rather talk it through &rarr;
           </Link>
         </div>
       </section>

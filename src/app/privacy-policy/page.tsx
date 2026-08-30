@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="prose prose-slate max-w-none">
           <p>
-            <strong>Last updated:</strong> March 2026
+            <strong>Last updated:</strong> August 2026
           </p>
 
           <p>
@@ -42,47 +42,44 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <h2>Information we collect</h2>
-          <p>When you use our service, we may collect:</p>
+          <p>
+            This website has no forms, no accounts and no analytics. Simply
+            browsing findakitchen.co.uk does not require you to give us any
+            personal information, and none is collected from you as you read.
+          </p>
+          <p>The only personal information we hold is:</p>
           <ul>
             <li>
-              <strong>Contact information:</strong> name, email address, and phone
-              number when you submit a quote request.
-            </li>
-            <li>
-              <strong>Enquiry details:</strong> your situation, location, timeline,
-              duration, and capacity requirements.
-            </li>
-            <li>
-              <strong>Usage data:</strong> pages visited, time spent on site, and
-              referral sources through standard web analytics.
+              <strong>Anything you choose to put in an email to us:</strong> your
+              name, email address, and whatever you tell us about your situation.
+              We only have this because you sent it.
             </li>
           </ul>
 
           <h2>How we use your information</h2>
-          <p>We use your information to:</p>
-          <ul>
-            <li>Match you with appropriate temporary kitchen providers.</li>
-            <li>
-              Share your enquiry details with providers who can help with your
-              specific situation.
-            </li>
-            <li>Contact you about your enquiry and provide relevant information.</li>
-            <li>Improve our service and website experience.</li>
-          </ul>
+          <p>
+            We use the contents of your email for one purpose only: to read it
+            and reply to you. We do not use it for marketing, and we do not build
+            any profile of you.
+          </p>
 
           <h2>Information sharing</h2>
           <p>
-            We share your enquiry details only with temporary kitchen providers we
-            match you with. We do not sell your personal information to third
-            parties. We may share anonymised, aggregated data for analytical
-            purposes.
+            We do not pass your details to temporary kitchen providers. If you
+            want a provider to contact you, you need to contact them yourself
+            using the details on their own website. We do not sell your personal
+            information to anyone.
+          </p>
+          <p>
+            Your email is handled by our email provider on our behalf, in the
+            same way any business email is.
           </p>
 
           <h2>Data retention</h2>
           <p>
-            We retain your personal information for as long as necessary to
-            provide our service and fulfil the purposes described in this policy.
-            You can request deletion of your data at any time by contacting us.
+            We keep email correspondence only for as long as it is useful to the
+            conversation you started, and delete it after that. You can ask us to
+            delete your correspondence at any time by contacting us.
           </p>
 
           <h2>Your rights</h2>
@@ -97,10 +94,8 @@ export default function PrivacyPolicyPage() {
 
           <h2>Cookies</h2>
           <p>
-            We use essential cookies to make our website function correctly. We
-            may also use analytics cookies to understand how visitors use our
-            site. You can control cookie settings through your browser
-            preferences.
+            This site sets no cookies of its own and runs no analytics or
+            tracking of any kind. Nothing you do here is recorded or profiled.
           </p>
 
           <h2>Contact us</h2>

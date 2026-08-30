@@ -397,13 +397,14 @@ export default async function ProviderProfilePage({ params }: Props) {
           ) : (
             <div className="bg-white rounded-2xl p-6 border border-[var(--border)] text-center">
               <p className="text-[var(--muted)] mb-4">
-                Request a personalised quote through FindAKitchen
+                This provider doesn&apos;t publish pricing. Ask them for a
+                personalised quote.
               </p>
               <Link
                 href="/get-quotes"
                 className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
               >
-                Get a quote &rarr;
+                How to get a quote &rarr;
               </Link>
             </div>
           )}

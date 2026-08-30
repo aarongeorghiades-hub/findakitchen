@@ -30,11 +30,11 @@ export default function ContactPage() {
               Need a temporary kitchen?
             </h2>
             <p className="text-slate-500 text-sm mb-4">
-              The fastest way to get matched with the right providers is to use
-              our quote form. It takes less than 2 minutes.
+              The quickest route is usually to browse the directory and contact
+              the providers that cover your area yourself.
             </p>
-            <Link href="/get-quotes" className="btn-primary text-sm">
-              Get Free Quotes
+            <Link href="/providers" className="btn-primary text-sm">
+              Browse Providers
             </Link>
           </div>
 
@@ -85,15 +85,16 @@ export default function ContactPage() {
                 Response time
               </h3>
               <p className="text-slate-500 text-sm">
-                We aim to respond to all enquiries within 2 business days. For
-                urgent temporary kitchen needs, please use our{" "}
+                FindAKitchen is a small operation and email is read by a person,
+                so replies are not immediate. If your kitchen situation is
+                urgent, contact providers directly from the{" "}
                 <Link
-                  href="/get-quotes"
+                  href="/providers"
                   className="text-primary-700 hover:underline"
                 >
-                  quote form
+                  provider directory
                 </Link>{" "}
-                for the fastest response.
+                rather than waiting on us.
               </p>
             </div>
           </div>

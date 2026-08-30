@@ -101,7 +101,7 @@ export default function CompareKitchenTypesPage() {
 
       <CTABanner
         headline="Worked out which type fits?"
-        subline="Tell us your situation and we'll match you with providers that supply it — free, no-obligation quotes."
+        subline="Browse specialist UK providers, see which ones supply the type you need, and contact them directly."
       />
     </>
   );

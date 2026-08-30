@@ -290,13 +290,13 @@ export function DrivewayCheckerClient() {
           <div className="mt-10 bg-[var(--charcoal)] rounded-2xl p-8 text-center">
             <h3 className="font-serif text-2xl text-white mb-2">Ready to get quotes?</h3>
             <p className="text-white/50 text-sm mb-6">
-              We&apos;ll match you with the right providers for your space and situation.
+              Check which UK providers supply these units and contact them directly with your measurements.
             </p>
             <Link
-              href="/get-quotes"
+              href="/providers"
               className="bg-[var(--clay)] text-white px-8 py-3.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 text-sm font-medium"
             >
-              Get matched with providers who offer these &rarr;
+              Browse providers who offer these &rarr;
             </Link>
           </div>
         </div>

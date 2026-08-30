@@ -158,7 +158,7 @@ export default async function RegionLandingPage({ params }: Props) {
 
       <CTABanner
         headline={`Need a temporary kitchen in ${region.name}?`}
-        subline="Tell us your situation and we'll match you with providers who cover your area."
+        subline="Browse specialist UK providers, check who covers your area, and contact them directly."
       />
     </>
   );

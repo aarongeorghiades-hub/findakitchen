@@ -26,7 +26,7 @@ const faqs = [
   {
     question: "How do I get an insurer-approved quote?",
     answer:
-      "Request free quotes through FindAKitchen, stating it is for an insurance claim, and we'll match you with insurance-ready providers. They will supply a formally formatted document you can submit to your insurer or loss adjuster directly.",
+      "Contact providers directly and say up front that it is for an insurance claim. Insurance-experienced providers will supply a formally formatted quote you can submit to your insurer or loss adjuster. The provider directory shows which providers work on claims.",
   },
   {
     question: "How long does installation take?",
@@ -187,8 +187,8 @@ export default async function InsuranceClaimsPage() {
           Insurance-ready temporary kitchen providers
         </h2>
         <p className="text-[var(--muted)] mb-12 max-w-2xl">
-          The providers we match you with are experienced with insurance claims
-          and can supply insurer-formatted quotes.
+          These providers work on insurance claims and can supply
+          insurer-formatted quotes. Contact them directly.
         </p>
 
         {providers && providers.length > 0 ? (
@@ -208,7 +208,7 @@ export default async function InsuranceClaimsPage() {
             href="/get-quotes"
             className="inline-block text-sm bg-[var(--clay)] text-white px-8 py-3.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 font-medium"
           >
-            Get matched with insurance-ready providers — request free quotes &rarr;
+            Email us if you&apos;d rather talk it through &rarr;
           </Link>
         </div>
       </section>

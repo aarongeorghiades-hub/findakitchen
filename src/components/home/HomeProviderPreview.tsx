@@ -52,7 +52,7 @@ export function HomeProviderPreview({
           href="/get-quotes"
           className="text-sm bg-[var(--clay)] text-white px-6 py-3 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 whitespace-nowrap self-start font-medium"
         >
-          Get matched with providers &rarr;
+          Browse all providers &rarr;
         </Link>
       </div>
 

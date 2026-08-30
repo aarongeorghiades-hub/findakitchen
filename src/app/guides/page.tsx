@@ -205,7 +205,7 @@ export default async function GuidesIndexPage() {
 
       <CTABanner
         headline="Still not sure what you need?"
-        subline="Tell us your situation and we'll match you with the right providers — free, no-obligation quotes."
+        subline="Browse specialist UK providers, compare what they offer, and contact whoever fits directly."
       />
     </>
   );

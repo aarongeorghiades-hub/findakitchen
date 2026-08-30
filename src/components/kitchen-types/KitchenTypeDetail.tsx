@@ -131,11 +131,11 @@ export default function KitchenTypeDetail({
           Need a {kitchenType.name.toLowerCase()}?
         </h2>
         <p className="text-slate-600 mb-5">
-          Tell us about your requirements and we&apos;ll match you with providers
-          who offer {kitchenType.name.toLowerCase()} hire.
+          See which UK providers supply {kitchenType.name.toLowerCase()} hire and
+          contact them directly.
         </p>
-        <Link href="/get-quotes" className="btn-primary">
-          Get Free Quotes
+        <Link href="/providers" className="btn-primary">
+          Browse Providers
         </Link>
       </div>
     </div>

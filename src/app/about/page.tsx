@@ -43,37 +43,37 @@ export default function AboutPage() {
 
             <h2>What we do</h2>
             <p>
-              FindAKitchen.co.uk is a free service that helps you navigate the
-              temporary kitchen market. We&apos;re not a generic directory —
-              we&apos;re a guide. We educate you about the options available, help
-              you understand what type of kitchen you actually need, and connect
-              you with specialist providers who can deliver.
+              FindAKitchen.co.uk is a free guide to the temporary kitchen
+              market. We explain the options available, help you work out what
+              type of kitchen you actually need, and list the specialist UK
+              providers who supply them so you can approach them yourself.
             </p>
 
             <h2>How it works</h2>
             <ol>
               <li>
-                <strong>Tell us your situation</strong> — renovation, flood
-                damage, insurance claim, school refurbishment, event, or something
-                else entirely.
+                <strong>Work out what you need</strong> — our guides cover
+                renovation, flood damage, insurance claims, school
+                refurbishments, events and more.
               </li>
               <li>
-                <strong>We match you with the right providers</strong> — based on
-                your location, timeline, capacity needs, and budget.
+                <strong>Compare the providers</strong> — the directory lists
+                coverage, kitchen types, delivery speed and whether each
+                provider works on insurance claims.
               </li>
               <li>
-                <strong>Get quotes and compare</strong> — receive no-obligation
-                quotes from providers who can actually help with your specific
-                situation.
+                <strong>Contact them yourself</strong> — approach the providers
+                that fit and ask each one for a quote. There is no obligation,
+                and nothing goes through us.
               </li>
             </ol>
 
             <h2>Why use FindAKitchen?</h2>
             <ul>
               <li>
-                <strong>We save you time</strong> — instead of calling providers
-                one by one, tell us what you need once and we&apos;ll do the
-                matching.
+                <strong>We save you time</strong> — instead of hunting down
+                providers one by one, they are listed together with the details
+                that decide which ones are worth calling.
               </li>
               <li>
                 <strong>We educate you</strong> — most people don&apos;t know a

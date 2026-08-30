@@ -151,7 +151,7 @@ export default async function CompareIndexPage() {
 
       <CTABanner
         headline="Compared your options and ready to go?"
-        subline="Tell us your situation and we'll match you with providers that fit — free, no-obligation quotes."
+        subline="Browse specialist UK providers, see which ones supply what you need, and contact them directly."
       />
     </>
   );

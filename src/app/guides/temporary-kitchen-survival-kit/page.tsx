@@ -271,7 +271,7 @@ export default function SurvivalKitPage() {
 
       <CTABanner
         headline="Think a full kitchen pod might suit you better?"
-        subline="Tell us your situation and we'll match you with the right providers — free, no-obligation quotes."
+        subline="Browse specialist UK providers, compare what they offer, and contact whoever fits directly."
       />
     </>
   );

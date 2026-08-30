@@ -7,7 +7,7 @@ interface CTABannerProps {
 
 export default function CTABanner({
   headline = "Ready to find the right temporary kitchen?",
-  subline = "Tell us your situation and we'll match you with the best providers. Free, no-obligation quotes.",
+  subline = "Browse specialist UK providers, compare what they offer, and contact whoever fits directly.",
 }: CTABannerProps) {
   return (
     <section className="bg-[var(--charcoal)] py-12 sm:py-16">
@@ -19,8 +19,8 @@ export default function CTABanner({
           {subline}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/get-quotes" className="inline-flex items-center justify-center bg-[var(--clay)] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[var(--clay-light)] transition-all duration-300">
-            Get Free Quotes
+          <Link href="/providers" className="inline-flex items-center justify-center bg-[var(--clay)] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[var(--clay-light)] transition-all duration-300">
+            Browse Providers
           </Link>
           <Link
             href="/kitchen-types"

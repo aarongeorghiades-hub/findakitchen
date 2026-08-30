@@ -1,21 +1,21 @@
 import Link from "next/link";
 
 // Honest reassurance block for the provider-facing pages. Every claim here is
-// demonstrably true — we list UK providers and match an enquiry by area,
-// situation and timeline; it's fast, free and no-obligation. Deliberately makes
-// NO claim of vetting, screening, accreditation, approval or certification.
+// demonstrably true — we list UK providers and describe what each one offers.
+// We do NOT take enquiries, route them, or pass details to anyone. Deliberately
+// makes NO claim of vetting, screening, accreditation, approval or certification.
 const REASONS = [
   {
-    title: "One form, the right matches",
-    body: "Tell us your postcode, situation and timeline once, and we match you to providers that cover your area and supply what you need — no ringing round a dozen companies.",
+    title: "Everyone in one place",
+    body: "Specialist UK temporary kitchen providers listed together, so you can see who exists without ringing round a dozen companies.",
   },
   {
-    title: "The fastest way to be contacted",
-    body: "We pass your details straight to suitable providers, so the right ones can come back to you quickly.",
+    title: "Compare before you call",
+    body: "Coverage, kitchen types, power source, delivery speed and whether they work on insurance claims — set out on every profile.",
   },
   {
     title: "Free and no obligation",
-    body: "It costs nothing, you're under no obligation, and you choose from whoever responds.",
+    body: "It costs nothing to use, you deal with providers directly, and you're under no obligation to anyone.",
   },
 ];
 
@@ -23,11 +23,11 @@ export function WhyRequestThroughUs() {
   return (
     <aside className="bg-white rounded-2xl border border-[var(--border)] p-6 sm:p-8 max-w-4xl">
       <h2 className="font-serif text-xl sm:text-2xl text-[var(--charcoal)] mb-1">
-        Why request through FindAKitchen?
+        Why start with FindAKitchen?
       </h2>
       <p className="text-sm text-[var(--muted)] mb-6">
-        We list temporary kitchen providers across the UK and match your enquiry
-        to the ones that fit.
+        We list temporary kitchen providers across the UK and set out what each
+        one offers, so you can work out who to approach.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
@@ -49,10 +49,10 @@ export function WhyRequestThroughUs() {
       </div>
 
       <Link
-        href="/get-quotes"
+        href="/providers"
         className="inline-flex items-center justify-center bg-[var(--clay)] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[var(--clay-light)] transition-colors"
       >
-        Get Free Quotes &rarr;
+        Browse all providers &rarr;
       </Link>
     </aside>
   );

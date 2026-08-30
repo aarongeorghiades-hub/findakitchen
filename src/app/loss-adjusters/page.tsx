@@ -1,11 +1,18 @@
 import { Metadata } from "next";
 import Link from "next/link";
-// LossAdjusterForm import removed — form parked as "coming soon"
+
+// Informational page. FindAKitchen does not take claimant details, source
+// providers or produce quotes on anyone's behalf — there is no form, no portal
+// and no backend. The only call to action is an email address.
+const CONTACT_EMAIL = "hello@findakitchen.co.uk";
+const MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+  "Loss adjuster enquiry — temporary kitchens"
+)}`;
 
 export const metadata: Metadata = {
   title: "Loss Adjuster Kitchen Referral Service",
   description:
-    "A specialist referral service for loss adjusters handling kitchen damage claims. FindAKitchen sources specialist temporary kitchen providers and generates insurer-formatted quotes.",
+    "A guide for loss adjusters and claims handlers on temporary kitchen hire in kitchen damage claims — what claimants need, what insurers expect from a quote, and where to find specialist UK providers.",
   alternates: {
     canonical: "https://findakitchen.co.uk/loss-adjusters",
   },
@@ -69,17 +76,18 @@ export default function LossAdjustersPage() {
           </h1>
 
           <p className="text-lg text-white/50 font-light leading-relaxed max-w-2xl mb-8">
-            When your claimant needs a temporary kitchen, FindAKitchen handles
-            the sourcing, quoting and coordination &mdash; so you don&apos;t
-            have to. Insurer-formatted quotes provided as standard.
+            When a claimant needs a temporary kitchen, the hard part is knowing
+            what to look for and who supplies it. This page sets out how
+            temporary kitchen hire works on a claim, and where to find the
+            specialist UK providers who do it.
           </p>
 
-          <a
-            href="#register"
+          <Link
+            href="/providers"
             className="text-sm bg-[var(--clay)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--clay-light)] transition-all duration-300 inline-block"
           >
-            Register your firm &rarr;
-          </a>
+            Browse the provider directory &rarr;
+          </Link>
         </div>
       </section>
 
@@ -119,57 +127,30 @@ export default function LossAdjustersPage() {
         </div>
       </section>
 
-      {/* ===== SECTION 3: HOW IT WORKS ===== */}
+      {/* ===== SECTION 3: TALK TO US ===== */}
       <section className="py-16 md:py-24 px-6 lg:px-12 bg-gray-50">
-        <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-12">
-          How it works
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-[2px] bg-[var(--border)] rounded-2xl overflow-hidden">
-          {[
-            {
-              num: "01",
-              title: "You refer the claimant",
-              body: "Share a unique referral link or submit the claimant\u2019s details via our secure B2B form. Takes under 2 minutes.",
-            },
-            {
-              num: "02",
-              title: "We source and match",
-              body: "FindAKitchen matches the claimant to specialist local providers based on kitchen type, location and availability. We contact the claimant directly.",
-            },
-            {
-              num: "03",
-              title: "Insurer-formatted quote",
-              body: "We generate a compliant quote document \u2014 itemised, dated, with provider credentials \u2014 ready to attach to the claim file.",
-            },
-            {
-              num: "04",
-              title: "The claimant is placed",
-              body: "The claimant books directly with the provider. We keep you updated so the placement can be recorded against the claim file.",
-            },
-          ].map((step) => (
-            <div
-              key={step.num}
-              className="group bg-white p-8 md:p-10 relative transition-all duration-300 hover:bg-[var(--charcoal)] cursor-default min-h-[260px]"
+        <div className="max-w-3xl">
+          <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-6">
+            Questions about a claim?
+          </h2>
+          <p className="text-lg text-[var(--warm-mid)] leading-relaxed">
+            Email us at{" "}
+            <a
+              href={MAILTO}
+              className="text-[var(--clay)] underline underline-offset-2 hover:text-[var(--charcoal)] transition-colors"
             >
-              <span className="absolute top-4 right-6 font-serif text-[88px] leading-none text-[var(--border)] group-hover:text-white/10 transition-colors duration-300 select-none">
-                {step.num}
-              </span>
-              <h3 className="font-serif text-xl text-[var(--charcoal)] group-hover:text-white transition-colors duration-300 mb-2">
-                {step.title}
-              </h3>
-              <p className="text-sm text-[var(--muted)] group-hover:text-white/60 transition-colors duration-300 leading-relaxed">
-                {step.body}
-              </p>
-            </div>
-          ))}
+              {CONTACT_EMAIL}
+            </a>{" "}
+            and we&apos;ll help however we can. Please don&apos;t send claimant
+            personal details &mdash; we have no system to handle them.
+          </p>
         </div>
       </section>
 
       {/* ===== SECTION 4: WHY FINDAKITCHEN ===== */}
       <section className="py-16 md:py-24 px-6 lg:px-12">
         <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-12">
-          Why loss adjusters choose FindAKitchen
+          What to know before approving a temporary kitchen
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl">
@@ -192,7 +173,7 @@ export default function LossAdjustersPage() {
               ),
               title: "Insurer-ready documentation",
               description:
-                "Quote documents are structured to meet standard insurer requirements \u2014 itemised costs, provider credentials, hire period and VAT breakdown.",
+                "Ask a provider for an insurance-ready quote and most will itemise costs, credentials, hire period and VAT in the format insurers expect. Request it up front rather than after the fact.",
             },
             {
               icon: (
@@ -200,9 +181,9 @@ export default function LossAdjustersPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               ),
-              title: "Fast turnaround",
+              title: "Built for urgency",
               description:
-                "Most claimants receive a matched provider and draft quote within 24 hours of referral. Urgent same-day matching available on request.",
+                "Many providers quote within 24 hours and deliver inside 48, and some offer emergency call-out. Delivery speed is listed on each provider profile so you can see who moves fastest.",
             },
             {
               icon: (
@@ -212,7 +193,7 @@ export default function LossAdjustersPage() {
               ),
               title: "Free to use",
               description:
-                "No subscription, no monthly cost, no minimum volume. Refer a claimant when it helps the claim, and not when it doesn\u2019t.",
+                "No subscription, no monthly cost, no registration. The directory and every guide on this site are open to read and free to use.",
             },
           ].map((card) => (
             <div
@@ -239,9 +220,9 @@ export default function LossAdjustersPage() {
           </h2>
 
           <p className="text-[var(--warm-mid)] leading-relaxed mb-10">
-            FindAKitchen&apos;s referral programme is designed for loss adjusters
-            and claims handlers at firms of all sizes &mdash; from major
-            nationals to independent practices.
+            This page is written for loss adjusters and claims handlers at firms
+            of all sizes &mdash; from major nationals to independent practices
+            &mdash; who deal with kitchen damage claims.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-6">
@@ -261,39 +242,37 @@ export default function LossAdjustersPage() {
           </div>
 
           <p className="text-xs text-[var(--muted)]">
-            These firms are cited as representative of our target partners. If
-            your firm is not listed, we welcome enquiries from all FCA-regulated
-            loss adjusters.
+            These firms are named only as examples of the sector this page is
+            written for. FindAKitchen has no arrangement with any of them.
           </p>
         </div>
       </section>
 
-      {/* ===== SECTION 6: B2B ENQUIRY FORM ===== */}
-      <section id="register" className="py-16 md:py-24 px-6 lg:px-12">
+      {/* ===== SECTION 6: NEXT STEPS ===== */}
+      <section className="py-16 md:py-24 px-6 lg:px-12">
         <div className="max-w-2xl">
           <h2 className="font-serif text-3xl md:text-4xl text-[var(--charcoal)] mb-3">
-            Register your firm
+            Where to go next
           </h2>
-          <p className="text-[var(--muted)] mb-10">
-            Complete the form below and a member of the FindAKitchen team will
-            be in touch within one business day to discuss the referral
-            programme.
+          <p className="text-[var(--muted)] leading-relaxed mb-8">
+            Every provider we know of is listed in the directory, with coverage,
+            kitchen types, delivery speed and whether they work on insurance
+            claims. Contact whoever fits the claim directly.
           </p>
 
-          <div className="bg-gray-50 rounded-2xl p-10 text-center max-w-xl mx-auto">
-            <div className="text-4xl mb-4">🔧</div>
-            <h3 className="font-serif text-2xl text-[var(--charcoal)] mb-3">
-              Programme launching soon
-            </h3>
-            <p className="text-[var(--muted)] leading-relaxed mb-6">
-              We&apos;re finalising the loss adjuster referral programme. To register early interest, email us directly.
-            </p>
-            <a
-              href="mailto:hello@findakitchen.co.uk?subject=Loss Adjuster Referral Interest"
-              className="inline-block bg-[var(--sage)] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[var(--sage)]/90 transition-all duration-300"
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/providers"
+              className="inline-block bg-[var(--clay)] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-[var(--clay-light)] transition-all duration-300"
             >
-              Register interest by email →
-            </a>
+              Browse the provider directory &rarr;
+            </Link>
+            <Link
+              href="/guides/loss-adjuster-temporary-kitchen-guide"
+              className="inline-block border border-[var(--border)] text-[var(--warm-mid)] px-6 py-3 rounded-full text-sm font-medium hover:border-[var(--charcoal)] hover:text-[var(--charcoal)] transition-all duration-300"
+            >
+              Read the loss adjuster guide
+            </Link>
           </div>
 
           <p className="text-sm text-[var(--muted)] leading-relaxed mt-8">

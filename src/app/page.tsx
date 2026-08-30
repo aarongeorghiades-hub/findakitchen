@@ -304,7 +304,7 @@ export default async function HomePage() {
                 </svg>
               ),
               title: "Kitchen damaged by fire or flood?",
-              body: "If you\u2019re making an insurance claim, we\u2019ll match you to an insurance-ready provider and help generate the quote your insurer needs.",
+              body: "If you\u2019re making an insurance claim, see which providers work with insurers, what your policy is likely to cover, and what an insurer-ready quote needs to show.",
               cta: "Insurance claims \u2192",
             },
             {
@@ -337,7 +337,7 @@ export default async function HomePage() {
                 </svg>
               ),
               title: "Loss adjuster or claims handler?",
-              body: "FindAKitchen sources specialist providers and generates insurer-formatted quotes for kitchen damage claims.",
+              body: "How temporary kitchen hire works on a kitchen damage claim \u2014 what claimants need, what insurers expect from a quote, and where to find specialist providers.",
               cta: "Loss adjuster referrals \u2192",
             },
           ].map((card, i) => (
